@@ -1,0 +1,38 @@
+//
+//  Util.cpp
+//  BBL
+//
+//  Created by Shrenil Patel on 2017-11-11.
+//
+
+#include "Util.hpp"
+#include <sstream>
+
+
+float getX(int len, int idx, float sp) {
+    return - ((len - 1) * sp / 2) + idx * sp;
+}
+
+
+float randFloat(float a, float b) {
+    return ((b - a) * ((float)rand() / RAND_MAX)) + a;
+}
+
+void playSound(std::string name, bool loop, float pitch, float volume, float pan, float gain) {
+    
+    std::stringstream ss;
+    auto audio = SimpleAudioEngine::getInstance();
+    audio->setEffectsVolume(volume);
+    ss << "sfx/mp3/" << name << ".mp3";
+    audio->playEffect(ss.str().c_str(), loop, pitch, pan, gain);
+    
+}
+
+void preloadSound(std::string name) {
+    std::stringstream ss;
+    ss << "sfx/mp3/" << name << ".mp3";
+    
+    auto audio = SimpleAudioEngine::getInstance();
+    
+    audio->preloadEffect(ss.str().c_str());
+}
