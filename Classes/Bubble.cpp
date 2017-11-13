@@ -220,6 +220,7 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWord(std::string word) {
                 x->setHighlight(true);
                 ret.push_back(make_pair(x, i));
                 done = true;
+                i++;
                 break;
             }
         }
@@ -235,9 +236,9 @@ void Bubble::popLetter(Letter * letter) {
     remove(letters, letter);
     
     auto emitter = ParticleSystemQuad::create("res/BubbleSm.plist");
-    addChild(emitter);
+    owner->addChild(emitter);
     emitter->setAutoRemoveOnFinish(true);
-    emitter->setPosition(letter->getPosition());
+    emitter->setPosition(convertToWorldSpace(letter->getPosition()));
     
     auto sk1 = EaseBackOut::create(ScaleTo::create(0.1, randFloat(0.55, 0.75)));
     auto sk2 = EaseElasticOut::create(ScaleTo::create(2, 0.5));
@@ -259,8 +260,9 @@ void Bubble::recalculate() {
     auto callback = CallFunc::create([=](){
         if (letters.size() > 0) {
             auto emitter = ParticleSystemQuad::create("res/BubbleSimp.plist");
-            addChild(emitter);
-            emitter->setPosition(Vec2(190, 190));
+            owner->addChild(emitter);
+            emitter->setAutoRemoveOnFinish(true);
+            emitter->setPosition(getPosition());
             playSound("bubbling", false, randFloat(0.5, 2), 0.2, 0.5, 0.05);
         }
     });
@@ -289,13 +291,22 @@ void Bubble::pop() {
     auto callback = CallFunc::create([=](){
         ded = true;
         auto emitter = ParticleSystemQuad::create("res/BubbleLg.plist");
-        addChild(emitter);
-        emitter->setPosition(Vec2(190, 190));
+        owner->addChild(emitter);
+        emitter->setAutoRemoveOnFinish(true);
+        emitter->setPosition(getPosition());
         playSound("pop2", false, randFloat(0.5, 2));
         playSound("bubbling2", false, randFloat(0.5, 2), 0.5, 0.5, 0.1);
     });
-    runAction(EaseOut::create(ScaleTo::create(0.45, randFloat(0.75, 0.95)), 1.5));
-    runAction(Sequence::create(FadeTo::create(0.45, 0), callback, NULL));
+    auto action0 = ScaleTo::create(0.05f, 0.80f);
+    auto action1 = ScaleTo::create(0.05f, 0.75f);
+    auto seq = Sequence::create(action0, action1, NULL);
+    auto action = Repeat::create(seq, 2);
+    
+    runAction(Sequence::create(EaseOut::create(ScaleTo::create(0.25, 0.75), 1.5), action, NULL));
+    runAction(Sequence::create(FadeTo::create(0.45, 192), callback, FadeTo::create(0, 0), NULL));
     playSound("stretch", false, randFloat(0.5, 2), 0.05f);
+    
+    
+    runAction(action);
     
 }

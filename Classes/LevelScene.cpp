@@ -7,6 +7,10 @@
 
 #include "LevelScene.hpp"
 #include <sstream>
+#include <iostream>
+#include <string>
+#include <regex>
+#include <fstream>
 
 USING_NS_CC;
 using namespace cocos2d::experimental;
@@ -172,7 +176,56 @@ bool LevelScene::init()
     nodeGrid->runAction(RepeatForever::create(waves));
     this->addChild(nodeGrid);
     
-    auto bbl = Bubble::create(std::vector<char>{'k'}, 0, 0, this);
+    auto linenum = 0;
+    std::ifstream infile;
+    std::regex re("([\\w\\d]*),\\s([\\w\\d]*),\\s([\\w\\d]*)");
+    std::smatch smatch;
+    
+    auto fileData = FileUtils::getInstance()->getDataFromFile(fname);
+    std::string content((const char*)fileData.getBytes(), fileData.getSize());
+    
+    auto lines = split_string(content, "\n");
+    for (auto line : lines) {
+        std::cout << line << "]\n";
+        if (linenum == 0) {
+            currentDepth = stoi(line);
+        } else if (linenum == 1) {
+            
+        } else {
+            std::vector<std::vector<char>> datum;
+            std::cout << line << "[\n";
+            if (std::regex_match(line, smatch, re)) {
+                std::cout << line << '\n';
+                for (size_t i = 1; i < smatch.size(); ++i) {
+                    std::ssub_match sub_match = smatch[i];
+                    std::string piece = sub_match.str();
+                    std::vector<char> dat;
+                    for (auto c : piece) {
+                        dat.push_back(c);
+                    }
+                    datum.push_back(dat);
+                }
+                data.push_back(datum);
+            }
+        }
+        
+        linenum++;
+    }
+    
+    for (auto depth = 0; depth < currentDepth; depth++) {
+        for (auto lane = 0; lane < data[depth].size(); lane++) {
+            auto datum = data[depth][lane];
+            if (datum.size() > 0) {
+                auto trueDepth = currentDepth - depth - 1;
+                auto bbl = Bubble::create(datum, lane, trueDepth, this);
+                nodeGrid->addChild(bbl);
+                bubbles.push_back(bbl);
+            }
+        }
+    }
+    
+    
+    /*auto bbl = Bubble::create(std::vector<char>{'k'}, 0, 0, this);
     nodeGrid->addChild(bbl);
     bubbles.push_back(bbl);
     
@@ -186,7 +239,7 @@ bool LevelScene::init()
     
     auto drawNode = DrawNode::create();
     nodeGrid->addChild(drawNode);
-    drawNode->drawSolidCircle(Vec2(256, 256), 16, 0, 8, Color4F::YELLOW);
+    drawNode->drawSolidCircle(Vec2(256, 256), 16, 0, 8, Color4F::YELLOW);*/
     
     
     textBox = cocos2d::ui::EditBox::create(Size(512, 80), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("input.png"));

@@ -11,6 +11,7 @@
 #include "cocos2d.h"
 #include "Bubble.hpp"
 #include "Util.hpp"
+
 #include <ui/CocosGUI.h>
 
 #define BZTO_TIME 0.2
@@ -51,9 +52,11 @@ class LevelScene : public cocos2d::Scene, public cocos2d::ui::EditBoxDelegate
     int lastLen = 0;
     int bubbleRetain = 0;
     int cardsLen = 0;
+    int currentDepth = 0;
     LevelScene(std::string fname) : fname(fname) {}
     std::vector<Card *> cards;
     std::vector<Bubble *> bubbles;
+    std::vector<std::vector<std::vector<char>>> data;
 public:
     int highlights = 0;
     int lightRetain = 0;

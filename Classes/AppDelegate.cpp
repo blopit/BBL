@@ -99,7 +99,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloadSound("woosh3");
     
     // create a scene. it's an autorelease object
-    auto scene = LevelScene::createScene("forest_trg.bbl");
+    auto scene = LevelScene::createScene("levels/forest_trg.bbl");
 
     // run
     director->runWithScene(scene);

@@ -43,4 +43,5 @@ void playSound(std::string name, bool loop, float pitch = 1.0f, float volume = 1
 
 void preloadSound(std::string name);
 
+std::vector<std::string> split_string(const std::string& str, const std::string& delimiter);
 #endif /* Util_hpp */
