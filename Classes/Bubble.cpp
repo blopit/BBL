@@ -51,7 +51,12 @@ bool Letter::init() {
     setScale(0);
     auto delay = DelayTime::create(0.3*(idx+1));
     auto scaleTo = EaseElasticOut::create(ScaleTo::create(1, 0.75));
-    auto seq = Sequence::create(delay, scaleTo, NULL);
+    auto sound = CallFunc::create([=](){
+        playSound("inflate", false, 1.0f, 0.5f, 0.5, 0.05f);
+    });
+    
+    auto seq = Sequence::create(delay, sound, scaleTo, NULL);
+    
     runAction(seq);
     
     setHighlight(false);
@@ -161,7 +166,8 @@ bool Bubble::init() {
     setScale(0);
     
     runAction(EaseElasticOut::create(ScaleTo::create(3, 0.5)));
-    
+    playSound("stretch", false, 1.0f, 0.2f, 0.5, 0.05f);
+    playSound("inflate", false, 1.0f, 0.2f, 0.5, 0.05f);
     
     auto len = letters.size();
     auto i = 0;

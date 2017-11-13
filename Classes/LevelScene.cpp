@@ -253,7 +253,7 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
         card->runAction(scaleTo);
         cardsLen++;
         
-        playSound("woosh5", false, 2.0f + float(strlen)/5.0f, 0.2f, 0.05f);
+        playSound("woosh5", false, 2.0f + float(strlen)/5.0f, 0.2f, 0.5f, 0.2f);
         addChild(card, 100);
     } else {
         auto callback = CallFunc::create([=](){
@@ -276,7 +276,7 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
         last->runAction(seq);
         last->ded = true;
         cards.pop_back();
-        playSound("vanish", false, 2.0f + float(strlen)/5.0f, 0.2f, 0.05f);
+        playSound("vanish", false, 2.0f + float(strlen)/5.0f, 0.2f, 0.5f, 0.1f);
     }
     
     auto i = 0;
