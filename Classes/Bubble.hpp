@@ -27,6 +27,7 @@ public:
     char letter;
     cocos2d::Vec2 anchorPosition;
     void setHighlight(bool hl);
+    bool getHighlight();
     static Letter* create(char c, int idx, Bubble *owner);
     void enactForce(Letter *source);
     virtual bool init() override;
@@ -36,11 +37,16 @@ public:
     void pop();
 };
 
+enum class BubbleType {
+    ORDERED,
+    UNORDERED
+};
 
 class Bubble : public cocos2d::Sprite {
-    bool ded = false;
+    BubbleType bubbleType;
     int tick, uptick, lane, depth;
-    Bubble(std::vector<char> chars, int lane, int depth, LevelScene *owner) : tick(int(random()) % 360), uptick(int(random()) % 360), lane(lane), depth(depth), owner(owner) {
+    float rand;
+    Bubble(std::vector<char> chars, int lane, int depth, LevelScene *owner, BubbleType bubbleType) : tick(int(random()) % 360), uptick(int(random()) % 360), lane(lane), depth(depth), owner(owner), bubbleType(bubbleType), rand(90 * (int(random()) % 4)) {
         auto i = 0;
         for (auto x : chars) {
             letters.push_back(Letter::create(x, i, this));
@@ -48,14 +54,18 @@ class Bubble : public cocos2d::Sprite {
         }
     }
 public:
+    bool ded = false;
     std::vector<std::pair<Letter *, int>> currentWord(std::string word);
+    std::vector<std::pair<Letter *, int>> currentWordUnordered(std::string word);
+    std::vector<std::pair<Letter *, int>> currentWordOrdered(std::string word);
     std::vector<Letter *> letters;
-    static Bubble* create(std::vector<char> letters, int lane, int depth, LevelScene *owner);
+    static Bubble* create(std::vector<char> letters, int lane, int depth, LevelScene *owner, BubbleType bubbleType);
     virtual bool init() override;
     virtual void update(float dt) override;
-    void popLetter(Letter * letter);
+    void popLetter(Letter *letter);
     void recalculate();
-    void pop();
+    void setAnchor(Letter *letter, int len, int idx);
+    void pop(cocos2d::CallFunc* cf);
     CC_SYNTHESIZE(LevelScene *, owner, Owner);
 };
 

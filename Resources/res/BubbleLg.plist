@@ -37,7 +37,7 @@
 	<key>gravityx</key>
 	<integer>0</integer>
 	<key>gravityy</key>
-	<integer>150</integer>
+	<integer>200</integer>
 	<key>maxParticles</key>
 	<integer>500</integer>
 	<key>maxRadius</key>
@@ -53,7 +53,7 @@
 	<key>particleLifespanVariance</key>
 	<real>1</real>
 	<key>radialAccelVariance</key>
-	<integer>-100</integer>
+	<integer>-200</integer>
 	<key>radialAcceleration</key>
 	<integer>0</integer>
 	<key>rotatePerSecond</key>
@@ -73,11 +73,11 @@
 	<key>sourcePositionVariancey</key>
 	<integer>70</integer>
 	<key>sourcePositionx</key>
-	<integer>292</integer>
+	<integer>300</integer>
 	<key>sourcePositiony</key>
-	<integer>442</integer>
+	<integer>361</integer>
 	<key>speed</key>
-	<integer>250</integer>
+	<integer>300</integer>
 	<key>speedVariance</key>
 	<integer>500</integer>
 	<key>startColorAlpha</key>
@@ -105,7 +105,7 @@
 	<key>tangentialAcceleration</key>
 	<integer>0</integer>
 	<key>textureFileName</key>
-	<string>749047E7-E1CE-410C-9284-B11E43EC60D9</string>
+	<string>7FAA50F2-D9D4-43C0-A395-18C56088F7B9</string>
 	<key>textureImageData</key>
 	<string>H4sIAAAAAAAAA+S9d3RU95bn2++P6ff69ep+06/f6pl5a2a9mV7X15ickwABEggE
 iBxscsY2YMAYDLZRRCjnClLlqMqqkiqXSqVSlaRSzjkhIZDI0eE6XN7ev3OOKHPx

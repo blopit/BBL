@@ -14,11 +14,13 @@
 
 #include <ui/CocosGUI.h>
 
-#define BZTO_TIME 0.2
+#define EDIT_DEPTH 488
+
 
 class LevelScene;
 class Letter;
 class Bubble;
+enum class BubbleType;
 
 class Light : public cocos2d::Sprite {
     cocos2d::Vec2 start;
@@ -53,13 +55,19 @@ class LevelScene : public cocos2d::Scene, public cocos2d::ui::EditBoxDelegate
     int bubbleRetain = 0;
     int cardsLen = 0;
     int currentDepth = 0;
+    int maxDepth = 0;
     LevelScene(std::string fname) : fname(fname) {}
     std::vector<Card *> cards;
     std::vector<Bubble *> bubbles;
-    std::vector<std::vector<std::vector<char>>> data;
+    std::vector<std::vector<std::pair<BubbleType, std::vector<char>>>> data;
 public:
+    int score = 0;
+    int targetScore = 0;
     int highlights = 0;
     int lightRetain = 0;
+    int lights = 0;
+    int maxBubbles = 0;
+    int maxLetters = 0;
     static cocos2d::Scene* createScene(std::string fname);
     virtual bool init();
     static LevelScene* create(std::string fname);
@@ -69,14 +77,25 @@ public:
     virtual void editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string& text);
     virtual void editBoxReturn(cocos2d::ui::EditBox* editBox);
     
+    void dropDepth();
     void addLightRetain();
     void removeLightRetain();
     void addBubbleRetain();
     void removeBubbleRetain();
     
     CC_SYNTHESIZE(cocos2d::Label *, editLabel, EditLabel);
+    CC_SYNTHESIZE(cocos2d::Label *, scoreLabel, ScoreLabel);
     CC_SYNTHESIZE(cocos2d::ui::EditBox *, textBox, TextBox);
+    CC_SYNTHESIZE(cocos2d::NodeGrid *, nodeGrid, NodeGrid);
+    CC_SYNTHESIZE(cocos2d::Sprite *, book, Book);
+    CC_SYNTHESIZE(cocos2d::LayerColor *, layer, Layer);
+    CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, psemitter1, Psemitter1);
+    CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, psemitter2, Psemitter2);
     
+    
+    /*CC_SYNTHESIZE(cocos2d::Action *, baMove, baMove);
+    CC_SYNTHESIZE(cocos2d::Action *, baRotate, baRotate);
+    CC_SYNTHESIZE(cocos2d::Action *, baSkew, baSkew);*/
 };
 
 #endif /* LevelScene_hpp */

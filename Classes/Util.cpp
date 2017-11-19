@@ -25,7 +25,6 @@ void playSound(std::string name, bool loop, float pitch, float volume, float pan
     audio->setEffectsVolume(volume);
     ss << "sfx/mp3/" << name << ".mp3";
     audio->playEffect(ss.str().c_str(), loop, pitch, pan, gain);
-    
 }
 
 void preloadSound(std::string name) {

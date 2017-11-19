@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "LevelScene.hpp"
 #include "Util.hpp"
+#include "GameManager.hpp"
 
 USING_NS_CC;
 
@@ -8,6 +9,7 @@ static cocos2d::Size designResolutionSize = cocos2d::Size(640, 1136);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(320, 568);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
 static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
+static cocos2d::Size macResolutionSize = cocos2d::Size(432, 768);
 
 AppDelegate::AppDelegate()
 {
@@ -44,8 +46,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
         glview = GLViewImpl::createWithRect("BBL", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+        glview = GLViewImpl::createWithRect("BBL", cocos2d::Rect(0, 0, macResolutionSize.width, macResolutionSize.height));
 #else
         glview = GLViewImpl::create("BBL");
 #endif
@@ -83,6 +87,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-0.plist");
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-1.plist");
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-2.plist");
+    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-3.plist");
+    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-4.plist");
+    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-5.plist");
+    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-6.plist");
+    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-7.plist");
+    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-8.plist");
     
     auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
     audio->setEffectsVolume(1);
@@ -98,8 +108,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloadSound("woosh2");
     preloadSound("woosh3");
     
+    auto gm = GameManager::getInstance();
+    
     // create a scene. it's an autorelease object
-    auto scene = LevelScene::createScene("levels/forest_trg.bbl");
+    auto scene = LevelScene::createScene("1-1");
 
     // run
     director->runWithScene(scene);

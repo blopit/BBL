@@ -23,8 +23,10 @@
 		395242271FB7893800F78065 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 395242241FB7893800F78065 /* Util.cpp */; };
 		3952422C1FB9252700F78065 /* sfx in Resources */ = {isa = PBXBuildFile; fileRef = 3952422B1FB9252700F78065 /* sfx */; };
 		3952422D1FB9252700F78065 /* sfx in Resources */ = {isa = PBXBuildFile; fileRef = 3952422B1FB9252700F78065 /* sfx */; };
-		3952422F1FB9A85700F78065 /* FileOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3952422E1FB9A85700F78065 /* FileOperation.mm */; };
-		395242301FB9A85700F78065 /* FileOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3952422E1FB9A85700F78065 /* FileOperation.mm */; };
+		395242341FBD071A00F78065 /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 395242321FBD071A00F78065 /* GameManager.cpp */; };
+		395242351FBD071A00F78065 /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 395242321FBD071A00F78065 /* GameManager.cpp */; };
+		395242371FBD150400F78065 /* dict in Resources */ = {isa = PBXBuildFile; fileRef = 395242361FBD150300F78065 /* dict */; };
+		395242381FBD150400F78065 /* dict in Resources */ = {isa = PBXBuildFile; fileRef = 395242361FBD150300F78065 /* dict */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
@@ -138,8 +140,9 @@
 		395242241FB7893800F78065 /* Util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
 		395242251FB7893800F78065 /* Util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Util.hpp; sourceTree = "<group>"; };
 		3952422B1FB9252700F78065 /* sfx */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sfx; sourceTree = "<group>"; };
-		3952422E1FB9A85700F78065 /* FileOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileOperation.mm; sourceTree = "<group>"; };
-		395242311FB9A86100F78065 /* FileOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileOperation.h; sourceTree = "<group>"; };
+		395242321FBD071A00F78065 /* GameManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
+		395242331FBD071A00F78065 /* GameManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameManager.hpp; sourceTree = "<group>"; };
+		395242361FBD150300F78065 /* dict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dict; sourceTree = "<group>"; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				395242361FBD150300F78065 /* dict */,
 				3952422B1FB9252700F78065 /* sfx */,
 				3952421D1FB5194300F78065 /* levels */,
 				521A8EA819F11F5000D177D7 /* fonts */,
@@ -343,8 +347,8 @@
 				395242211FB525C500F78065 /* Bubble.hpp */,
 				395242241FB7893800F78065 /* Util.cpp */,
 				395242251FB7893800F78065 /* Util.hpp */,
-				3952422E1FB9A85700F78065 /* FileOperation.mm */,
-				395242311FB9A86100F78065 /* FileOperation.h */,
+				395242321FBD071A00F78065 /* GameManager.cpp */,
+				395242331FBD071A00F78065 /* GameManager.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -510,6 +514,7 @@
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				395242371FBD150400F78065 /* dict in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				3952422C1FB9252700F78065 /* sfx in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
@@ -543,6 +548,7 @@
 				3952422D1FB9252700F78065 /* sfx in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
+				395242381FBD150400F78065 /* dict in Resources */,
 				3952421F1FB5194300F78065 /* levels in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,13 +561,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				395242341FBD071A00F78065 /* GameManager.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				395242221FB525C500F78065 /* Bubble.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				395242121FB513E400F78065 /* LevelScene.cpp in Sources */,
-				3952422F1FB9A85700F78065 /* FileOperation.mm in Sources */,
 				395242261FB7893800F78065 /* Util.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,10 +577,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
-				395242301FB9A85700F78065 /* FileOperation.mm in Sources */,
 				395242231FB525C500F78065 /* Bubble.cpp in Sources */,
 				395242131FB513E400F78065 /* LevelScene.cpp in Sources */,
 				395242271FB7893800F78065 /* Util.cpp in Sources */,
+				395242351FBD071A00F78065 /* GameManager.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 			);
