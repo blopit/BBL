@@ -16,6 +16,66 @@
 USING_NS_CC;
 using namespace cocos2d::experimental;
 
+EndPopup* EndPopup::create(int score, int stars, bool gold, std::vector<std::string> secretWords) {
+    EndPopup* pRet = new EndPopup(score, stars, gold, secretWords);
+    if (pRet && pRet->init())
+    {
+        pRet->autorelease();
+        return pRet;
+    }
+    else
+    {
+        delete pRet;
+        pRet = NULL;
+        return NULL;
+    }
+}
+
+bool EndPopup::init() {
+    
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = CC_CALLBACK_2(EndPopup::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(EndPopup::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(EndPopup::onTouchEnded, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
+    this->scheduleUpdate();
+    //auto ss = Director::getInstance()->getVisibleSize();
+    
+    auto layerColor = LayerColor::create(Color4B(0, 0, 0, 128));
+    addChild(layerColor);
+    
+    auto scoreLabel = Label::createWithTTF("0", "fonts/Marker Felt.ttf", 24);
+    addChild(scoreLabel, 1);
+    
+    auto director = Director::getInstance();
+    auto visibleSize = director->getVisibleSize();
+    
+    //layerColor->setPosition(Vex);
+    
+    return true;
+}
+
+bool EndPopup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
+    
+    return true;
+}
+
+void EndPopup::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
+    
+}
+
+void EndPopup::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) {
+    
+}
+
+void EndPopup::update(float dt) {
+    
+}
+
+//////////////////////////////////////////////////////////////////////
+
 Light* Light::create(std::vector<Letter *> letters, cocos2d::Vec2 start, LevelScene * levelScene) {
     Light* pSprite = new Light(letters, start, levelScene);
     if (pSprite->initWithSpriteFrameName("diamond.png"))
@@ -235,9 +295,9 @@ bool LevelScene::init()
                     }
                     
                     if (sub_match2.str() == "-") {
-                        datum.push_back(std::make_pair(BubbleType::ORDERED, dat));
-                    } else {
                         datum.push_back(std::make_pair(BubbleType::UNORDERED, dat));
+                    } else {
+                        datum.push_back(std::make_pair(BubbleType::ORDERED, dat));
                     }
                     
                 }
@@ -334,6 +394,9 @@ bool LevelScene::init()
     nd->runAction(RepeatForever::create(wv));
     book->addChild(nd, 10);
     
+    //auto ep = EndPopup::create(100, 2, false, std::vector<std::string> {});
+    //addChild(ep, 2000);
+    
     /*auto spr = Sprite::createWithSpriteFrameName("flow2/flow2_K.psd");
     spr->setRotation(-90);
     spr->setScale(0.15);
@@ -414,10 +477,16 @@ void LevelScene::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox) {
 void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string& text) {
     
     int strlen = int(text.length());
+    auto txt = text;
     auto spc = 70;
     
+    auto d = txt;
+    d.erase( std::remove_if( d.begin(), d.end(), []( char c ) { return !std::isalpha(c) ; } ), d.end() ) ;
+    editBox->setText(d.c_str());
+    
     if (lastLen < strlen) {
-        auto card = Card::create(text.back());
+        if (!isalpha(d.back())) return;
+        auto card = Card::create(d.back());
         card->setPosition(Vec2(320 + getX(cardsLen+1, cardsLen, spc), EDIT_DEPTH-50));
         cards.push_back(card);
         card->setScale(0, 0.4);
@@ -466,10 +535,11 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
     }
     
     for (auto b : bubbles) {
-        b->currentWord(text);
+        b->currentWord(d);
     }
     
     lastLen = strlen;
+    lastText = txt;
 }
 
 void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
@@ -477,6 +547,7 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
     auto gm = GameManager::getInstance();
     auto dict = gm->words;
     auto text = std::string(editBox->getText());
+    text.erase( std::remove_if( text.begin(), text.end(), []( char c ) { return !std::isalpha(c) ; } ), text.end() ) ;
     
     /*if (text == "") {
         auto callback = CallFunc::create([=](){

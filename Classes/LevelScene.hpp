@@ -22,6 +22,22 @@ class Letter;
 class Bubble;
 enum class BubbleType;
 
+class EndPopup : public cocos2d::Layer {
+    int score;
+    int stars;
+    bool gold;
+    std::vector<std::string> secretWords;
+    EndPopup(int score, int stars, bool gold, std::vector<std::string> secretWords): score(score), stars(stars), gold(gold), secretWords(secretWords) {}
+public:
+    static EndPopup* create(int score, int stars, bool gold, std::vector<std::string> secretWords);
+    virtual bool init() override;
+    virtual void update(float dt) override;
+    
+    bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
+    void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) override;
+    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
+};
+
 class Light : public cocos2d::Sprite {
     cocos2d::Vec2 start;
     std::vector<Letter *> letters;
@@ -71,6 +87,7 @@ public:
     static cocos2d::Scene* createScene(std::string fname);
     virtual bool init();
     static LevelScene* create(std::string fname);
+    std::string lastText = "";
     
     virtual void editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox);
     virtual void editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox);
