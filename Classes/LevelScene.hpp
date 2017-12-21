@@ -24,18 +24,25 @@ enum class BubbleType;
 
 class EndPopup : public cocos2d::Layer {
     int score;
+    int dscore = 0;
     int stars;
     bool gold;
+    bool death;
     std::vector<std::string> secretWords;
-    EndPopup(int score, int stars, bool gold, std::vector<std::string> secretWords): score(score), stars(stars), gold(gold), secretWords(secretWords) {}
+    EndPopup(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death): score(score), stars(stars), gold(gold), secretWords(secretWords), death(death) {}
 public:
-    static EndPopup* create(int score, int stars, bool gold, std::vector<std::string> secretWords);
+    static EndPopup* create(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death);
     virtual bool init() override;
     virtual void update(float dt) override;
     
     bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
     void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) override;
     void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
+    
+    void restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+    void next(Ref* sender, cocos2d::ui::Widget::TouchEventType type);
+    
+    CC_SYNTHESIZE(cocos2d::Label *, scoreLabel, ScoreLabel);
 };
 
 class Light : public cocos2d::Sprite {

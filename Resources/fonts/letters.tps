@@ -150,7 +150,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>letters.plist</filename>
+                <filename>letters-{n}.plist</filename>
             </struct>
             <key>header</key>
             <key>source</key>
@@ -160,7 +160,7 @@
             </struct>
         </map>
         <key>multiPack</key>
-        <false/>
+        <true/>
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>
@@ -205,78 +205,210 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/0.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/1.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/2.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/3.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/4.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/5.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/6.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/7.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/8.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/9.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/A.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/B.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/C.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/D.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/E.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/F.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/G.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/H.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/I.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/J.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/K.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/L.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/M.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/N.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/O.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/P.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/Q.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/R.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/S.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/T.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/U.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/V.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/W.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/X.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/Y.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/blue/Z.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/0.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/1.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/2.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/3.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/4.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/5.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/6.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/7.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/8.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/9.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/A.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/B.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/C.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/D.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/E.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/F.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/G.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/H.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/I.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/J.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/K.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/L.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/M.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/N.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/O.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/P.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/Q.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/R.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/S.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/T.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/U.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/V.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/W.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/X.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/Y.psd</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/gold/Z.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/FieldBG.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>160,284,320,568</rect>
+                <key>scale9Paddings</key>
+                <rect>160,284,320,568</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/rect.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/continue-icon.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/menu-icon.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/retry-icon.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>128,128,256,256</rect>
+                <key>scale9Paddings</key>
+                <rect>128,128,256,256</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/reg.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/shiny.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>128,130,256,260</rect>
+                <key>scale9Paddings</key>
+                <rect>128,130,256,260</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/square.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>134,130,268,260</rect>
+                <key>scale9Paddings</key>
+                <rect>134,130,268,260</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/button.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,26,100,52</rect>
+                <key>scale9Paddings</key>
+                <rect>50,26,100,52</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/0.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/1.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/2.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/3.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/4.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/5.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/6.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/7.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/8.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/9.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/?.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/A.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/B.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/C.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/D.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/E.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/F.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/G.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/H.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/I.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/J.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/K.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/L.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/M.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/N.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/O.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/P.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/Q.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/R.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/S.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/T.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/U.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/V.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/W.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/X.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/Y.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/Z.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/A.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/B.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/C.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/D.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/E.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/F.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/G.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/H.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/I.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/J.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/K.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/L.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/M.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/N.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/O.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/P.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/Q.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/R.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/S.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/T.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/U.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/V.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/W.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/X.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/Y.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/Z.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/0.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/1.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/2.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/3.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/4.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/5.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/6.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/7.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/8.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/9.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/A.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/B.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/C.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/D.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/E.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/F.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/G.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/H.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/I.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/J.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/K.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/L.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/M.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/N.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/O.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/P.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/Q.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/R.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/S.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/T.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/U.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/V.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/W.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/X.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/Y.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/goldnum/Z.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/A.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/B.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/C.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/D.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/E.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/F.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/G.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/H.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/I.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/J.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/K.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/L.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/M.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/N.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/O.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/P.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/Q.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/R.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/S.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/T.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/U.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/V.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/W.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/X.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/Y.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlight/Z.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/0.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/1.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/2.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/3.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/4.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/5.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/6.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/7.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/8.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/highlightnum/9.psd</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -286,6 +418,150 @@
                 <rect>64,64,128,128</rect>
                 <key>scale9Paddings</key>
                 <rect>64,64,128,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/diamondWhite.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9Paddings</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/endPanel.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>145,137,289,273</rect>
+                <key>scale9Paddings</key>
+                <rect>145,137,289,273</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/inputBook.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>276,171,552,341</rect>
+                <key>scale9Paddings</key>
+                <rect>276,171,552,341</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,9,50,18</rect>
+                <key>scale9Paddings</key>
+                <rect>25,9,50,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/4.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>33,9,66,18</rect>
+                <key>scale9Paddings</key>
+                <rect>33,9,66,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>41,9,82,18</rect>
+                <key>scale9Paddings</key>
+                <rect>41,9,82,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/6.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>49,9,98,18</rect>
+                <key>scale9Paddings</key>
+                <rect>49,9,98,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/7.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>57,9,114,18</rect>
+                <key>scale9Paddings</key>
+                <rect>57,9,114,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/8.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>65,9,130,18</rect>
+                <key>scale9Paddings</key>
+                <rect>65,9,130,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/9.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>73,9,146,18</rect>
+                <key>scale9Paddings</key>
+                <rect>73,9,146,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/stars/gold.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/stars/silver.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>78,73,156,146</rect>
+                <key>scale9Paddings</key>
+                <rect>78,73,156,146</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

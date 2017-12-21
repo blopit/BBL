@@ -6,6 +6,7 @@
 //
 
 #include "GameManager.hpp"
+#include "LevelScene.hpp"
 #include "Util.hpp"
 
 USING_NS_CC;
@@ -54,9 +55,15 @@ GameManager::GameManager() {
         "wheel_related",
         "wood_related",
         "world_related",
-        
         "incredible_related",
     };
+    
+    auto i = 0;
+    for (auto f : files) {
+        auto level = new Level(f, i);
+        levels.push_back(level);
+        i++;
+    }
     
     auto fileData = FileUtils::getInstance()->getDataFromFile("dict");
     std::string content((const char*)fileData.getBytes(), fileData.getSize());
@@ -74,7 +81,31 @@ GameManager* GameManager::getInstance() {
     return gameManager;
 }
 
-std::string GameManager::nextLevel() {
-    levelIndex++;
-    return files[levelIndex];
+void GameManager::completeLevel(std::string level, int stars, std::vector<std::string> hiddenWords, int score) {
+    for (auto l : levels) {
+        if (l->fname == level) {
+            l->stars = stars;
+            l->hiddenWords = hiddenWords;
+            l->highscore = score > l->highscore ? score : l->highscore;
+            if (levelIndex < l->index + 1) {
+                levelIndex = l->index + 1;
+            }
+            break;
+        }
+    }
 }
+
+std::string GameManager::nextLevel(std::string current) {
+    int idx = int(std::find(files.begin(), files.end(), current) - files.begin());
+    return files[idx + 1];
+}
+
+void GameManager::restart() {
+    auto scene = LevelScene::createScene(currentLevel);
+    Director::getInstance()->replaceScene(scene);
+}
+void GameManager::next() {
+    auto scene = LevelScene::createScene(nextLevel(currentLevel));
+    Director::getInstance()->replaceScene(scene);
+}
+

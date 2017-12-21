@@ -173,7 +173,7 @@ Bubble* Bubble::create(vector<char> letters, int lane, int depth, LevelScene *ow
 {
     Bubble* pSprite = new Bubble(letters, lane, depth, owner, bubbleType);
     
-    auto bubbleFormat = bubbleType == BubbleType::UNORDERED ? "bubbles/blue.png" : "bubbles/blueRect.png";
+    auto bubbleFormat = bubbleType == BubbleType::UNORDERED ? "bubbles/reg.png" : "bubbles/square.png";
     
     if (pSprite->initWithSpriteFrameName(bubbleFormat))
     {

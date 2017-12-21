@@ -16,8 +16,8 @@
 USING_NS_CC;
 using namespace cocos2d::experimental;
 
-EndPopup* EndPopup::create(int score, int stars, bool gold, std::vector<std::string> secretWords) {
-    EndPopup* pRet = new EndPopup(score, stars, gold, secretWords);
+EndPopup* EndPopup::create(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death) {
+    EndPopup* pRet = new EndPopup(score, stars, gold, secretWords, death);
     if (pRet && pRet->init())
     {
         pRet->autorelease();
@@ -46,17 +46,113 @@ bool EndPopup::init() {
     auto layerColor = LayerColor::create(Color4B(0, 0, 0, 128));
     addChild(layerColor);
     
-    auto scoreLabel = Label::createWithTTF("0", "fonts/Marker Felt.ttf", 24);
-    addChild(scoreLabel, 1);
     
     auto director = Director::getInstance();
     auto visibleSize = director->getVisibleSize();
     
-    //layerColor->setPosition(Vex);
+    auto panel = Sprite::createWithSpriteFrameName("panel.png");
+    panel->setPosition(visibleSize/2);
+    addChild(panel);
     
+    auto star1 = Sprite::createWithSpriteFrameName("stars/silver.png");
+    auto star2 = Sprite::createWithSpriteFrameName("stars/silver.png");
+    auto star3 = Sprite::createWithSpriteFrameName("stars/silver.png");
+    
+    auto rto = 3;
+    auto rp = 3;
+    
+    if (!death) {
+        if (stars >= 1) {
+            auto sound = CallFunc::create([=](){
+                playSound("star", false, 0.5, 1.0f);
+            });
+            star1->setPosition(Vec2(91, 521));
+            star1->setScale(0);
+            star1->runAction(Sequence::create(DelayTime::create(0.5), sound, EaseElasticOut::create(ScaleTo::create(0.5, 1.0)), NULL));
+            star1->runAction(RepeatForever::create(Sequence::create(EaseInOut::create(RotateTo::create(rp, rto), 1.5), EaseInOut::create(RotateTo::create(rp, -rto), 1.5), NULL)));
+            panel->addChild(star1);
+        }
+        if (stars >= 2) {
+            auto sound = CallFunc::create([=](){
+                playSound("star", false, 1, 1.0f);
+            });
+            star2->setPosition(Vec2(288, 587));
+            star2->setScale(0);
+            star2->runAction(Sequence::create(DelayTime::create(1), sound, EaseElasticOut::create(ScaleTo::create(0.5, 1.0)), NULL));
+            star2->runAction(RepeatForever::create(Sequence::create(EaseInOut::create(RotateTo::create(rp, rto), 1.5), EaseInOut::create(RotateTo::create(rp, -rto), 1.5), NULL)));
+            panel->addChild(star2);
+        }
+        if (stars >= 3) {
+            auto sound = CallFunc::create([=](){
+                playSound("star", false, 1.5, 1.0f);
+            });
+            star3->setPosition(Vec2(486, 521));
+            star3->setScale(0);
+            star3->runAction(Sequence::create(DelayTime::create(1.5), sound, EaseElasticOut::create(ScaleTo::create(0.5, 1.0)), NULL));
+            star3->runAction(RepeatForever::create(Sequence::create(EaseInOut::create(RotateTo::create(rp, rto), 1.5), EaseInOut::create(RotateTo::create(rp, -rto), 1.5), NULL)));
+            panel->addChild(star3);
+        }
+    } else {
+        auto sound = CallFunc::create([=](){
+            std::string evils[3] = {"evil1", "evil2", "evil3"};
+            random_shuffle(&evils[0], &evils[2]);
+            auto p = evils[0];
+            playSound(evils[0], false, 1.5, 1.0f);
+        });
+        auto death = Sprite::createWithSpriteFrameName("death.png");
+        death->setPosition(Vec2(288, 587));
+        death->setScale(0);
+        death->runAction(Sequence::create(DelayTime::create(1), sound, EaseElasticOut::create(ScaleTo::create(0.5, 1.0)), NULL));
+        death->runAction(RepeatForever::create(Sequence::create(EaseInOut::create(RotateTo::create(rp, rto), 1.5), EaseInOut::create(RotateTo::create(rp, -rto), 1.5), NULL)));
+        panel->addChild(death);
+    }
+    
+    scoreLabel = Label::createWithTTF("Score: 0", "fonts/Marker Felt.ttf", 40);
+    scoreLabel->setColor(Color3B::BLACK);
+    scoreLabel->setPosition(Vec2(286, 357));
+    panel->addChild(scoreLabel, 1);
+    
+    auto uRestart = cocos2d::ui::Button::create();
+    uRestart->setTouchEnabled(true);
+    uRestart->loadTextures("retry-button.png", "retry-pressed.png", "");
+    uRestart->setPosition(Vec2(death ? 387 : 288, 0));
+    uRestart->addTouchEventListener(CC_CALLBACK_2(EndPopup::restart, this));
+    panel->addChild(uRestart);
+    
+    auto uMenu = cocos2d::ui::Button::create();
+    uMenu->setTouchEnabled(true);
+    uMenu->loadTextures("menu-button.png", "menu-pressed.png", "");
+    uMenu->setPosition(Vec2(death ? 190 : 91, 0));
+    //uMenu->addTouchEventListener(CC_CALLBACK_2(EndPopup::restart, this));
+    panel->addChild(uMenu);
+    
+    if (!death) {
+        auto uNext = cocos2d::ui::Button::create();
+        uNext->setTouchEnabled(true);
+        uNext->loadTextures("next-button.png", "next-pressed.png", "");
+        uNext->setPosition(Vec2(486, 0));
+        uNext->addTouchEventListener(CC_CALLBACK_2(EndPopup::next, this));
+        panel->addChild(uNext);
+    }
+    
+    this->scheduleUpdate();
     return true;
 }
 
+void EndPopup::restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    auto delayed = CallFunc::create([=](){
+        GameManager::getInstance()->restart();
+    });
+    runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
+}
+
+void EndPopup::next(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    auto delayed = CallFunc::create([=](){
+        GameManager::getInstance()->next();
+    });
+    runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
+}
+                                    
 bool EndPopup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
     
     return true;
@@ -71,14 +167,19 @@ void EndPopup::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) {
 }
 
 void EndPopup::update(float dt) {
+    dscore += boundToRange(1, int(score / ( 60 * 2.0 )), INT8_MAX);
+    if (dscore > score) dscore = score;
+    std::stringstream ss;
     
+    ss << "Score: " << dscore;
+    scoreLabel->setString(ss.str());
 }
 
 //////////////////////////////////////////////////////////////////////
 
 Light* Light::create(std::vector<Letter *> letters, cocos2d::Vec2 start, LevelScene * levelScene) {
     Light* pSprite = new Light(letters, start, levelScene);
-    if (pSprite->initWithSpriteFrameName("diamond.png"))
+    if (pSprite->initWithSpriteFrameName("diamondWhite.png"))
     {
         pSprite->autorelease();
         pSprite->init();
@@ -228,6 +329,7 @@ bool LevelScene::init()
     auto director = Director::getInstance();
     auto visibleSize = director->getVisibleSize();
     Vec2 origin = director->getVisibleOrigin();
+    GameManager::getInstance()->currentLevel = fname;
     
     //auto layerColor = LayerColor::create(Color4B(192, 192, 255, 255));
     //addChild(layerColor);
@@ -394,8 +496,8 @@ bool LevelScene::init()
     nd->runAction(RepeatForever::create(wv));
     book->addChild(nd, 10);
     
-    //auto ep = EndPopup::create(100, 2, false, std::vector<std::string> {});
-    //addChild(ep, 2000);
+    auto ep = EndPopup::create(100, 3, false, std::vector<std::string> {}, true);
+    addChild(ep, 2000);
     
     /*auto spr = Sprite::createWithSpriteFrameName("flow2/flow2_K.psd");
     spr->setRotation(-90);
@@ -436,9 +538,14 @@ void LevelScene::dropDepth() {
             }
         }
         if (next) {
-            //return
-            auto scene = LevelScene::createScene(GameManager::getInstance()->nextLevel());
-            Director::getInstance()->replaceScene(TransitionFlipX::create(2, scene));
+            auto stars = 1;
+            if (score >= targetScore) {
+                stars = 3;
+            } else if (score >= targetScore/2) {
+                stars = 2;
+            }
+            auto endpopup = EndPopup::create(score, stars, 100, std::vector<std::string> {}, false);
+            addChild(endpopup, 20000);
         }
         return;
     };

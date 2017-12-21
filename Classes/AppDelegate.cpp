@@ -6,9 +6,9 @@
 USING_NS_CC;
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(640, 1136);
-static cocos2d::Size smallResolutionSize = cocos2d::Size(320, 568);
-static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
-static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
+static cocos2d::Size smallResolutionSize = cocos2d::Size(640, 1136);
+static cocos2d::Size mediumResolutionSize = cocos2d::Size(1125, 2436);
+static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 2732);
 static cocos2d::Size macResolutionSize = cocos2d::Size(432, 768);
 
 AppDelegate::AppDelegate()
@@ -107,6 +107,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloadSound("woosh1");
     preloadSound("woosh2");
     preloadSound("woosh3");
+    preloadSound("star");
     
     auto gm = GameManager::getInstance();
     
