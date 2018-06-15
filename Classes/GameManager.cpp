@@ -13,49 +13,58 @@ USING_NS_CC;
 
 static GameManager* gameManager = nullptr;
 
+void AdListener::adViewDidDismissScreen(const std::string &name) {
+    if (name == "gameover") {
+        GameManager::getInstance()->restart();
+    }
+}
+
 GameManager::GameManager() {
+    sdkbox::PluginAdMob::cache("gameover");
+    sdkbox::PluginAdMob::setListener(new AdListener());
     files = {
         "1-1",
-        "assault_related",
-        "bald_related",
-        "brag_related",
-        "cast_related",
-        "certain_related",
-        "clash_related",
-        "collar_related",
-        "convention_related",
-        "cure_related",
-        "dip_related",
-        "dirt_related",
-        "escape_related",
-        "feeling_related",
-        "fluffy_related",
-        "forest_descby",
-        "forest_related",
-        "forest_trg",
-        "ground_related",
-        "have_related",
-        "hover_related",
-        "imagine_related",
-        "manner_descby",
-        "manner_related",
-        "motivation_related",
-        "nature_related",
-        "probable_related",
-        "qualify_related",
-        "safari_related",
-        "sand_trg",
-        "silver_related",
-        "size_related",
-        "soul_related",
-        "suite_related",
-        "switch_related",
-        "tolerant_related",
-        "tower_related",
-        "wheel_related",
-        "wood_related",
-        "world_related",
-        "incredible_related",
+        /*"0_current",
+        "1_glass",
+        "2_broken",
+        "3_stone",
+        "4_increase",
+        "5_reading",
+        "6_alive",
+        "7_oil",
+        "8_aware",
+        "9_church",
+        "10_save",
+        "11_edge",
+        "12_chief",
+        "13_writing",*/
+        "14_list",
+        "15_interesting",
+        "16_material",
+        "17_offer",
+        "18_picture",
+        "19_huge",
+        "20_phone",
+        "21_charge",
+        "22_hurt",
+        "23_price",
+        "24_gold",
+        "25_telling",
+        "26_camp",
+        "27_size",
+        "28_distance",
+        "29_river",
+        "30_fair",
+        "31_gun",
+        "32_value",
+        "33_married",
+        "34_remain",
+        "35_growth",
+        "36_empty",
+        "37_legs",
+        "38_check",
+        "39_key",
+        "40_north",
     };
     
     auto i = 0;
@@ -72,6 +81,8 @@ GameManager::GameManager() {
     for (auto line : lines) {
         words.push_back(line);
     }
+    
+    currentLevel = files[0];
 }
 
 GameManager* GameManager::getInstance() {
@@ -107,5 +118,10 @@ void GameManager::restart() {
 void GameManager::next() {
     auto scene = LevelScene::createScene(nextLevel(currentLevel));
     Director::getInstance()->replaceScene(scene);
+}
+
+int GameManager::level() {
+    int idx = int(std::find(files.begin(), files.end(), currentLevel) - files.begin());
+    return idx + 1;
 }
 

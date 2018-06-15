@@ -2,6 +2,8 @@
 #include "LevelScene.hpp"
 #include "Util.hpp"
 #include "GameManager.hpp"
+#include "PluginSdkboxAds/PluginSdkboxAds.h"
+#include "PluginAdMob/PluginAdMob.h"
 
 USING_NS_CC;
 
@@ -43,6 +45,8 @@ static int register_all_packages()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
+    sdkbox::PluginSdkboxAds::init();
+    sdkbox::PluginAdMob::init();
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
@@ -108,6 +112,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloadSound("woosh2");
     preloadSound("woosh3");
     preloadSound("star");
+    preloadSound("deflate");
     
     auto gm = GameManager::getInstance();
     

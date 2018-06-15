@@ -11,24 +11,116 @@
 #include <string>
 #include <regex>
 #include <fstream>
+#include <algorithm>
 #include "GameManager.hpp"
+#include "PluginSdkboxAds/PluginSdkboxAds.h"
+#include "ColorConv.hpp"
 
 USING_NS_CC;
 using namespace cocos2d::experimental;
 
+#define iar(pRet) if (pRet && pRet->init()) \
+{\
+    pRet->autorelease();\
+    return pRet;\
+}\
+else\
+{\
+    delete pRet;\
+    pRet = NULL;\
+    return NULL;\
+}
+
+#define iSprite(pSprite, spr) if (pSprite->initWithSpriteFrameName(spr))\
+{\
+    pSprite->autorelease();\
+    pSprite->init();\
+    return pSprite;\
+}\
+CC_SAFE_DELETE(pSprite);\
+return NULL;\
+
+Coin* Coin::create(cocos2d::Vec2 start, cocos2d::Vec2 end) {
+    Coin* pRet = new Coin(start, end);
+    iSprite(pRet, "coin.png");
+}
+
+bool Coin::init() {
+    setPosition(start);
+    runAction(EaseBackIn::create(MoveTo::create(1.0f, end)));
+    setScale(0.125);
+    playSound("star", false, 1, 1.0f);
+    scheduleUpdate();
+    return true;
+}
+
+void Coin::update(float dt) {
+    
+}
+
+MessagePopup* MessagePopup::create(std::string text, LevelScene *owner) {
+    MessagePopup* pRet = new MessagePopup(text, owner);
+    iar(pRet)
+}
+
+void MessagePopup::dismiss(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    
+    auto end = CallFunc::create([=](){
+        owner->getTextBox()->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
+    });
+    
+    panel->runAction(Sequence::create(EaseOut::create(ScaleTo::create(0.3, 0), 1.5), end, RemoveSelf::create(), NULL));
+    runAction(Sequence::create(FadeTo::create(0.3, 0), RemoveSelf::create(), end, NULL));
+}
+
+bool MessagePopup::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) {
+    return true;
+}
+
+void MessagePopup::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) {
+}
+
+void MessagePopup::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) {
+}
+
+bool MessagePopup::init() {
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = CC_CALLBACK_2(MessagePopup::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(MessagePopup::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(MessagePopup::onTouchEnded, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    
+    auto layerColor = LayerColor::create(Color4B(0, 0, 0, 128));
+    addChild(layerColor);
+    
+    auto director = Director::getInstance();
+    auto visibleSize = director->getVisibleSize();
+    
+    panel = Sprite::createWithSpriteFrameName("message.png");
+    panel->setPosition(visibleSize/2);
+    addChild(panel);
+    
+    scoreLabel = Label::createWithBMFont("fonts/bbl.fnt", text);
+    scoreLabel->setColor(Color3B::WHITE);
+    scoreLabel->setPosition(Vec2(286, 380));
+    scoreLabel->setDimensions(500, 0);
+    scoreLabel->setHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
+    panel->addChild(scoreLabel, 1);
+    
+    auto uDismiss = cocos2d::ui::Button::create();
+    uDismiss->setTouchEnabled(true);
+    uDismiss->loadTextures("menu-button.png", "menu-pressed.png", "");
+    uDismiss->setPosition(Vec2(288, 128));
+    uDismiss->addTouchEventListener(CC_CALLBACK_2(MessagePopup::dismiss, this));
+    panel->addChild(uDismiss);
+    
+    return true;
+}
+    
 EndPopup* EndPopup::create(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death) {
     EndPopup* pRet = new EndPopup(score, stars, gold, secretWords, death);
-    if (pRet && pRet->init())
-    {
-        pRet->autorelease();
-        return pRet;
-    }
-    else
-    {
-        delete pRet;
-        pRet = NULL;
-        return NULL;
-    }
+    iar(pRet)
 }
 
 bool EndPopup::init() {
@@ -57,6 +149,8 @@ bool EndPopup::init() {
     auto star1 = Sprite::createWithSpriteFrameName("stars/silver.png");
     auto star2 = Sprite::createWithSpriteFrameName("stars/silver.png");
     auto star3 = Sprite::createWithSpriteFrameName("stars/silver.png");
+    
+    auto corner = Vec2(0, visibleSize.height);
     
     auto rto = 3;
     auto rp = 3;
@@ -102,27 +196,30 @@ bool EndPopup::init() {
         auto death = Sprite::createWithSpriteFrameName("death.png");
         death->setPosition(Vec2(288, 587));
         death->setScale(0);
-        death->runAction(Sequence::create(DelayTime::create(1), sound, EaseElasticOut::create(ScaleTo::create(0.5, 1.0)), NULL));
+        death->runAction(Sequence::create(DelayTime::create(0.3), sound, EaseElasticOut::create(ScaleTo::create(0.5, 1.0)), NULL));
         death->runAction(RepeatForever::create(Sequence::create(EaseInOut::create(RotateTo::create(rp, rto), 1.5), EaseInOut::create(RotateTo::create(rp, -rto), 1.5), NULL)));
         panel->addChild(death);
     }
     
-    scoreLabel = Label::createWithTTF("Score: 0", "fonts/Marker Felt.ttf", 40);
-    scoreLabel->setColor(Color3B::BLACK);
-    scoreLabel->setPosition(Vec2(286, 357));
+    panel->setScale(0);
+    panel->runAction(EaseElasticOut::create(ScaleTo::create(1, 1.0)));
+    
+    scoreLabel = Label::createWithBMFont("fonts/bbl.fnt", "Score: 0");
+    scoreLabel->setColor(Color3B::WHITE);
+    scoreLabel->setPosition(Vec2(286, 380));
     panel->addChild(scoreLabel, 1);
     
     auto uRestart = cocos2d::ui::Button::create();
     uRestart->setTouchEnabled(true);
     uRestart->loadTextures("retry-button.png", "retry-pressed.png", "");
-    uRestart->setPosition(Vec2(death ? 387 : 288, 0));
+    uRestart->setPosition(Vec2(death ? 387 : 288, -16));
     uRestart->addTouchEventListener(CC_CALLBACK_2(EndPopup::restart, this));
     panel->addChild(uRestart);
     
     auto uMenu = cocos2d::ui::Button::create();
     uMenu->setTouchEnabled(true);
     uMenu->loadTextures("menu-button.png", "menu-pressed.png", "");
-    uMenu->setPosition(Vec2(death ? 190 : 91, 0));
+    uMenu->setPosition(Vec2(death ? 190 : 91, -16));
     //uMenu->addTouchEventListener(CC_CALLBACK_2(EndPopup::restart, this));
     panel->addChild(uMenu);
     
@@ -130,9 +227,67 @@ bool EndPopup::init() {
         auto uNext = cocos2d::ui::Button::create();
         uNext->setTouchEnabled(true);
         uNext->loadTextures("next-button.png", "next-pressed.png", "");
-        uNext->setPosition(Vec2(486, 0));
+        uNext->setPosition(Vec2(486, -16));
         uNext->addTouchEventListener(CC_CALLBACK_2(EndPopup::next, this));
         panel->addChild(uNext);
+    }
+    
+    auto i = 0;
+    for (auto scr : GameManager::getInstance()->hiddenWords) {
+        auto secret = strip(scr);
+        std::stringstream ss;
+        auto len = secret.length();
+        ss << "secret/" << len << ".png";
+        
+        auto s = Sprite::createWithSpriteFrameName(ss.str());
+        s->setPosition(Vec2(288, 272 - i * 42));
+        panel->addChild(s,8);
+        
+        auto done = false;
+        for (auto x : secretWords) {
+            if (x == secret) {
+                done = true;
+                s->setColor(Color3B::MAGENTA);
+                break;
+            }
+        }
+        
+        //if (done) {
+            auto j = 0;
+            for (auto c : secret) {
+                std::string sc(1, c);
+                if (!done) sc = "?";
+                
+                auto label = Label::createWithTTF(sc, "fonts/ccs.ttf", 24);
+                auto x = getX(int(len), j, 32);
+                label->setPosition(Vec2(s->getContentSize().width / 2 + x, 21));
+                s->addChild(label, 10);
+                label->setColor(done ? Color3B::WHITE : Color3B::BLACK);
+                auto config = label->getTTFConfig();
+                config.bold = true;
+                label->setTTFConfig(config);
+                if (!done) {
+                    label->setOpacity(32);
+                    label->setScale(0.8);
+                }
+                
+                j++;
+            }
+        //}
+        
+        auto emit = CallFunc::create([=](){
+            if (done) {
+                auto emitter = ParticleSystemQuad::create("res/SecretFog.plist");
+                emitter->setPosVar(Vec2(s->getContentSize().width / 2, 0));
+                s->addChild(emitter, 9);
+                emitter->setAutoRemoveOnFinish(true);
+                emitter->setPosition(convertToWorldSpace(Vec2(s->getContentSize().width / 2, 18)));
+            }
+        });
+        
+        s->setScale(0);
+        s->runAction(Sequence::create(DelayTime::create(1+i*0.1), emit, EaseElasticOut::create(ScaleTo::create(1, 1)), NULL));
+        i++;
     }
     
     this->scheduleUpdate();
@@ -140,9 +295,14 @@ bool EndPopup::init() {
 }
 
 void EndPopup::restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    if (type != cocos2d::ui::Widget::TouchEventType::BEGAN) return;
     auto delayed = CallFunc::create([=](){
         GameManager::getInstance()->restart();
     });
+    if (death and sdkbox::PluginAdMob::isAvailable("gameover")) {
+        sdkbox::PluginAdMob::show("gameover");
+        return;
+    }
     runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
 }
 
@@ -317,6 +477,34 @@ Scene* LevelScene::createScene(std::string fname) {
     return LevelScene::create(fname);
 }
 
+void LevelScene::combo() {
+    cmbo++;
+    if (cmbo < 2) {
+        return;
+    }
+    
+    auto sound = CallFunc::create([=](){
+        playSound("deflate", false, ((float)cmbo)/5.0f, 1.0f);
+    });
+    
+    std::stringstream sscc;
+    sscc << "combo/x" << cmbo << ".png";
+    cmb->setSpriteFrame(sscc.str());
+    //cmb->runAction(FadeTo::create(0.1, 255));
+    //cmb->setScale(0.7f + ((float)c)/20.0f);
+    cmb->runAction(Sequence::create(
+                                    sound,
+                                    EaseElasticOut::create(ScaleTo::create(0.3, 1 + ((float)cmbo)/20.0f)),
+                               DelayTime::create(0.7f),
+                                    ScaleTo::create(0.3, 1),
+                                    NULL));
+}
+
+void LevelScene::resetcombo() {
+    cmbo = 0;
+    cmb->runAction(ScaleTo::create(0.3, 0));
+}
+
 bool LevelScene::init()
 {
     //////////////////////////////
@@ -329,15 +517,72 @@ bool LevelScene::init()
     auto director = Director::getInstance();
     auto visibleSize = director->getVisibleSize();
     Vec2 origin = director->getVisibleOrigin();
+    Vec2 center = origin + visibleSize / 2;
     GameManager::getInstance()->currentLevel = fname;
+    this->scheduleUpdate();
     
     //auto layerColor = LayerColor::create(Color4B(192, 192, 255, 255));
     //addChild(layerColor);
     
-    auto bk = Sprite::createWithSpriteFrameName("FieldBG.png");
+    /*auto bk = Sprite::createWithSpriteFrameName("bkg1.png");
     addChild(bk);
-    bk->setScale(1.5);
-    bk->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
+    bk->setScale(1);
+    bk->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));*/
+    
+    std::stringstream sscc;
+    sscc << "combo/x" << 2 << ".png";
+    cmb = Sprite::createWithSpriteFrameName(sscc.str());
+    addChild(cmb, 200);
+    cmb->setPosition(Vec2(320, 200));
+    cmb->setScale(0);
+    
+    ActionInterval* wv = Waves3D::create(100, Size(20, 40), 10, 12);
+    
+   // Waves3D::create(100, Size(20, 40), 10, 12);
+    
+    std::srand(time(NULL));
+    skytime = rand() % 720;
+    
+    auto clvl = GameManager::getInstance()->currentLevel;
+    hue1 = std::hash<std::string>()(clvl);
+    hue2 = hue1 >> 5;
+    
+    hsv h = {
+        (double)(hue1 % 360),
+        0.8,
+        1.0};
+    auto rgb1 = hsv2rgb(h);
+    
+    hsv h2 = {
+        (double)(hue2 % 360),
+        0.4,
+        0.7};
+    auto rgb2 = hsv2rgb(h2);
+    
+    auto col = Color4B(Color4F(rgb1.r, rgb1.g, rgb1.b, 1.0f));
+    auto col2 = Color4B(Color4F(rgb2.r, rgb2.g, rgb2.b, 1.0f));
+    
+    gradbk = LayerGradient::create(col2, col);
+    gradbk->setVector(Vec2(0,1));
+    addChild(gradbk);
+    
+    auto ng = NodeGrid::create();
+    ng->runAction(RepeatForever::create(wv));
+    addChild(ng);
+    
+    diag = Sprite::create("grad_diamond.png");
+    ng->addChild(diag);
+    
+    Texture2D::TexParams params;
+    params.minFilter = GL_NEAREST;
+    params.magFilter = GL_NEAREST;
+    params.wrapS = GL_REPEAT;
+    params.wrapT = GL_REPEAT;
+    
+    diag->getTexture()->setTexParameters(params);
+    diag->setTextureRect(Rect(0, 0, 2048, 6144));
+    diag->setPosition(origin);
+    diag->setOpacity(128);
     
     layer = LayerColor::create(Color4B(0, 0, 0, 0));
     addChild(layer, 8);
@@ -363,7 +608,7 @@ bool LevelScene::init()
     
     auto linenum = 0;
     std::ifstream infile;
-    std::regex re("([\\w\\d]*)(,|-)\\s?([\\w\\d]*)(,|-)\\s?([\\w\\d]*)(|,|-)$");
+    std::regex re("([\\w\\d]*)(,|-|&)\\s?([\\w\\d]*)(,|-|&)\\s?([\\w\\d]*)(|,|-|&)$");
     std::smatch smatch;
     
     std::stringstream ss;
@@ -371,16 +616,100 @@ bool LevelScene::init()
     auto fileData = FileUtils::getInstance()->getDataFromFile(ss.str());
     std::string content((const char*)fileData.getBytes(), fileData.getSize());
     
+    textBox = cocos2d::ui::EditBox::create(Size(640, 60), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("inputBook.png"));
+    textBox->setPosition(Vec2(320, EDIT_DEPTH));
+    textBox->setFont("arial", 0);
+    textBox->setMaxLength(9);
+    textBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);
+    textBox->setDelegate(this);
+    textBox->setVisible(false);
+    textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_ALL_CHARACTERS);
+    textBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
+    textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::SENSITIVE);
+    textBox->setFontSize(0);
+    addChild(textBox, 0);
+    
     auto lines = split_string(content, "\n");
+    currentDepth = 1;
+    
     for (auto line : lines) {
         std::cout << line << "]\n";
+        
         if (linenum == 0) {
-            currentDepth = stoi(line);
+           ;//stoi(line);
+            levelName = line;
         } else if (linenum == 1) {
-            //SECRET WORDS
+            difficulty = stoi(line);
         } else if (linenum == 2) {
-            targetScore = stoi(line);
+            auto hw = split_string(line, ",");
+            for (auto h : hw) {
+                hiddenWords.push_back(strip(h));
+            }
+            GameManager::getInstance()->hiddenWords = hiddenWords;
         } else if (linenum == 3) {
+            targetScore = stoi(line);
+        } else if (linenum == 4) {
+            //OPTIONS HERE
+        } else if (linenum == 5) {
+            
+            auto callback = CallFunc::create([=](){
+                if (line != "") {
+                    addChild(MessagePopup::create(line, this), 2000);
+                } else {
+                    textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
+                }
+            });
+            std::stringstream ss;
+            ss << "Level " << GameManager::getInstance()->level();
+            auto lvl = Label::createWithBMFont("fonts/bbl2.fnt", ss.str());
+            lvl->setBMFontSize(52);
+            
+            auto p1 = Vec2(center.x, origin.y - 200);
+            auto p2 = center + Vec2(0, 128);
+            
+            lvl->setPosition(p1);
+            addChild(lvl, 2000);
+            
+            auto creator = CallFunc::create([=](){
+                auto idx = 0;
+                for (auto c : levelName) {
+                    if (c == ' ') {
+                        idx++;
+                        continue;
+                    }
+                    std::stringstream ssc;
+                    std::string cstr(1, toupper(c));
+                    ssc << "goldnum/" << cstr << ".psd";
+                    auto str = ssc.str();
+                    auto spr = Sprite::createWithSpriteFrameName(str);
+                    spr->setPosition(p1);
+                    spr->setScale(0.25);
+                    addChild(spr, 2001);
+                    
+                    auto p3 = Vec2(getX(levelName.size(), idx, 48), - 64);
+                    
+                    spr->runAction(Sequence::create(
+                                                    DelayTime::create(0.1f * idx),
+                                                EaseBackOut::create(MoveTo::create(1.0f, p2 + p3)),
+                                                    DelayTime::create(1.5f),
+                                                //EaseBackOut::create(MoveTo::create(0.f, p1)),
+                                                    FadeTo::create(0.3, 0),
+                                                    NULL));
+                    
+                    idx++;
+                }
+            });
+            
+            
+            lvl->runAction(Sequence::create(
+                                            EaseElasticOut::create(MoveTo::create(1.0f, p2)),
+                                            creator,
+                                            DelayTime::create(0.1f * levelName.size() + 2.6f),
+                                            //EaseBackOut::create(MoveTo::create(0.3f, p1)),
+                                            FadeTo::create(0.3, 0),
+                                            DelayTime::create(0.3f),
+                                            callback,
+                                            NULL));
             
         } else {
             std::vector<std::pair<BubbleType, std::vector<char>>> datum;
@@ -397,9 +726,11 @@ bool LevelScene::init()
                     }
                     
                     if (sub_match2.str() == "-") {
-                        datum.push_back(std::make_pair(BubbleType::UNORDERED, dat));
-                    } else {
                         datum.push_back(std::make_pair(BubbleType::ORDERED, dat));
+                    } else if (sub_match2.str() == "&") {
+                        datum.push_back(std::make_pair(BubbleType::BOMB, dat));
+                    } else {
+                        datum.push_back(std::make_pair(BubbleType::UNORDERED, dat));
                     }
                     
                 }
@@ -409,23 +740,23 @@ bool LevelScene::init()
         
         linenum++;
     }
-    maxDepth = linenum - 5;
+    maxDepth = linenum - 7;
     
     for (auto depth = 0; depth < currentDepth; depth++) {
         for (auto lane = 0; lane < data[depth].size(); lane++) {
             auto datum = data[depth][lane];
             if (datum.second.size() > 0) {
                 auto trueDepth = currentDepth - depth - 1;
-                auto bbl = Bubble::create(datum.second, lane, trueDepth, this, datum.first);
+                auto bbl = Bubble::create(datum.second, lane, trueDepth, this, datum.first, 1);
                 nodeGrid->addChild(bbl);
                 bubbles.push_back(bbl);
             }
         }
     }
     
-    book = Sprite::createWithSpriteFrameName("inputBook.png");
-    book->setScale(1.25);
-    book->setPosition(Vec2(320, 180));
+    book = Sprite::createWithSpriteFrameName("book.png");
+    book->setScale(1);
+    book->setPosition(Vec2(320, 200));
     
     auto baMove = (RepeatForever::create(Sequence::create(EaseInOut::create(MoveBy::create(5, Vec2(0, 5)), 1.5), EaseInOut::create(MoveBy::create(5, Vec2(0, -5)), 1.5), NULL)));
     auto baRotate = (RepeatForever::create(Sequence::create(EaseInOut::create(RotateTo::create(7, 1), 1.5), EaseInOut::create(RotateTo::create(7, -1), 1.5), NULL)));
@@ -460,21 +791,6 @@ bool LevelScene::init()
     
     addChild(book, 1);
     
-    textBox = cocos2d::ui::EditBox::create(Size(640, 60), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("inputBook.png"));
-    textBox->setPosition(Vec2(320, EDIT_DEPTH));
-    textBox->setFont("arial", 0);
-    textBox->setMaxLength(9);
-    textBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);
-    textBox->setDelegate(this);
-    textBox->setVisible(false);
-    textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_ALL_CHARACTERS);
-    textBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
-    textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::SENSITIVE);
-    textBox->setFontSize(0);
-    textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
-    
-    addChild(textBox, 0);
-    
     editLabel = Label::createWithTTF("", "fonts/ccs.ttf", 56);
     editLabel->setTextColor(Color4B::BLACK);
     editLabel->setPosition(Vec2(320, EDIT_DEPTH));
@@ -491,13 +807,10 @@ bool LevelScene::init()
     psemitter2->stopSystem();
     psemitter2->setPosition(book->getPosition());
     
-    ActionInterval* wv = Waves3D::create(3, Size(40, 20), 25, 2);
+    /*ActionInterval* wv = Waves3D::create(3, Size(40, 20), 25, 2);
     auto nd = NodeGrid::create();
     nd->runAction(RepeatForever::create(wv));
-    book->addChild(nd, 10);
-    
-    auto ep = EndPopup::create(100, 3, false, std::vector<std::string> {}, true);
-    addChild(ep, 2000);
+    book->addChild(nd, 10);*/
     
     /*auto spr = Sprite::createWithSpriteFrameName("flow2/flow2_K.psd");
     spr->setRotation(-90);
@@ -506,11 +819,83 @@ bool LevelScene::init()
     spr->setBlendFunc(BlendFunc::ADDITIVE);
     nd->addChild(spr, 0);*/
     
+    /*auto endpopup = EndPopup::create(8000, 3, 100, std::vector<std::string> {"one", "two", "three", "five"}, true);
+    addChild(endpopup, 20000);*/
+    
+    //sdkbox::PluginSdkboxAds::playAd();
     return true;
     
 }
 
+void LevelScene::update(float dt) {
+    auto diffoff = (difficulty / 5);
+    bkpos += 1 + diffoff;
+    if (bkpos >= 2048) {
+        bkpos -= 2048;
+    }
+    
+    if (li1 - 0.05 > 0) {
+        li1 -= 0.05;
+    } else {
+        li1 = 0;
+    }
+    
+    skytime += 0.004;
+    
+    float rad = MATH_DEG_TO_RAD(skytime*15);
+    float rad2 = MATH_DEG_TO_RAD(180 + skytime*15 * 1.89);
+    float rad3 = MATH_DEG_TO_RAD(90 - skytime * 20 * difficulty);
+    auto c2 = (cos(rad) + 1.0f) / 2;
+    auto c22 = (cos(rad2) + 1.0f) / 2;
+    auto c23 = (cos(rad3) + 1.0f) / 2;
+    
+    auto cc1 = (((double)(hue1 % 360)) / 360 ) * 0.8 + 0.2 * c2;
+    auto cc2 = (((double)(hue2 % 360)) / 360 ) * 0.8 + 0.2 * c22;
+    
+    hsv h = {
+        (double)((int)(340 - cc1 * 210) % 360),
+        0.6 + 0.2 * c2,
+        0.9 + 0.1 * c2};
+    auto rgb1 = hsv2rgb(h);
+    
+    hsv h2 = {
+        (double)((int)(140 + cc2 * 290) % 360), //(140 + cc2 * 290), //skytime * 15 * 1.5,
+        0.3 + 0.2 * (1 - c2),
+        0.7 + 0.1 * (1 - c2)};
+    auto rgb2 = hsv2rgb(h2);
+
+    auto white = - 0.1 + c23 * 0.6;
+    rgb rgb3 = {
+        (rgb1.r * 0.375 * (1-white) + rgb2.r * 0.625 * (1-white) + white),
+        (rgb1.g * 0.375 * (1-white) + rgb2.g * 0.625 * (1-white) + white),
+        (rgb1.b * 0.375 * (1-white) + rgb2.b * 0.625 * (1-white) + white)
+    };
+    
+    auto col = Color4F(rgb1.r, rgb1.g, rgb1.b, 1.0f);
+    gradbk->setEndColor(Color3B(col));
+    
+    //gradbk->setEndOpacity(255 * (1 - (0.8 + 0.2 * c2)));
+    
+    auto col2 = Color4F(rgb2.r, rgb2.g, rgb2.b, 1.0f);
+    gradbk->setStartColor(Color3B(col2));
+    
+    auto col3 = Color4F(rgb3.r, rgb3.g, rgb3.b, 1.0f);
+    diag->setColor(Color3B(col3));
+    
+    float wx = sin(rad2) * 32 * diffoff / 5;
+    float wy = cos(rad2) * 128 *  diffoff / 5;
+    diag->setPosition(Director::getInstance()->getVisibleOrigin() + Vec2(wx, bkpos + wy));
+}
+
+void LevelScene::lost() {
+    if (end) return;
+    end = true;
+    auto endpopup = EndPopup::create(score, 0, false, words, true);
+    addChild(endpopup, 2000);
+}
+
 void LevelScene::dropDepth() {
+    resetcombo();
     currentDepth++;
     
     auto currBubbles = 0;
@@ -524,11 +909,11 @@ void LevelScene::dropDepth() {
     auto popped = maxBubbles - currBubbles;
     auto poppedLetters = maxLetters - currLetters;
     
-    score += (5 * popped + poppedLetters) * boundToRange(10, 100 * int(pow(float(popped)/float(maxBubbles), 2)), INT32_MAX);
+    //score += (5 * popped + poppedLetters) * boundToRange(10, 100 * int(pow(float(popped)/float(maxBubbles), 2)), INT32_MAX);
+    score += 20 * (poppedLetters * poppedLetters);
     
     scoreLabel->setString(std::to_string(score));
-    
-    textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
+
     if (currentDepth > maxDepth) {
         auto next = true;
         for (auto b : bubbles) {
@@ -544,15 +929,24 @@ void LevelScene::dropDepth() {
             } else if (score >= targetScore/2) {
                 stars = 2;
             }
-            auto endpopup = EndPopup::create(score, stars, 100, std::vector<std::string> {}, false);
-            addChild(endpopup, 20000);
+            
+            auto popup = CallFunc::create([=](){
+                auto endpopup = EndPopup::create(score, stars, 100, words, false);
+                addChild(endpopup, 20000);
+            });
+            
+            runAction(Sequence::create(DelayTime::create(0.5), popup, NULL));
+            
+        } else {
+            if (!end) textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
         }
         return;
     };
+    textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
     for (auto lane = 0; lane < data[currentDepth-1].size(); lane++) {
         auto datum = data[currentDepth-1][lane];
         if (datum.second.size() > 0) {
-            auto bbl = Bubble::create(datum.second, lane, 0, this, datum.first);
+            auto bbl = Bubble::create(datum.second, lane, 0, this, datum.first, currentDepth);
             nodeGrid->addChild(bbl);
             bubbles.push_back(bbl);
         }
@@ -599,7 +993,7 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
         card->setScale(0, 0.4);
         card->setOpacity(128);
         
-        auto scaleTo = ScaleTo::create(0.2, 0.4);
+        auto scaleTo = ScaleTo::create(0.2, 0.33);
         auto fadeTo = FadeTo::create(0.2, 255);
         auto moveBy = EaseBackOut::create(MoveBy::create(0.2, Vec2(0, 50)));
         card->runAction(fadeTo);
@@ -650,8 +1044,10 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
 }
 
 void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
-    
     auto gm = GameManager::getInstance();
+    auto director = Director::getInstance();
+    auto visibleSize = director->getVisibleSize();
+    
     auto dict = gm->words;
     auto text = std::string(editBox->getText());
     text.erase( std::remove_if( text.begin(), text.end(), []( char c ) { return !std::isalpha(c) ; } ), text.end() ) ;
@@ -666,6 +1062,9 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
     
     std::string d = text;
     std::transform(d.begin(), d.end(), d.begin(), ::tolower);
+    //d.erase(std::remove_if(d.begin(), d.end(), std::not1(std::ptr_fun( (int(*)(int))std::isalpha ))), d.end());
+    
+    words.push_back(d);
     
     if (text != "" and std::find(dict.begin(), dict.end(), d) == dict.end()) {
         auto callback = CallFunc::create([=](){
@@ -710,6 +1109,15 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
             maxBubbles++;
             maxLetters += b->letters.size();
         }
+    }
+    
+    auto it = std::find(hiddenWords.begin(), hiddenWords.end(), d);
+    if (it != hiddenWords.end()) {
+        auto spr = Sprite::createWithSpriteFrameName("secretWord.png");
+        spr->setScale(0);
+        spr->setPosition(visibleSize/2);
+        spr->runAction(Sequence::create(EaseElasticOut::create(ScaleTo::create(0.3, 1)), DelayTime::create(2), EaseOut::create(ScaleTo::create(0.1, 0), 1.5), NULL));
+        addChild(spr, 30000);
     }
     
     textBox->setText("");

@@ -20,6 +20,16 @@ LOCAL_CPPFLAGS := -DSDKBOX_ENABLED
 LOCAL_LDLIBS := -landroid \
 -llog
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
+LOCAL_SHARED_LIBRARIES := libadcolonyso \
+libjsso \
+libadcolonyso \
+libjsso \
+libadcolonyso \
+libjsso \
+libadcolonyso \
+libjsso \
+libadcolonyso \
+libjsso
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END
@@ -27,6 +37,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 LOCAL_WHOLE_STATIC_LIBRARIES += PluginSdkboxAds
 LOCAL_WHOLE_STATIC_LIBRARIES += sdkbox
 LOCAL_WHOLE_STATIC_LIBRARIES += PluginIAP
+LOCAL_WHOLE_STATIC_LIBRARIES += PluginAdColony
+LOCAL_WHOLE_STATIC_LIBRARIES += PluginAdMob
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 
@@ -39,6 +51,8 @@ $(call import-module,.)
 $(call import-module, ./sdkbox)
 $(call import-module, ./pluginsdkboxads)
 $(call import-module, ./pluginiap)
+$(call import-module, ./pluginadcolony)
+$(call import-module, ./pluginadmob)
 
 # _COCOS_LIB_IMPORT_ANDROID_BEGIN
 # _COCOS_LIB_IMPORT_ANDROID_END

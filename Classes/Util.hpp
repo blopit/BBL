@@ -26,7 +26,7 @@ using namespace CocosDenshion;
 #include <stdio.h>
 #include "cocos2d.h"
 
-float getX(int len, int idx, float sp = 96);
+float getX(int len, int idx, float sp = 144);
 
 template <class T>
 T boundToRange(T lower, T value, T upper) {
@@ -45,6 +45,8 @@ void playSound(std::string name, bool loop, float pitch = 1.0f, float volume = 1
 void preloadSound(std::string name);
 
 std::vector<std::string> split_string(const std::string& str, const std::string& delimiter);
+
+std::string strip( const std::string &s );
 
 /*float resScale(float val) {
     cocos2d::Dir

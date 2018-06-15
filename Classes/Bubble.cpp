@@ -68,7 +68,7 @@ bool Letter::init() {
     
     setScale(0);
     auto delay = DelayTime::create(0.3*(idx+1));
-    auto scaleTo = EaseElasticOut::create(ScaleTo::create(1, 0.75));
+    auto scaleTo = EaseElasticOut::create(ScaleTo::create(1, 0.8));
     auto sound = CallFunc::create([=](){
         playSound("inflate", false, 1.0f, 0.5f, 0.5, 0.05f);
     });
@@ -153,12 +153,12 @@ void Letter::setHighlight(bool hl) {
     //hlSprite->setVisible(hl);
     
     if (highlight) {
-        radius = 70;
+        radius = 105;
         weight = 0.1;
         auto scaleTo = EaseElasticOut::create(ScaleTo::create(0.2, 1.25));
         hlSprite->runAction(scaleTo);
     } else {
-        radius = 40;
+        radius = 60;
         weight = 0.2;
         auto scaleTo = EaseBackIn::create(ScaleTo::create(0.1, 0));
         hlSprite->runAction(scaleTo);
@@ -169,11 +169,21 @@ bool Letter::getHighlight() {
     return highlight;
 }
 
-Bubble* Bubble::create(vector<char> letters, int lane, int depth, LevelScene *owner, BubbleType bubbleType)
+Bubble* Bubble::create(vector<char> letters, int lane, int depth, LevelScene *owner, BubbleType bubbleType, int td)
 {
-    Bubble* pSprite = new Bubble(letters, lane, depth, owner, bubbleType);
+    Bubble* pSprite = new Bubble(letters, lane, depth, owner, bubbleType, td);
     
-    auto bubbleFormat = bubbleType == BubbleType::UNORDERED ? "bubbles/reg.png" : "bubbles/square.png";
+    
+    
+    auto bubbleFormat = "";
+    
+    if (bubbleType == BubbleType::UNORDERED) {
+        bubbleFormat = "bubbles/reg.png";
+    } else if (bubbleType == BubbleType::ORDERED) {
+        bubbleFormat = "bubbles/square.png";
+    } else if (bubbleType == BubbleType::BOMB) {
+        bubbleFormat = "bubbles/bomb.png";
+    }
     
     if (pSprite->initWithSpriteFrameName(bubbleFormat))
     {
@@ -188,7 +198,7 @@ Bubble* Bubble::create(vector<char> letters, int lane, int depth, LevelScene *ow
 void Bubble::setAnchor(Letter *letter, int len, int idx) {
     /*switch (bubbleType) {
         case BubbleType::ORDERED:*/
-    letter->anchorPosition = Vec2(190 + getX(int(len), idx), 190);
+    letter->anchorPosition = Vec2(256 + getX(int(len), idx), 256);
             /*break;
         case BubbleType::UNORDERED:
             auto ang = rand + idx * 360.0f/len;
@@ -203,7 +213,11 @@ void Bubble::setAnchor(Letter *letter, int len, int idx) {
 bool Bubble::init() {
     setScale(0);
     
-    runAction(EaseElasticOut::create(ScaleTo::create(3, 0.5)));
+    if (bubbleType == BubbleType::BOMB) {
+        setAnchorPoint(Vec2(0.55, 0.5));
+    }
+    
+    runAction(EaseElasticOut::create(ScaleTo::create(3, 0.37)));
     playSound("stretch", false, 1.0f, 0.2f, 0.5, 0.05f);
     playSound("inflate", false, 1.0f, 0.2f, 0.5, 0.05f);
     
@@ -216,6 +230,14 @@ bool Bubble::init() {
         setAnchor(x, int(len), i);
         x->setPosition(x->anchorPosition);
         i += 1;
+    }
+    
+    psemitter = ParticleSystemQuad::create("res/Dazzle.plist");
+    addChild(psemitter, -1);
+    psemitter->setPosition(Vec2(256, 256));
+    
+    if (td < owner->maxDepth) {
+        psemitter->stop();
     }
     
     setPosition(136 + 184 * lane, 1000 - 184 * depth);
@@ -261,6 +283,9 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWord(std::string word) {
             break;
         case BubbleType::ORDERED:
             return currentWordOrdered(word);
+            break;
+        case BubbleType::BOMB:
+            return currentWordUnordered(word);
             break;
         default:
             break;
@@ -354,6 +379,7 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWordOrdered(std::string wor
 }
 
 void Bubble::popLetter(Letter * letter) {
+    owner->combo();
     remove(letters, letter);
     
     auto emitter = ParticleSystemQuad::create("res/BubbleSm.plist");
@@ -361,11 +387,11 @@ void Bubble::popLetter(Letter * letter) {
     emitter->setAutoRemoveOnFinish(true);
     emitter->setPosition(convertToWorldSpace(letter->getPosition()));
     
-    auto sk1 = EaseBackOut::create(ScaleTo::create(0.1, randFloat(0.55, 0.75)));
-    auto sk2 = EaseElasticOut::create(ScaleTo::create(2, 0.5));
+    auto sk1 = EaseBackOut::create(ScaleTo::create(0.1, randFloat(0.4, 0.55)));
+    auto sk2 = EaseElasticOut::create(ScaleTo::create(2, 0.37));
     auto seq = Sequence::create(sk1, sk2, NULL);
     
-    playSound("burst2", false, randFloat(0.5, 2), 0.25f, 0.5f, 0.5f);
+    playSound("burst2", false, randFloat(0.5, 2), 0.5f, 0.5f, 0.5f);
     
     runAction(seq);
     
@@ -374,10 +400,7 @@ void Bubble::popLetter(Letter * letter) {
 }
 
 void Bubble::recalculate() {
-    auto moveTo = EaseElasticOut::create(MoveTo::create(3, Vec2(136 + 184 * lane, 1000 - 184 * (depth + 1))));
-    
-    auto scaleTo = ScaleTo::create(0.1, randFloat(0.55, 0.75), randFloat(0.25, 0.45));
-    auto scaleTo2 = EaseElasticOut::create(ScaleTo::create(3, 0.5, 0.5));
+    if (ded) return;
     auto callback = CallFunc::create([=](){
         if (letters.size() > 0) {
             auto emitter = ParticleSystemQuad::create("res/BubbleSimp.plist");
@@ -387,8 +410,37 @@ void Bubble::recalculate() {
             playSound("bubbling", false, randFloat(0.5, 2), 0.2, 0.5, 0.05);
         }
     });
-    
+    auto scaleTo = ScaleTo::create(0.1, randFloat(0.4, 0.6), randFloat(0.25, 0.45));
+    auto scaleTo2 = EaseElasticOut::create(ScaleTo::create(3, 0.37));
     auto seq = Sequence::create(scaleTo, callback, scaleTo2, NULL);
+    
+    depth += 1;
+    if (depth >= 3) {
+        owner->ending = true;
+        auto cf = CallFunc::create([=](){
+            auto null = CallFunc::create([=](){
+                owner->lost();
+            });
+            pop(null);
+        });
+        
+        Vector<cocos2d::FiniteTimeAction *> actions;
+        
+        for (auto l : letters) {
+            auto p = CallFunc::create([=](){
+                popLetter(l);
+            });
+            actions.pushBack(Sequence::create(DelayTime::create(0.3), p, NULL));
+        }
+        
+        runAction(Sequence::create(TintTo::create(0.5, Color3B::RED), Sequence::create(actions), cf, NULL));
+        
+        return;
+    }
+    
+    if (owner->ending) return;
+    
+    auto moveTo = EaseElasticOut::create(MoveTo::create(3, Vec2(136 + 184 * lane, 1000 - 184 * (depth))));
     
     auto len = letters.size();
     auto i = 0;
@@ -399,7 +451,6 @@ void Bubble::recalculate() {
         i+= 1;
     }
     
-    depth += 1;
     runAction(moveTo);
     runAction(seq);
     
@@ -413,6 +464,7 @@ void Bubble::recalculate() {
 }
 
 void Bubble::pop(cocos2d::CallFunc* cf) {
+    psemitter->stop();
     auto callback = CallFunc::create([=](){
         ded = true;
         auto emitter = ParticleSystemQuad::create("res/BubbleLg.plist");
@@ -423,7 +475,7 @@ void Bubble::pop(cocos2d::CallFunc* cf) {
         playSound("bubbling2", false, randFloat(0.5, 2), 0.5, 0.5, 0.1);
         stopActionByTag(1);
     });
-    auto fl = randFloat(0.65, 0.85);
+    auto fl = randFloat(0.6, 0.7);
     auto action0 = ScaleTo::create(0.05f, fl + randFloat(0.04, 0.06));
     auto action1 = ScaleTo::create(0.05f, fl);
     auto seq = Sequence::create(action0, action1, NULL);

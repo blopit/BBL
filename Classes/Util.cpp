@@ -53,3 +53,15 @@ std::vector<std::string> split_string(const std::string& str, const std::string&
     
     return strings;
 }
+
+std::string strip( const std::string &s ) {
+    std::string result;
+    result.reserve( s.length() );
+    
+    std::remove_copy_if( s.begin(),
+                        s.end(),
+                        std::back_inserter( result ),
+                        std::not1( std::ptr_fun( isalpha ) ) );
+    
+    return result;
+}
