@@ -198,7 +198,13 @@ Bubble* Bubble::create(vector<char> letters, int lane, int depth, LevelScene *ow
 void Bubble::setAnchor(Letter *letter, int len, int idx) {
     /*switch (bubbleType) {
         case BubbleType::ORDERED:*/
-    letter->anchorPosition = Vec2(256 + getX(int(len), idx), 256);
+    
+    if (bubbleType == BubbleType::BOMB) {
+        letter->anchorPosition = Vec2(284 + getX(int(len), idx), 256);
+    } else {
+        letter->anchorPosition = Vec2(256 + getX(int(len), idx), 256);
+    }
+    
             /*break;
         case BubbleType::UNORDERED:
             auto ang = rand + idx * 360.0f/len;
@@ -249,6 +255,7 @@ bool Bubble::init() {
 void Bubble::update(float dt) {
     tick = tick + 2 % 360;
     uptick = uptick + 2 % 360;
+    tick2 = (tick2 + 10) % 360;
     
     /*if (bubbleType == BubbleType::UNORDERED) {
         rand += 0.05;
@@ -263,6 +270,10 @@ void Bubble::update(float dt) {
         }
     }*/
     
+    if (bubbleType == BubbleType::BOMB) {
+        setColor(Color3B(255, 223+32*sin(MATH_DEG_TO_RAD(tick2)), 223+32*sin(MATH_DEG_TO_RAD(tick2))));
+    }
+    
     setSkewX(1*sin(MATH_DEG_TO_RAD(tick)));
     setSkewY(1*sin(MATH_DEG_TO_RAD(uptick)));
     
@@ -276,23 +287,23 @@ void Bubble::update(float dt) {
     
 }
 
-std::vector<std::pair<Letter *, int>> Bubble::currentWord(std::string word) {
+std::vector<std::pair<Letter *, int>> Bubble::currentWord(std::string word, bool simulate) {
     switch (bubbleType) {
         case BubbleType::UNORDERED:
-            return currentWordUnordered(word);
+            return currentWordUnordered(word, simulate);
             break;
         case BubbleType::ORDERED:
-            return currentWordOrdered(word);
+            return currentWordOrdered(word, simulate);
             break;
         case BubbleType::BOMB:
-            return currentWordUnordered(word);
+            return currentWordUnordered(word, simulate);
             break;
         default:
             break;
     }
 }
 
-std::vector<std::pair<Letter *, int>> Bubble::currentWordUnordered(std::string word) {
+std::vector<std::pair<Letter *, int>> Bubble::currentWordUnordered(std::string word, bool simulate) {
     std::vector<std::pair<Letter *, int>> ret;
     std::vector<int> used;
     for (auto x : letters) {
@@ -315,12 +326,12 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWordUnordered(std::string w
                 }
             }
         }
-        x->setHighlight(done);
+        if (!simulate) x->setHighlight(done);
     }
     return ret;
 }
 
-std::vector<std::pair<Letter *, int>> Bubble::currentWordOrdered(std::string word) {
+std::vector<std::pair<Letter *, int>> Bubble::currentWordOrdered(std::string word, bool simulate) {
     std::vector<std::pair<Letter *, int>> ret;
     auto crush = false;
     auto i = 0;
@@ -331,7 +342,7 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWordOrdered(std::string wor
         auto done = false;
         
         if (ii == id and isnumber(x->letter) and atoi(&x->letter) == word.size()){
-            x->setHighlight(true);
+            if (!simulate) x->setHighlight(true);
             ret.push_back(make_pair(x, word.length()-1));
             done = true;
             crush = true;
@@ -340,7 +351,7 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWordOrdered(std::string wor
         }
         
         if (crush) {
-            x->setHighlight(false);
+            if (!simulate) x->setHighlight(false);
             ii++;
             continue;
         }
@@ -350,14 +361,14 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWordOrdered(std::string wor
             auto c = word[i];
             auto letr = x->letter;
             if (toupper(letr) == toupper(c)) {
-                x->setHighlight(true);
+                if (!simulate) x->setHighlight(true);
                 ret.push_back(make_pair(x, i));
                 done = true;
                 id++;
                 i++;
                 break;
             } else if (isnumber(letr) and atoi(&letr) == word.size()){
-                x->setHighlight(true);
+                if (!simulate) x->setHighlight(true);
                 ret.push_back(make_pair(x, i));
                 done = true;
                 id++;
@@ -369,7 +380,7 @@ std::vector<std::pair<Letter *, int>> Bubble::currentWordOrdered(std::string wor
         }
         
         if (!done) {
-            x->setHighlight(false);
+            if (!simulate) x->setHighlight(false);
             crush = true;
         }
         
@@ -396,6 +407,23 @@ void Bubble::popLetter(Letter * letter) {
     runAction(seq);
     
     letter->pop();
+    if (bubbleType == BubbleType::BOMB and !safedelete) {
+        auto cf = CallFunc::create([=](){
+            owner->ending = true;
+            auto null = CallFunc::create([=](){
+                owner->lost();
+            });
+            pop(null);
+        });
+        auto emit = CallFunc::create([=](){
+            auto emitter = ParticleSystemQuad::create("res/Fire.plist");
+            owner->addChild(emitter, 90);
+            emitter->setAutoRemoveOnFinish(true);
+            emitter->setPosition(getPosition());
+        });
+        setColor(Color3B::WHITE);
+        runAction(Sequence::create(emit, DelayTime::create(1), cf, NULL));
+    }
     
 }
 
@@ -414,14 +442,51 @@ void Bubble::recalculate() {
     auto scaleTo2 = EaseElasticOut::create(ScaleTo::create(3, 0.37));
     auto seq = Sequence::create(scaleTo, callback, scaleTo2, NULL);
     
-    depth += 1;
-    if (depth >= 3) {
-        owner->ending = true;
-        auto cf = CallFunc::create([=](){
+    if (bubbleType == BubbleType::BOMB) {
+        auto destroy = true;
+        for (auto b : owner->bubbles) {
+            if (b->bubbleType != BubbleType::BOMB and !b->ded and b->cdepth == cdepth) {
+                destroy = false;
+            }
+        }
+        if (destroy) {
+            safedelete = true;
             auto null = CallFunc::create([=](){
-                owner->lost();
             });
             pop(null);
+            Vector<cocos2d::FiniteTimeAction *> actions;
+            
+            for (auto l : letters) {
+                popLetter(l);
+            }
+        }
+    }
+    
+    
+    depth += 1;
+    if (depth >= 3) {
+        if (bubbleType == BubbleType::BOMB) {
+            safedelete = true;
+        } else {
+            owner->ending = true;
+        }
+        auto cf = CallFunc::create([=](){
+            if (bubbleType != BubbleType::BOMB) {
+                auto null = CallFunc::create([=](){
+                    owner->lost();
+                });
+                pop(null);
+            } else {
+                auto null = CallFunc::create([=](){
+                });
+                pop(null);
+            }
+        });
+        auto emit = CallFunc::create([=](){
+            auto emitter = ParticleSystemQuad::create("res/Fire.plist");
+            owner->addChild(emitter, 9);
+            emitter->setAutoRemoveOnFinish(true);
+            emitter->setPosition(getPosition());
         });
         
         Vector<cocos2d::FiniteTimeAction *> actions;
@@ -433,8 +498,11 @@ void Bubble::recalculate() {
             actions.pushBack(Sequence::create(DelayTime::create(0.3), p, NULL));
         }
         
-        runAction(Sequence::create(TintTo::create(0.5, Color3B::RED), Sequence::create(actions), cf, NULL));
-        
+        if (bubbleType != BubbleType::BOMB) {
+            runAction(Sequence::create(emit, DelayTime::create(1), Sequence::create(actions), cf, NULL));
+        } else {
+            runAction(Sequence::create(emit, Sequence::create(actions), cf, NULL));
+        }
         return;
     }
     

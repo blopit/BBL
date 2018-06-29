@@ -29,9 +29,9 @@ class EndPopup : public cocos2d::Layer {
     bool gold;
     bool death;
     std::vector<std::string> secretWords;
-    EndPopup(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death): score(score), stars(stars), gold(gold), secretWords(secretWords), death(death) {}
+    EndPopup(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death, LevelScene *owner): score(score), stars(stars), gold(gold), secretWords(secretWords), death(death), owner(owner) {}
 public:
-    static EndPopup* create(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death);
+    static EndPopup* create(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death, LevelScene *owner);
     virtual bool init() override;
     virtual void update(float dt) override;
     
@@ -43,6 +43,7 @@ public:
     void next(Ref* sender, cocos2d::ui::Widget::TouchEventType type);
     
     CC_SYNTHESIZE(cocos2d::Label *, scoreLabel, ScoreLabel);
+    CC_SYNTHESIZE(LevelScene *, owner, Owner);
 };
 
 class MessagePopup : public cocos2d::Layer {
@@ -80,13 +81,14 @@ class Coin : public cocos2d::Sprite {
     cocos2d::Vec2 start;
     cocos2d::Vec2 end;
     //std::vector<std::pair<cocos2d::Vec2, float>> trail;
-    Coin(cocos2d::Vec2 start, cocos2d::Vec2 end) : start(start), end(end) {}
+    Coin(cocos2d::Vec2 start, cocos2d::Vec2 end, LevelScene * levelScene) : start(start), end(end), levelScene(levelScene) {}
 public:
-    static Coin* create(cocos2d::Vec2 start, cocos2d::Vec2 end);
+    static Coin* create(cocos2d::Vec2 start, cocos2d::Vec2 end, LevelScene * levelScene);
     virtual bool init() override;
     virtual void update(float dt) override;
     CC_SYNTHESIZE(cocos2d::DrawNode *, drawNode, DrawNode);
     CC_SYNTHESIZE(cocos2d::Layer *, layer, Layer);
+    CC_SYNTHESIZE(LevelScene *, levelScene, LevelScene);
 };
 
 class Card : public cocos2d::Sprite {
@@ -110,7 +112,6 @@ class LevelScene : public cocos2d::Scene, public cocos2d::ui::EditBoxDelegate
     int currentDepth = 0;
     LevelScene(std::string fname) : fname(fname) {}
     std::vector<Card *> cards;
-    std::vector<Bubble *> bubbles;
     std::vector<std::string> hiddenWords;
     std::vector<std::string> words;
     std::vector<std::vector<std::pair<BubbleType, std::vector<char>>>> data;
@@ -121,15 +122,21 @@ class LevelScene : public cocos2d::Scene, public cocos2d::ui::EditBoxDelegate
     int hue1 = 0;
     int hue2 = 0;
     int cmbo = 0;
-    float li1 = 0;
+    int coinbkshift = 0;
+    int scorewid = 128;
+    int csw = 0;
     
 public:
+    std::vector<Bubble *> bubbles;
+    float li1 = 0;
+    float coinLi = 0;
     int difficulty = 1;
     std::string levelName = "";
     bool redZone = false;
     bool timed = false;
     
     int score = 0;
+    int coins = 0;
     int targetScore = 0;
     int highlights = 0;
     int lightRetain = 0;
@@ -158,18 +165,28 @@ public:
     void lost();
     void combo();
     void resetcombo();
+    void getHint();
     
     CC_SYNTHESIZE(cocos2d::Label *, editLabel, EditLabel);
     CC_SYNTHESIZE(cocos2d::Label *, scoreLabel, ScoreLabel);
+    CC_SYNTHESIZE(cocos2d::Label *, coinLabel, CoinLabel);
+    CC_SYNTHESIZE(cocos2d::Label *, helpLabel, HelpLabel);
+    CC_SYNTHESIZE(cocos2d::Label *, hintLabel, HintLabel);
     CC_SYNTHESIZE(cocos2d::ui::EditBox *, textBox, TextBox);
     CC_SYNTHESIZE(cocos2d::NodeGrid *, nodeGrid, NodeGrid);
     CC_SYNTHESIZE(cocos2d::Sprite *, book, Book);
     CC_SYNTHESIZE(cocos2d::Sprite *, diag, Diag);
     CC_SYNTHESIZE(cocos2d::Sprite *, cmb, Cmb);
+    CC_SYNTHESIZE(cocos2d::Sprite *, coinAm, CoinAm);
+    CC_SYNTHESIZE(cocos2d::Sprite *, coinAmCoin, CoinAmCoin);
+    CC_SYNTHESIZE(cocos2d::Sprite *, helpAmCoin, HelpAmCoin);
+    CC_SYNTHESIZE(cocos2d::Sprite *, help, Help);
     CC_SYNTHESIZE(cocos2d::LayerColor *, layer, Layer);
     CC_SYNTHESIZE(cocos2d::LayerGradient *, gradbk, Gradbk);
     CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, psemitter1, Psemitter1);
     CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, psemitter2, Psemitter2);
+    CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, scoreEmit, ScoreEmit);
+    CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, scoreEmit2, ScoreEmit2);
     
     
     /*CC_SYNTHESIZE(cocos2d::Action *, baMove, baMove);

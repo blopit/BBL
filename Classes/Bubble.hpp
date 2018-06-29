@@ -44,8 +44,7 @@ enum class BubbleType {
 };
 
 class Bubble : public cocos2d::Sprite {
-    BubbleType bubbleType;
-    int tick, uptick, lane, depth, td;
+    int tick, uptick, tick2, lane, td;
     int combo = 0;
     float rand;
     Bubble(std::vector<char> chars, int lane, int depth, LevelScene *owner, BubbleType bubbleType, int td) : tick(int(random()) % 360), uptick(int(random()) % 360), lane(lane), depth(depth), owner(owner), bubbleType(bubbleType), rand(90 * (int(random()) % 4)), td(td) {
@@ -56,10 +55,13 @@ class Bubble : public cocos2d::Sprite {
         }
     }
 public:
+    int depth, cdepth;
+    BubbleType bubbleType;
     bool ded = false;
-    std::vector<std::pair<Letter *, int>> currentWord(std::string word);
-    std::vector<std::pair<Letter *, int>> currentWordUnordered(std::string word);
-    std::vector<std::pair<Letter *, int>> currentWordOrdered(std::string word);
+    bool safedelete = false;
+    std::vector<std::pair<Letter *, int>> currentWord(std::string word, bool simulate);
+    std::vector<std::pair<Letter *, int>> currentWordUnordered(std::string word, bool simulate);
+    std::vector<std::pair<Letter *, int>> currentWordOrdered(std::string word, bool simulate);
     std::vector<Letter *> letters;
     static Bubble* create(std::vector<char> letters, int lane, int depth, LevelScene *owner, BubbleType bubbleType, int td);
     virtual bool init() override;

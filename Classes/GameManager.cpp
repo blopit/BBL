@@ -22,9 +22,13 @@ void AdListener::adViewDidDismissScreen(const std::string &name) {
 GameManager::GameManager() {
     sdkbox::PluginAdMob::cache("gameover");
     sdkbox::PluginAdMob::setListener(new AdListener());
+    
+    sdkbox::PluginSdkboxPlay::setListener(this);
+    sdkbox::PluginSdkboxPlay::signin();
+    
     files = {
         "1-1",
-        /*"0_current",
+        "0_current",
         "1_glass",
         "2_broken",
         "3_stone",
@@ -37,7 +41,7 @@ GameManager::GameManager() {
         "10_save",
         "11_edge",
         "12_chief",
-        "13_writing",*/
+        "13_writing",/**/
         "14_list",
         "15_interesting",
         "16_material",
@@ -76,11 +80,18 @@ GameManager::GameManager() {
     
     auto fileData = FileUtils::getInstance()->getDataFromFile("dict");
     std::string content((const char*)fileData.getBytes(), fileData.getSize());
-    
     auto lines = split_string(content, "\n");
     for (auto line : lines) {
         words.push_back(line);
     }
+    
+    fileData = FileUtils::getInstance()->getDataFromFile("smalldict");
+    std::string cnt((const char*)fileData.getBytes(), fileData.getSize());
+    lines = split_string(cnt, "\n");
+    for (auto line : lines) {
+        smwords.push_back(line);
+    }
+    //std::random_shuffle(smwords.begin(), smwords.end());
     
     currentLevel = files[0];
 }

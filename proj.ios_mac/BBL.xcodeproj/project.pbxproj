@@ -17,6 +17,8 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
 		32F6480BAE4A3CFE55A76529 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C6416EBF48532A7F0A3DBC /* GoogleMobileAds.framework */; };
+		3908890D20D8896100681B92 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3908890C20D8896100681B92 /* GameKit.framework */; };
+		3908895520E2EB2600681B92 /* smalldict in Resources */ = {isa = PBXBuildFile; fileRef = 3908895420E2EB2600681B92 /* smalldict */; };
 		395242121FB513E400F78065 /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 395242101FB513E400F78065 /* LevelScene.cpp */; };
 		395242131FB513E400F78065 /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 395242101FB513E400F78065 /* LevelScene.cpp */; };
 		3952421E1FB5194300F78065 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 3952421D1FB5194300F78065 /* levels */; };
@@ -114,6 +116,7 @@
 		8465407C86278DA21A641F1F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE147CBB55AF75E198B558E /* SafariServices.framework */; };
 		895B4721804C0C131FE3BAA1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54984E58A3DB5A595B0E9F0F /* CoreMedia.framework */; };
 		8C9D409D8818FA6D8967A31B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56A42EF9898C74D6AA3D01F /* CFNetwork.framework */; };
+		90794920BE730F5404D61404 /* PluginSdkboxPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EC4B3AB63D8369F065B795 /* PluginSdkboxPlay.framework */; };
 		98BA482BB6AD68C92D623B92 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0654717A0F3446E0AE6637F /* AdColony.framework */; };
 		9B2F471DA72C392C8AB523C0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B9694EABB06C2146BECCD300 /* libsqlite3.dylib */; };
 		B4E741209478CC0D44616BAD /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7640DDB19CE8DDC7D4C77A /* GLKit.framework */; };
@@ -188,6 +191,9 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		3533448CBB234757B99C1653 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/EventKitUI.framework; sourceTree = DEVELOPER_DIR; };
+		3908890B20D8894700681B92 /* BBL-mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "BBL-mobile.entitlements"; path = "BBL-mobile/BBL-mobile.entitlements"; sourceTree = "<group>"; };
+		3908890C20D8896100681B92 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
+		3908895420E2EB2600681B92 /* smalldict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = smalldict; sourceTree = "<group>"; };
 		395242101FB513E400F78065 /* LevelScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelScene.cpp; sourceTree = "<group>"; };
 		395242111FB513E400F78065 /* LevelScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LevelScene.hpp; sourceTree = "<group>"; };
 		3952421D1FB5194300F78065 /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 		39DECD701FEE1A8600A8080A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		39DECD741FEE2F6400A8080A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "BBL-mobile/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
+		41EC4B3AB63D8369F065B795 /* PluginSdkboxPlay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PluginSdkboxPlay.framework; sourceTree = SOURCE_ROOT; };
 		455C4CDEAA6EB5C1F164D99D /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libz.1.2.5.dylib; sourceTree = DEVELOPER_DIR; };
 		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
@@ -312,6 +319,7 @@
 				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
 				D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */,
 				C53A44A880A706804630C372 /* sdkbox.framework in Frameworks */,
+				3908890D20D8896100681B92 /* GameKit.framework in Frameworks */,
 				E4CA49529EA053D0244FDD31 /* PluginSdkboxAds.framework in Frameworks */,
 				7D134103894CB0AA04BB1682 /* AdSupport.framework in Frameworks */,
 				8C9D409D8818FA6D8967A31B /* CFNetwork.framework in Frameworks */,
@@ -340,6 +348,7 @@
 				32F6480BAE4A3CFE55A76529 /* GoogleMobileAds.framework in Frameworks */,
 				464B46568F23BD03615772B3 /* CoreVideo.framework in Frameworks */,
 				8465407C86278DA21A641F1F /* SafariServices.framework in Frameworks */,
+				90794920BE730F5404D61404 /* PluginSdkboxPlay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +411,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				3908890B20D8894700681B92 /* BBL-mobile.entitlements */,
 				46880B8319C43A87006E1F66 /* Classes */,
 				46880B7519C43A67006E1F66 /* Resources */,
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
@@ -416,6 +426,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3908890C20D8896100681B92 /* GameKit.framework */,
 				39DECD701FEE1A8600A8080A /* MessageUI.framework */,
 				39DECD6D1FEE1A5000A8080A /* libz.1.2.5.tbd */,
 				294D0D631D0D56D500F7F5D4 /* CoreText.framework */,
@@ -467,6 +478,7 @@
 				65C6416EBF48532A7F0A3DBC /* GoogleMobileAds.framework */,
 				CC0E4DB0960C416D09D85396 /* CoreVideo.framework */,
 				5BE147CBB55AF75E198B558E /* SafariServices.framework */,
+				41EC4B3AB63D8369F065B795 /* PluginSdkboxPlay.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -474,6 +486,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3908895420E2EB2600681B92 /* smalldict */,
 				397EF01620C78FA500129F2B /* grad_diamond.png */,
 				39DECD741FEE2F6400A8080A /* Images.xcassets */,
 				39DECD5A1FEB7ACC00A8080A /* retry-button.png */,
@@ -614,6 +627,17 @@
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = E2FPXMPTD9;
+						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -706,6 +730,7 @@
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				39DECD641FEB7C0500A8080A /* next-pressed.png in Resources */,
 				50EF629717ECD46A001EB2F8 /* Icon-58.png in Resources */,
+				3908895520E2EB2600681B92 /* smalldict in Resources */,
 				7BBB422E9FED2C82023EB74A /* sdkbox_config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -790,6 +815,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "BBL-mobile/BBL-mobile.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = E2FPXMPTD9;
@@ -816,6 +842,7 @@
 					"\"AdColony.framework\"",
 					"\"PluginAdMob.framework\"",
 					"\"GoogleMobileAds.framework\"",
+					"\"PluginSdkboxPlay.framework\"",
 				);
 				OTHER_CFLAGS = "-DSDKBOX_ENABLED";
 				OTHER_LDFLAGS = (
@@ -824,6 +851,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.TBH.BBL;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -838,6 +866,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "BBL-mobile/BBL-mobile.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = E2FPXMPTD9;
@@ -863,6 +892,7 @@
 					"\"AdColony.framework\"",
 					"\"PluginAdMob.framework\"",
 					"\"GoogleMobileAds.framework\"",
+					"\"PluginSdkboxPlay.framework\"",
 				);
 				OTHER_CFLAGS = "-DSDKBOX_ENABLED";
 				OTHER_LDFLAGS = (
@@ -871,6 +901,7 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.TBH.BBL;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;

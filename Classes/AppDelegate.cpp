@@ -4,6 +4,7 @@
 #include "GameManager.hpp"
 #include "PluginSdkboxAds/PluginSdkboxAds.h"
 #include "PluginAdMob/PluginAdMob.h"
+#include "PluginSdkboxPlay/PluginSdkboxPlay.h"
 
 USING_NS_CC;
 
@@ -47,6 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     sdkbox::PluginSdkboxAds::init();
     sdkbox::PluginAdMob::init();
+    sdkbox::PluginSdkboxPlay::init();
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
@@ -111,6 +113,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloadSound("woosh1");
     preloadSound("woosh2");
     preloadSound("woosh3");
+    preloadSound("woosh5");
     preloadSound("star");
     preloadSound("deflate");
     
@@ -118,7 +121,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     // create a scene. it's an autorelease object
     auto scene = LevelScene::createScene("1-1");
-
+    
+    //sdkbox::PluginSdkboxPlay::signin();
+    
+    /*std::string sData("1bC\0u\4;Y\5L", 10);
+    const void* data = (const void*)sData.c_str();
+    int len = (int)sData.length();
+    sdkbox::PluginSdkboxPlay::saveGameDataBinary("key3", data, len);*/
+    
     // run
     director->runWithScene(scene);
 
