@@ -40,6 +40,8 @@ else\
 CC_SAFE_DELETE(pSprite);\
 return NULL;\
 
+#define HINT_COST 100
+
 Coin* Coin::create(cocos2d::Vec2 start, cocos2d::Vec2 end, LevelScene * levelScene) {
     Coin* pRet = new Coin(start, end, levelScene);
     iSprite(pRet, "coin.png");
@@ -123,19 +125,25 @@ bool MessagePopup::init() {
     panel->setScale(0);
     panel->runAction(EaseElasticOut::create(ScaleTo::create(0.3, 1)));
     
-    scoreLabel = Label::createWithBMFont("fonts/bbl.fnt", text);
+    auto tt = text;
+    if (text == ""){
+        tt = "More levels coming soon!";
+    }
+    scoreLabel = Label::createWithBMFont("fonts/bbl.fnt", tt);
     scoreLabel->setColor(Color3B::WHITE);
     scoreLabel->setPosition(Vec2(286, 380));
     scoreLabel->setDimensions(500, 0);
     scoreLabel->setHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
     panel->addChild(scoreLabel, 1);
     
-    auto uDismiss = cocos2d::ui::Button::create();
-    uDismiss->setTouchEnabled(true);
-    uDismiss->loadTextures("menu-button.png", "menu-pressed.png", "");
-    uDismiss->setPosition(Vec2(288, 128));
-    uDismiss->addTouchEventListener(CC_CALLBACK_2(MessagePopup::dismiss, this));
-    panel->addChild(uDismiss);
+    if (text != "") {
+        auto uDismiss = cocos2d::ui::Button::create();
+        uDismiss->setTouchEnabled(true);
+        uDismiss->loadTextures("next-button.png", "next-pressed.png", "");
+        uDismiss->setPosition(Vec2(288, 128));
+        uDismiss->addTouchEventListener(CC_CALLBACK_2(MessagePopup::dismiss, this));
+        panel->addChild(uDismiss);
+    }
     
     return true;
 }
@@ -182,6 +190,15 @@ bool EndPopup::init() {
     Vec2 locs = Vec2(0, 0);
     int am = 5;
     float ix = 0;
+    
+    auto ws = 0;
+    for (auto scr : GameManager::getInstance()->hiddenWords) {
+        if (std::find(secretWords.begin(), secretWords.end(), scr) != secretWords.end()) {
+            ws += 1;
+        }
+    }
+    
+    GameManager::getInstance()->coins += stars * 5 + ws;
     
     if (!death) {
         if (stars >= 1) {
@@ -266,6 +283,7 @@ bool EndPopup::init() {
             star3->runAction(Sequence::create(ftas));
             star3->runAction(RepeatForever::create(Sequence::create(EaseInOut::create(RotateTo::create(rp, rto), 1.5), EaseInOut::create(RotateTo::create(rp, -rto), 1.5), NULL)));
         }
+        
     } else {
         auto sound = CallFunc::create([=](){
             std::string evils[3] = {"evil1", "evil2", "evil3"};
@@ -289,27 +307,29 @@ bool EndPopup::init() {
     scoreLabel->setPosition(Vec2(286, 380));
     panel->addChild(scoreLabel, 1);
     
-    auto uRestart = cocos2d::ui::Button::create();
-    uRestart->setTouchEnabled(true);
-    uRestart->loadTextures("retry-button.png", "retry-pressed.png", "");
-    uRestart->setPosition(Vec2(death ? 387 : 288, -16));
-    uRestart->addTouchEventListener(CC_CALLBACK_2(EndPopup::restart, this));
-    panel->addChild(uRestart);
-    
-    auto uMenu = cocos2d::ui::Button::create();
+    /*auto uMenu = cocos2d::ui::Button::create();
     uMenu->setTouchEnabled(true);
     uMenu->loadTextures("menu-button.png", "menu-pressed.png", "");
     uMenu->setPosition(Vec2(death ? 190 : 91, -16));
     //uMenu->addTouchEventListener(CC_CALLBACK_2(EndPopup::restart, this));
-    panel->addChild(uMenu);
+    panel->addChild(uMenu);*/
     
     if (!death) {
+        GameManager::getInstance()->adscore += 40;
         auto uNext = cocos2d::ui::Button::create();
         uNext->setTouchEnabled(true);
         uNext->loadTextures("next-button.png", "next-pressed.png", "");
-        uNext->setPosition(Vec2(486, -16));
+        uNext->setPosition(Vec2(288, -16));
         uNext->addTouchEventListener(CC_CALLBACK_2(EndPopup::next, this));
         panel->addChild(uNext);
+    } else {
+        GameManager::getInstance()->adscore += 200;
+        auto uRestart = cocos2d::ui::Button::create();
+        uRestart->setTouchEnabled(true);
+        uRestart->loadTextures("retry-button.png", "retry-pressed.png", "");
+        uRestart->setPosition(Vec2(288, -16));
+        uRestart->addTouchEventListener(CC_CALLBACK_2(EndPopup::restart, this));
+        panel->addChild(uRestart);
     }
     
     std::vector<Sprite *> foundwords;
@@ -393,10 +413,33 @@ void EndPopup::restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
     auto delayed = CallFunc::create([=](){
         GameManager::getInstance()->restart();
     });
-    if (death and sdkbox::PluginAdMob::isAvailable("gameover")) {
+    /*if (death and sdkbox::PluginAdMob::isAvailable("gameover")) {
         sdkbox::PluginAdMob::show("gameover");
         return;
+    }*/
+    
+    auto adscore = GameManager::getInstance()->adscore;
+    if (adscore > 200) adscore = 200;
+    if (sdkbox::PluginAdMob::isAvailable("gameover")) {
+        if (adscore > 100 and sdkbox::PluginAdMob::isAvailable("intermediate")) {
+            adscore -= 100;
+            sdkbox::PluginAdMob::show("intermediate");
+            GameManager::getInstance()->adscore = adscore;
+            return;
+        } else {
+            sdkbox::PluginAdMob::cache("intermediate");
+        }
+        if (adscore >= 100) {
+            adscore -= 100;
+            sdkbox::PluginAdMob::show("gameover");
+        }
+        GameManager::getInstance()->adscore = adscore;
+        return;
+    } else {
+        sdkbox::PluginAdMob::cache("gameover");
     }
+    GameManager::getInstance()->adscore = adscore;
+    
     runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
 }
 
@@ -404,6 +447,19 @@ void EndPopup::next(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
     auto delayed = CallFunc::create([=](){
         GameManager::getInstance()->next();
     });
+    
+    auto adscore = GameManager::getInstance()->adscore;
+    if (adscore > 200) adscore = 200;
+    if (sdkbox::PluginAdMob::isAvailable("next")) {
+        adscore -= 100;
+        sdkbox::PluginAdMob::show("next");
+        GameManager::getInstance()->adscore = adscore;
+        return;
+    } else {
+        sdkbox::PluginAdMob::cache("next");
+    }
+    GameManager::getInstance()->adscore = adscore;
+    
     runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
 }
                                     
@@ -591,6 +647,8 @@ void LevelScene::combo() {
                                     EaseElasticOut::create(ScaleTo::create(0.3, 1 + ((float)cmbo)/20.0f)),
                                DelayTime::create(0.7f),
                                     ScaleTo::create(0.3, 1),
+                                    DelayTime::create(3),
+                                    ScaleTo::create(0.3, 0),
                                     NULL));
 }
 
@@ -615,6 +673,61 @@ bool LevelScene::init()
     auto corner = Vec2(0, visibleSize.height);
     GameManager::getInstance()->currentLevel = fname;
     this->scheduleUpdate();
+    ActionInterval* wv = Waves3D::create(100, Size(20, 40), 10, 12);
+    
+    if (fname == "" or fname == ".") {
+        std::srand(time(NULL));
+        skytime = rand() % 720;
+        
+        auto clvl = "None";
+        hue1 = std::hash<std::string>()(clvl);
+        hue2 = hue1 >> 5;
+        
+        hsv h = {
+            (double)(hue1 % 360),
+            0.8,
+            1.0};
+        auto rgb1 = hsv2rgb(h);
+        
+        hsv h2 = {
+            (double)(hue2 % 360),
+            0.4,
+            0.7};
+        auto rgb2 = hsv2rgb(h2);
+        
+        auto col = Color4B(Color4F(rgb1.r, rgb1.g, rgb1.b, 1.0f));
+        auto col2 = Color4B(Color4F(rgb2.r, rgb2.g, rgb2.b, 1.0f));
+        
+        gradbk = LayerGradient::create(col2, col);
+        gradbk->setVector(Vec2(0,1));
+        addChild(gradbk);
+        
+        auto ng = NodeGrid::create();
+        ng->runAction(RepeatForever::create(wv));
+        addChild(ng);
+        
+        diag = Sprite::create("grad_diamond.png");
+        ng->addChild(diag);
+        
+        Texture2D::TexParams params;
+        params.minFilter = GL_NEAREST;
+        params.magFilter = GL_NEAREST;
+        params.wrapS = GL_REPEAT;
+        params.wrapT = GL_REPEAT;
+        
+        diag->getTexture()->setTexParameters(params);
+        diag->setTextureRect(Rect(0, 0, 2048, 6144));
+        diag->setPosition(origin);
+        diag->setOpacity(128);
+        
+        if (fname == "") {
+            addChild(MessagePopup::create("", this));
+        }
+        
+        return true;
+    }
+    
+    
     
     //auto layerColor = LayerColor::create(Color4B(192, 192, 255, 255));
     //addChild(layerColor);
@@ -631,7 +744,7 @@ bool LevelScene::init()
     
     help = Sprite::createWithSpriteFrameName("coin_bk.png");
     addChild(help, 30001);
-    help->setPosition(otherCorner );
+    help->setPosition(otherCorner + Vec2(-45, 0) );
     
     coinAmCoin = Sprite::createWithSpriteFrameName("coin.png");
     coinAm->addChild(coinAmCoin, 30002);
@@ -643,34 +756,53 @@ bool LevelScene::init()
     helpAmCoin->setScale(0.0625);
     helpAmCoin->setPosition(Vec2(40, 50-14 ));
     
-    coinLabel = Label::createWithBMFont("fonts/bbl2.fnt", "0");
+    help->runAction(RepeatForever::create(Sequence::createWithTwoActions(ScaleTo::create(0.5, 1.025), ScaleTo::create(0.5, 0.975))));
+    
+    coins = GameManager::getInstance()->coins;
+    coinLabel = Label::createWithBMFont("fonts/bbl2.fnt", std::to_string(coins));
     coinLabel->setBMFontSize(32);
     coinLabel->setAnchorPoint(Vec2(0, 0.5));
     coinAm->addChild(coinLabel, 30002);
     coinLabel->setPosition(Vec2(140 + 50, 50-14 ));
     
-    helpLabel = Label::createWithBMFont("fonts/bbl2.fnt", "0");
+    helpLabel = Label::createWithBMFont("fonts/bbl2.fnt", std::to_string(HINT_COST));
     helpLabel->setBMFontSize(32);
     helpLabel->setAnchorPoint(Vec2(0, 0.5));
     help->addChild(helpLabel, 30002);
-    helpLabel->setPosition(Vec2(50, 14 ));
+    helpLabel->setPosition(Vec2(50, 50-14 ));
     
-    auto cspr = Sprite::createWithSpriteFrameName("coin.png");
-    help->addChild(cspr, 30002);
-    cspr->setScale(0.125);
-    cspr->setPosition(Vec2(20, 14 ));
+    helpAmCoin2 = Sprite::createWithSpriteFrameName("coin.png");
+    help->addChild(helpAmCoin2, 30002);
+    helpAmCoin2->setScale(0.125*0.75);
+    helpAmCoin2->setPosition(Vec2(20, 14 ));
     
     auto listener1 = EventListenerTouchOneByOne::create();
     listener1->setSwallowTouches(true);
-    listener1->onTouchBegan = [](Touch* touch, Event* event) {
-        return true; // if you are consuming it
+    listener1->onTouchBegan = [=](Touch* touch, Event* event) {
+        
+        cocos2d::Vec2 p = touch->getLocation();
+        cocos2d::Rect rect = help->getBoundingBox();
+        
+        rect.origin -= Vec2(20, 20);
+        
+        if(rect.containsPoint(p)) {
+            coins = GameManager::getInstance()->coins;
+            if (coins >= HINT_COST and hintLabel->getOpacity() == 0) {
+                coins -= HINT_COST;
+                GameManager::getInstance()->coins = coins;
+                
+                getHint();
+                return true;
+            } else {
+               playSound("wrong", false, randFloat(0.75, 1.5));
+            }
+        }
+        
+        return false; // if you are consuming it
     };
     listener1->onTouchMoved = [](Touch* touch, Event* event){
     };
     listener1->onTouchEnded = [=](Touch* touch, Event* event){
-        cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread([=](){
-            getHint();
-        });
     };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener1, help);
     
@@ -680,8 +812,6 @@ bool LevelScene::init()
     addChild(cmb, 200);
     cmb->setPosition(Vec2(320, 200));
     cmb->setScale(0);
-    
-    ActionInterval* wv = Waves3D::create(100, Size(20, 40), 10, 12);
     
    // Waves3D::create(100, Size(20, 40), 10, 12);
     
@@ -753,13 +883,13 @@ bool LevelScene::init()
     addChild(scoreEmit2);
     
     
-    hintLabel =  Label::createWithBMFont("fonts/bbl.fnt", "Loading...");
+    hintLabel =  Label::createWithBMFont("fonts/sand.fnt", "Loading...");
     hintLabel->setPosition(Vec2(origin.x + visibleSize.width/2,
                                  origin.y + visibleSize.height/2));
     //hintLabel->setColor(Color3B::WHITE);
     //hintLabel->enableOutline(Color4B::BLACK, 3);
     hintLabel->setOpacity(0);
-    addChild(hintLabel,100);
+    addChild(hintLabel, 1);
     
     /*auto score =  Label::createWithTTF(fname, "fonts/Marker Felt.ttf", 24);
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
@@ -784,17 +914,17 @@ bool LevelScene::init()
     auto fileData = FileUtils::getInstance()->getDataFromFile(ss.str());
     std::string content((const char*)fileData.getBytes(), fileData.getSize());
     
-    textBox = cocos2d::ui::EditBox::create(Size(640, 60), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("inputBook.png"));
+    textBox = cocos2d::ui::EditBox::create(Size(640, 60), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("nothing.png"));
     textBox->setPosition(Vec2(320, EDIT_DEPTH));
     textBox->setFont("arial", 0);
     textBox->setMaxLength(9);
     textBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);
     textBox->setDelegate(this);
-    textBox->setVisible(false);
+    textBox->setVisible(true);
     textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_ALL_CHARACTERS);
     textBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
     textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::SENSITIVE);
-    textBox->setFontSize(0);
+    textBox->setFontSize(20);
     addChild(textBox, 0);
     
     auto lines = split_string(content, "\n");
@@ -819,6 +949,8 @@ bool LevelScene::init()
         } else if (linenum == 4) {
             //OPTIONS HERE
         } else if (linenum == 5) {
+            currentDepth = stoi(line);
+        } else if (linenum == 6) {
             
             auto callback = CallFunc::create([=](){
                 if (line != "") {
@@ -967,6 +1099,9 @@ bool LevelScene::init()
     editLabel->setPosition(Vec2(320, EDIT_DEPTH));
     addChild(editLabel, 2);
     
+    psemitter3 = ParticleSystemQuad::create("res/Dazzle_lt.plist");
+    psemitter3->stopSystem();
+    addChild(psemitter3, 0);
     
     psemitter1 = ParticleSystemQuad::create("res/Burst.plist");
     addChild(psemitter1, 9);
@@ -1010,43 +1145,54 @@ void LevelScene::update(float dt) {
     } else {
         li1 = 0;
     }
-    coinAm->setScale(1 + 0.25 * li1);
-    auto cstr = std::to_string(coins);
-    auto corner = Vec2(0, Director::getInstance()->getVisibleSize().height);
-    coinLabel->setString(cstr);
-    coinbkshift = coinLabel->getBoundingBox().size.width;
-    coinAm->setPosition(corner + Vec2(coinbkshift - 52, -8));
-    coinAmCoin->setPosition(Vec2(140 + 52 + 20 - coinbkshift, 50-14 ));
-    coinLabel->setPosition(Vec2(140 + 52 + 50 - coinbkshift, 50-14 ));
     
-    float tps = (float)score/(float)targetScore;
-    
-    if (tps >= 1) {
-        tps = 1; //MAX
-        scoreEmit->setStartColor(Color4F(0, 0.6, 1, 0.2));
-        scoreEmit->setEndColor(Color4F(1, 0.2, 0.6, 0.2));
+    if (fname != "" and fname != ".") {
+        coinAm->setScale(1 + 0.25 * li1);
+        auto cstr = std::to_string(coins);
+        auto corner = Vec2(0, Director::getInstance()->getVisibleSize().height);
+        coinLabel->setString(cstr);
+        coinbkshift = coinLabel->getBoundingBox().size.width;
+        coinAm->setPosition(corner + Vec2(coinbkshift - 52, -8));
+        coinAmCoin->setPosition(Vec2(140 + 52 + 20 - coinbkshift, 50-14 ));
+        coinLabel->setPosition(Vec2(140 + 20 + 50 - coinbkshift, 50-14 ));
         
-        scoreEmit2->setStartColor(Color4F(0, 0.6, 1, 0.2));
-        scoreEmit2->setEndColor(Color4F(1, 0.2, 0.6, 0.2));
-    } else if (tps > 0.65) { //2 star
-        scoreEmit->setEndColor(Color4F(0.3, 0.1, 1, 0.2));
-        scoreEmit2->setEndColor(Color4F(0.3, 0.1, 1, 0.2));
-    } else if (tps > 0.35) { //1 star
-        scoreEmit->setEndColor(Color4F(0, 0.6, 1, 0.2));
-        scoreEmit2->setEndColor(Color4F(0, 0.6, 1, 0.2));
-    } else { //0 star
-        scoreEmit->setStartColor(Color4F(0.5, 0.5, 0.5, 0.2));
-        scoreEmit->setEndColor(Color4F(0.5, 0.9, 0.5, 0.2));
-        scoreEmit2->setStartColor(Color4F(0.5, 0.5, 0.5, 0.2));
-        scoreEmit2->setEndColor(Color4F(0.5, 0.9, 0.5, 0.2));
-    }
-    
-    auto sp = scorewid * tps;
-    
-    if (csw < sp) {
-        csw += (sp - csw) * 0.1;
-        scoreEmit->setSpeed(csw);
-        scoreEmit2->setSpeed(csw);
+        auto bb = coinLabel->getBoundingBox();
+        coinAmCoin->setPosition(bb.origin + Vec2(bb.size.width+coinAmCoin->getBoundingBox().size.width/2 + 4, bb.size.height/2));
+        
+        bb = helpLabel->getBoundingBox();
+        helpAmCoin2->setPosition(bb.origin + Vec2(bb.size.width+helpAmCoin2->getBoundingBox().size.width/2 + 4, bb.size.height/2));
+        
+        float tps = (float)score/(float)targetScore;
+        
+        if (tps >= 1) {
+            tps = 1; //MAX
+            scoreEmit->setStartColor(Color4F(0, 0.6, 1, 0.2));
+            scoreEmit->setEndColor(Color4F(1, 0.2, 0.6, 0.2));
+            
+            scoreEmit2->setStartColor(Color4F(0, 0.6, 1, 0.2));
+            scoreEmit2->setEndColor(Color4F(1, 0.2, 0.6, 0.2));
+        } else if (tps > 0.65) { //2 star
+            scoreEmit->setEndColor(Color4F(0.3, 0.1, 1, 0.2));
+            scoreEmit2->setEndColor(Color4F(0.3, 0.1, 1, 0.2));
+        } else if (tps > 0.35) { //1 star
+            scoreEmit->setEndColor(Color4F(0, 0.6, 1, 0.2));
+            scoreEmit2->setEndColor(Color4F(0, 0.6, 1, 0.2));
+        } else { //0 star
+            scoreEmit->setStartColor(Color4F(0.5, 0.5, 0.5, 0.2));
+            scoreEmit->setEndColor(Color4F(0.5, 0.9, 0.5, 0.2));
+            scoreEmit2->setStartColor(Color4F(0.5, 0.5, 0.5, 0.2));
+            scoreEmit2->setEndColor(Color4F(0.5, 0.9, 0.5, 0.2));
+        }
+        
+        auto sp = scorewid * tps;
+        
+        if (csw < sp) {
+            csw += (sp - csw) * 0.1;
+            scoreEmit->setSpeed(csw);
+            scoreEmit2->setSpeed(csw);
+        }
+        
+        psemitter3->setOpacity(helpLabel->getOpacity());
     }
     
     skytime += 0.004;
@@ -1094,6 +1240,8 @@ void LevelScene::update(float dt) {
     float wx = sin(rad2) * 32 * diffoff / 5;
     float wy = cos(rad2) * 128 *  diffoff / 5;
     diag->setPosition(Director::getInstance()->getVisibleOrigin() + Vec2(wx, bkpos + wy));
+    
+    
 }
 
 void LevelScene::lost() {
@@ -1185,6 +1333,7 @@ void LevelScene::editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox) {
 void LevelScene::editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox) {
 }
 
+
 void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string& text) {
     
     int strlen = int(text.length());
@@ -1254,7 +1403,28 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
 }
 
 void LevelScene::getHint() {
+    auto callback = CallFunc::create([=](){
+        textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
+    });
+    
+    //psemitter3->setPosition(Vec2(0,0));
+    //psemitter3->cocos2d::Node::setScale(0.5);
+    psemitter3->resetSystem();
+    auto sz = hintLabel->getBoundingBox().size;
+    psemitter3->setPosVar(Vec2(sz.width/2 + 20, sz.height/2));
+    //psemitter->setPosition(Vec2(sz.width/2, sz.height/2));
+    
+    psemitter3->setPosition(hintLabel->getPosition());
+    
     hintLabel->setString("Loading...");
+    hintLabel->runAction(Sequence::create(EaseOut::create(FadeTo::create(1, 255), 1.5), callback, NULL));
+    playSound("glass", false, randFloat(0.5, 2), 0.2, 0.5, 0.05);
+    
+    hintLabel->runAction(RepeatForever::create(Sequence::create(
+                                                     EaseBackOut::create(ScaleTo::create(0.2, 1.1)),
+                                                     ScaleTo::create(0.5, 1),
+                                                     NULL)));
+    
     //std::vector<std::pair<Letter *, int>>
     auto ws = GameManager::getInstance()->smwords;
     //std::random_shuffle(ws.begin(), ws.end());
@@ -1292,6 +1462,8 @@ void LevelScene::getHint() {
         }
     }
     auto oword = cword;
+    for(auto& x: cword)
+        x = toupper(x);
     std::vector<int> v(cword.length());
     std::generate(v.begin(), v.end(), [n = 0] () mutable { return n++; });
     std::random_shuffle(v.begin(), v.end());
@@ -1300,6 +1472,8 @@ void LevelScene::getHint() {
         cword[v[i]] = '_';
     }
     hintLabel->setString(cword);
+    sz = hintLabel->getBoundingBox().size;
+    psemitter3->setPosVar(Vec2(sz.width/2 + 20, sz.height/2));
 }
 
 void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
@@ -1311,17 +1485,8 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
     auto text = std::string(editBox->getText());
     text.erase( std::remove_if( text.begin(), text.end(), []( char c ) { return !std::isalpha(c) ; } ), text.end() ) ;
     
-    /*if (text == "") {
-        auto callback = CallFunc::create([=](){
-            textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
-        });
-        runAction(Sequence::create(DelayTime::create(0.5), callback, NULL));
-        return;
-    }*/
-    
     std::string d = text;
     std::transform(d.begin(), d.end(), d.begin(), ::tolower);
-    //d.erase(std::remove_if(d.begin(), d.end(), std::not1(std::ptr_fun( (int(*)(int))std::isalpha ))), d.end());
     
     words.push_back(d);
     
@@ -1427,12 +1592,17 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
     
     
     /************/
-    
-    hintLabel->setOpacity(255);
-    hintLabel->setString("Loading...");
    // cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread(); //, this, 0.0f, 0, 0, false, "name"
     
     if (create) {
+        auto cb = CallFunc::create([=](){
+            psemitter3->stopSystem();
+        });
+        
+        hintLabel->runAction(Sequence::createWithTwoActions(
+                             EaseOut::create(FadeTo::create(3, 0), 1.5),
+                                                            cb));
+        
         psemitter1->resetSystem();
         psemitter2->resetSystem();
         playSound("portal", false, randFloat(0.5, 2), 0.2, 0.5, 0.2);

@@ -1,11 +1,12 @@
 edge
 5
-margin, fringe, inch, butt, border
-1400
+inch, butt, bound, lead, side
+1300
 1
+2
 
-i, , mar,
-i- - fr-
-c- i- n-
+nc- - i-
 bt- u- -
-br- e- o-
+n, bou, ,
+e- - l-
+e- s- i-

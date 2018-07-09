@@ -136,7 +136,7 @@ public:
     bool timed = false;
     
     int score = 0;
-    int coins = 0;
+    int coins;
     int targetScore = 0;
     int highlights = 0;
     int lightRetain = 0;
@@ -180,11 +180,13 @@ public:
     CC_SYNTHESIZE(cocos2d::Sprite *, coinAm, CoinAm);
     CC_SYNTHESIZE(cocos2d::Sprite *, coinAmCoin, CoinAmCoin);
     CC_SYNTHESIZE(cocos2d::Sprite *, helpAmCoin, HelpAmCoin);
+    CC_SYNTHESIZE(cocos2d::Sprite *, helpAmCoin2, HelpAmCoin2);
     CC_SYNTHESIZE(cocos2d::Sprite *, help, Help);
     CC_SYNTHESIZE(cocos2d::LayerColor *, layer, Layer);
     CC_SYNTHESIZE(cocos2d::LayerGradient *, gradbk, Gradbk);
     CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, psemitter1, Psemitter1);
     CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, psemitter2, Psemitter2);
+    CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, psemitter3, Psemitter3);
     CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, scoreEmit, ScoreEmit);
     CC_SYNTHESIZE(cocos2d::ParticleSystemQuad *, scoreEmit2, ScoreEmit2);
     

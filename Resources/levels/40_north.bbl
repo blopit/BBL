@@ -1,14 +1,14 @@
 north
-45
-northeast, northwest, northern, northward, southern, midnight, severely, compass
-8200
+22
+northeast, northwest, northern, northward, southern, region, midnight
+2800
+2
 2
 
-ht- nor- s-
-wes- h- nr-
-nn- the- o-
-nd- tw- hr-
-un- o- sth-
-mnt- d- gh-
-vry- sel- -
-s- mpa- c-
+nt, rts, o,
+et, nrt, o,
+or, t, nr,
+od, nwr, r,
+tr, se, o,
+rgo, i, ,
+mnt, , ig,

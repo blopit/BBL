@@ -259,6 +259,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>nothing.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,-1}</string>
+                <key>spriteSize</key>
+                <string>{3,3}</string>
+                <key>spriteSourceSize</key>
+                <string>{1,1}</string>
+                <key>textureRect</key>
+                <string>{{693,1805},{3,3}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>panel.png</key>
             <dict>
                 <key>aliases</key>
@@ -423,7 +438,7 @@
             <key>size</key>
             <string>{2042,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:bfbe9677a0fc517774635e445b556949:209213c76265e8844eed106dd1861a8d:91e82d6dd59eb8eb3d136cd6604538ed$</string>
+            <string>$TexturePacker:SmartUpdate:769afb94ac935f88885470218da8bb5f:e971c3043207fef48c9a6dc37ea5cfbf:91e82d6dd59eb8eb3d136cd6604538ed$</string>
             <key>textureFileName</key>
             <string>letters-0.png</string>
         </dict>

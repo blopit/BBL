@@ -257,19 +257,6 @@ void Bubble::update(float dt) {
     uptick = uptick + 2 % 360;
     tick2 = (tick2 + 10) % 360;
     
-    /*if (bubbleType == BubbleType::UNORDERED) {
-        rand += 0.05;
-        if (rand >= 360) {
-            rand -= 360;
-        }
-        auto i = 0;
-        auto len = letters.size();
-        for (auto x: letters) {
-            setAnchor(x, int(len), i);
-            i += 1;
-        }
-    }*/
-    
     if (bubbleType == BubbleType::BOMB) {
         setColor(Color3B(255, 223+32*sin(MATH_DEG_TO_RAD(tick2)), 223+32*sin(MATH_DEG_TO_RAD(tick2))));
     }

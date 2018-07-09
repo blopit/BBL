@@ -1,11 +1,12 @@
 church
 5
-choir, faith, hall, cult, mass
-1100
+parish, chapel, clergy, priest, choir
+1800
 1
+2
 
-i- - co-
-t- f- i-
-hl- a- -
-t- cu- -
-s- ma- -
+prs, i, ,
+e, ha, c,
+r, l, ce,
+e, pr, i,
+cr, o, i,

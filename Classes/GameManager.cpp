@@ -6,7 +6,6 @@
 //
 
 #include "GameManager.hpp"
-#include "LevelScene.hpp"
 #include "Util.hpp"
 
 USING_NS_CC;
@@ -16,18 +15,24 @@ static GameManager* gameManager = nullptr;
 void AdListener::adViewDidDismissScreen(const std::string &name) {
     if (name == "gameover") {
         GameManager::getInstance()->restart();
+    } else if (name == "next") {
+        GameManager::getInstance()->next();
+    } else if (name == "intermediate") {
+        sdkbox::PluginAdMob::show("gameover");
     }
 }
 
 GameManager::GameManager() {
     sdkbox::PluginAdMob::cache("gameover");
+    sdkbox::PluginAdMob::cache("next");
+    sdkbox::PluginAdMob::cache("intermediate");
     sdkbox::PluginAdMob::setListener(new AdListener());
     
     sdkbox::PluginSdkboxPlay::setListener(this);
     sdkbox::PluginSdkboxPlay::signin();
     
     files = {
-        "1-1",
+        "0__",
         "0_current",
         "1_glass",
         "2_broken",
@@ -37,11 +42,11 @@ GameManager::GameManager() {
         "6_alive",
         "7_oil",
         "8_aware",
-        "9_church",
+        "9_church",/*
         "10_save",
         "11_edge",
         "12_chief",
-        "13_writing",/**/
+        "13_writing",
         "14_list",
         "15_interesting",
         "16_material",
@@ -68,7 +73,7 @@ GameManager::GameManager() {
         "37_legs",
         "38_check",
         "39_key",
-        "40_north",
+        "40_north",*/
     };
     
     auto i = 0;
@@ -118,7 +123,18 @@ void GameManager::completeLevel(std::string level, int stars, std::vector<std::s
 }
 
 std::string GameManager::nextLevel(std::string current) {
-    int idx = int(std::find(files.begin(), files.end(), current) - files.begin());
+    auto idxx = std::find(files.begin(), files.end(), current);
+    
+    if (idxx == files.end()) {
+        return "";
+    }
+    int idx = int(idxx - files.begin());
+    
+    int a[] = {idx + 1, coins};
+    const void* data = &a;
+    int len = (int)(sizeof(a));
+    sdkbox::PluginSdkboxPlay::saveGameDataBinary("save", data, len);
+    
     return files[idx + 1];
 }
 

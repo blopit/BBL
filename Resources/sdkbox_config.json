@@ -105,7 +105,7 @@
             }
         }, 
         "AdColony": {
-            "debug": true, 
+            "debug": false,
             "id": "app185a7e71e1714831a49ec7", 
             "ads": {
                 "v4vc": {
@@ -161,33 +161,17 @@
             }, 
             "safearea": true, 
             "ads": {
-                "next_level": {
+                "next": {
                     "type": "interstitial", 
                     "id": "ca-app-pub-1329374026572143/4564434111"
-                }, 
-                "gamedover": {
-                    "type": "interstitial", 
-                    "id": "ca-app-pub-3173499596362739/4843795086"
-                }, 
+                },
                 "gameover": {
                     "type": "interstitial", 
                     "id": "ca-app-pub-1329374026572143/1092476511"
-                }, 
-                "home": {
-                    "width": 300, 
-                    "type": "banner", 
-                    "id": "ca-app-pub-1329374026572143/2685130917", 
-                    "alignment": "bottom", 
-                    "height": 100
-                }, 
-                "rewarded": {
-                    "type": "rewarded_video", 
-                    "id": "ca-app-pub-1329374026572143/8251968111"
-                }, 
-                "top_banner": {
-                    "type": "banner", 
-                    "id": "ca-app-pub-1329374026572143/3087700911", 
-                    "alignment": "top"
+                },
+                "intermediate": {
+                    "type": "interstitial",
+                    "id": "ca-app-pub-3173499596362739/8080256493"
                 }
             }
         }, 
@@ -231,7 +215,7 @@
             "clound_save": false, 
             "connect_on_start": false, 
             "show_achievement_notification": true, 
-            "debug": true
+            "debug": false
         }, 
         "Bee7": {
             "debug": true, 
@@ -308,7 +292,7 @@
             "app_key": "2cfc9cc638980eb7f5ff35d6eb63dbe404503151ccc451ed"
         }, 
         "SdkboxAds": {
-            "debug": true, 
+            "debug": false,
             "units": [
                 "AdColony", 
                 "Fyber", 
@@ -384,7 +368,7 @@
             ]
         }, 
         "AdColony": {
-            "debug": true, 
+            "debug": false,
             "id": "appbdee68ae27024084bb334a", 
             "ads": {
                 "v4vc": {
@@ -417,9 +401,9 @@
             }, 
             "safearea": true, 
             "ads": {
-                "next_level": {
+                "intermediate": {
                     "type": "interstitial", 
-                    "id": "ca-app-pub-1329374026572143/9390403312"
+                    "id": "ca-app-pub-3173499596362739/8080256493"
                 }, 
                 "next": {
                     "type": "interstitial", 
@@ -428,22 +412,6 @@
                 "gameover": {
                     "type": "interstitial", 
                     "id": "ca-app-pub-3173499596362739/4843795086"
-                }, 
-                "home": {
-                    "width": 300, 
-                    "type": "banner", 
-                    "id": "ca-app-pub-3940256099942544/2934735716", 
-                    "alignment": "bottom", 
-                    "height": 50
-                }, 
-                "rewarded": {
-                    "type": "rewarded_video", 
-                    "id": "ca-app-pub-1329374026572143/7991602916"
-                }, 
-                "top_banner": {
-                    "type": "banner", 
-                    "id": "ca-app-pub-1329374026572143/6690628914", 
-                    "alignment": "top"
                 }
             }
         }, 
@@ -519,7 +487,7 @@
             ], 
             "connect_on_start": false, 
             "show_achievement_notification": true, 
-            "debug": true
+            "debug": false
         }, 
         "Bee7": {
             "debug": true, 

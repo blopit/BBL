@@ -11,16 +11,27 @@
 #include "cocos2d.h"
 #include "PluginAdMob/PluginAdMob.h"
 #include "PluginSdkboxPlay/PluginSdkboxPlay.h"
+#include "LevelScene.hpp"
 
 class AdListener : public sdkbox::AdMobListener
 {
 private:
-    void adViewDidReceiveAd(const std::string &name) {}
-    void adViewDidFailToReceiveAdWithError(const std::string &name, const std::string &msg) {}
-    void adViewWillPresentScreen(const std::string &name) {}
+    void adViewDidReceiveAd(const std::string &name) {
+        
+    }
+    void adViewDidFailToReceiveAdWithError(const std::string &name, const std::string &msg) {
+        
+    }
+    void adViewWillPresentScreen(const std::string &name) {
+        
+    }
     void adViewDidDismissScreen(const std::string &name);
-    void adViewWillDismissScreen(const std::string &name) {}
-    void adViewWillLeaveApplication(const std::string &name) {}
+    void adViewWillDismissScreen(const std::string &name) {
+        
+    }
+    void adViewWillLeaveApplication(const std::string &name) {
+        
+    }
 };
 
 class Level {
@@ -40,12 +51,14 @@ class GameManager: public sdkbox::SdkboxPlayListener
 {
 private:
     int levelIndex = 0;
-    int coins = 0;
     std::vector<std::string> files;
     GameManager();
     ~GameManager();
     
 public:
+    int coins;
+    int adscore = 0;
+    bool loaded = false;
     std::vector<std::string> hiddenWords;
     std::string currentLevel = "";
     std::vector<std::string> words;
@@ -63,11 +76,12 @@ public:
         if (sdkbox::GPS_CONNECTED) {
             /*std::string sData("1bC\0u\4;Y\5L", 10);
             const void* data = (const void*)sData.c_str();*/
-            std::map<std::string, int> m = {{"level", 8}, {"coins", 9087}};
-            int a[] = {9, 9087};
+            
+            /*int a[] = {0, 999};
             const void* data = &a;
             int len = (int)(sizeof(a));
             sdkbox::PluginSdkboxPlay::saveGameDataBinary("save", data, len);
+            */
             
             sdkbox::PluginSdkboxPlay::loadAllGameData();
         }
@@ -85,14 +99,25 @@ public:
     }
     virtual void onLoadGameData(const sdkbox::SavedGameData* savedData,
                                 const std::string& error) {
+        if (loaded) {
+            return;
+        }
         int i,j;
+        i = 0;
+        j = 0;
         if (savedData) {
             if (savedData->name == "save"){
                 auto d = (int *)savedData->data;
                 i = *(d);
                 j = *(d + 1);
+                loaded = true;
+            } else {
+                return;
             }
         }
+        coins = j;
+        auto scene = LevelScene::createScene(files[i]);
+        cocos2d::Director::getInstance()->replaceScene(scene);
     }
     virtual void onGameDataNames(const std::vector<std::string>& names,
                                  const std::string& error) {}

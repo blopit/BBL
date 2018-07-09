@@ -63,7 +63,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    //director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
@@ -116,11 +116,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloadSound("woosh5");
     preloadSound("star");
     preloadSound("deflate");
+    preloadSound("glass");
     
     auto gm = GameManager::getInstance();
     
     // create a scene. it's an autorelease object
-    auto scene = LevelScene::createScene("1-1");
+    auto scene = LevelScene::createScene(".");
     
     //sdkbox::PluginSdkboxPlay::signin();
     
