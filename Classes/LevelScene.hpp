@@ -119,12 +119,14 @@ class LevelScene : public cocos2d::Scene, public cocos2d::ui::EditBoxDelegate
     float skytime = 0;
     float bkpos = 0;
     
+    int depthRetainCount = 0;
     int hue1 = 0;
     int hue2 = 0;
     int cmbo = 0;
     int coinbkshift = 0;
     int scorewid = 128;
     int csw = 0;
+    int startlevel = 0;
     
 public:
     std::vector<Bubble *> bubbles;

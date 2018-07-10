@@ -83,7 +83,14 @@ public:
             sdkbox::PluginSdkboxPlay::saveGameDataBinary("save", data, len);
             */
             
-            sdkbox::PluginSdkboxPlay::loadAllGameData();
+            //sdkbox::PluginSdkboxPlay::loadAllGameData();
+            
+            auto ud = cocos2d::UserDefault::getInstance();
+            levelIndex = ud->getIntegerForKey("level");
+            coins = ud->getIntegerForKey("coins");
+            currentLevel = files[levelIndex];
+            auto scene = LevelScene::createScene(currentLevel);
+            cocos2d::Director::getInstance()->replaceScene(scene);
         }
         
     }

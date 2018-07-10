@@ -205,23 +205,62 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/FieldBG.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bkg1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>160,284,320,568</rect>
+                <rect>200,346,400,692</rect>
                 <key>scale9Paddings</key>
-                <rect>160,284,320,568</rect>
+                <rect>200,346,400,692</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/book.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>200,167,400,333</rect>
+                <key>scale9Paddings</key>
+                <rect>200,167,400,333</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/bomb.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>142,131,284,262</rect>
+                <key>scale9Paddings</key>
+                <rect>142,131,284,262</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/button.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/pressed.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>127,130,255,259</rect>
+                <key>scale9Paddings</key>
+                <rect>127,130,255,259</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
             <key type="filename">../../../../Google Drive/BBLimage/Letters/bubbles/rect.png</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/continue-icon.png</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/menu-icon.png</key>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/retry-icon.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/death.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/help.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -258,19 +297,6 @@
                 <rect>134,130,268,260</rect>
                 <key>scale9Paddings</key>
                 <rect>134,130,268,260</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/button.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>50,26,100,52</rect>
-                <key>scale9Paddings</key>
-                <rect>50,26,100,52</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -311,6 +337,16 @@
             <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/X.psd</key>
             <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/Y.psd</key>
             <key type="filename">../../../../Google Drive/BBLimage/Letters/card2/Z.psd</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/coin.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/coin_gold.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x2.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x3.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x4.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x5.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x6.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x7.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x8.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/combo/x9.png</key>
             <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/A.psd</key>
             <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/B.psd</key>
             <key type="filename">../../../../Google Drive/BBLimage/Letters/evil/C.psd</key>
@@ -421,6 +457,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/coin_bk.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>70,25,140,50</rect>
+                <key>scale9Paddings</key>
+                <rect>70,25,140,50</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">../../../../Google Drive/BBLimage/Letters/diamondWhite.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -434,7 +483,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/endPanel.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/inputBook.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>276,171,552,341</rect>
+                <key>scale9Paddings</key>
+                <rect>276,171,552,341</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/message.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/panel.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -447,16 +510,30 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/inputBook.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/nothing.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>276,171,552,341</rect>
+                <rect>0,0,1,1</rect>
                 <key>scale9Paddings</key>
-                <rect>276,171,552,341</rect>
+                <rect>0,0,1,1</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/9.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>73,9,146,18</rect>
+                <key>scale9Paddings</key>
+                <rect>73,9,146,18</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -538,16 +615,16 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../../Google Drive/BBLimage/Letters/secret/9.png</key>
+            <key type="filename">../../../../Google Drive/BBLimage/Letters/secretWord.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>73,9,146,18</rect>
+                <rect>104,31,208,61</rect>
                 <key>scale9Paddings</key>
-                <rect>73,9,146,18</rect>
+                <rect>104,31,208,61</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

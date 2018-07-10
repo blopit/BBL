@@ -23,10 +23,14 @@ void AdListener::adViewDidDismissScreen(const std::string &name) {
 }
 
 GameManager::GameManager() {
-    sdkbox::PluginAdMob::cache("gameover");
-    sdkbox::PluginAdMob::cache("next");
-    sdkbox::PluginAdMob::cache("intermediate");
     sdkbox::PluginAdMob::setListener(new AdListener());
+    try {
+        sdkbox::PluginAdMob::cache("gameover");
+        sdkbox::PluginAdMob::cache("next");
+        sdkbox::PluginAdMob::cache("intermediate");
+    } catch (std::exception e) {
+        
+    }
     
     sdkbox::PluginSdkboxPlay::setListener(this);
     sdkbox::PluginSdkboxPlay::signin();
@@ -42,7 +46,7 @@ GameManager::GameManager() {
         "6_alive",
         "7_oil",
         "8_aware",
-        "9_church",/*
+        "9_church",
         "10_save",
         "11_edge",
         "12_chief",
@@ -73,7 +77,16 @@ GameManager::GameManager() {
         "37_legs",
         "38_check",
         "39_key",
-        "40_north",*/
+        "40_north",
+        "41_attempt",
+        "42_quiet",
+        "43_consider",
+        "44_impossible",
+        "45_dear",
+        "46_drink",
+        "47_allow",
+        "48_accept",
+        "49_secret",
     };
     
     auto i = 0;
@@ -97,8 +110,6 @@ GameManager::GameManager() {
         smwords.push_back(line);
     }
     //std::random_shuffle(smwords.begin(), smwords.end());
-    
-    currentLevel = files[0];
 }
 
 GameManager* GameManager::getInstance() {
@@ -134,6 +145,10 @@ std::string GameManager::nextLevel(std::string current) {
     const void* data = &a;
     int len = (int)(sizeof(a));
     sdkbox::PluginSdkboxPlay::saveGameDataBinary("save", data, len);
+    
+    auto ud = UserDefault::getInstance();
+    ud->setIntegerForKey("level", idx+1);
+    ud->setIntegerForKey("coins", coins);
     
     return files[idx + 1];
 }

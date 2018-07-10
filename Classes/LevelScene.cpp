@@ -40,7 +40,7 @@ else\
 CC_SAFE_DELETE(pSprite);\
 return NULL;\
 
-#define HINT_COST 100
+#define HINT_COST 0
 
 Coin* Coin::create(cocos2d::Vec2 start, cocos2d::Vec2 end, LevelScene * levelScene) {
     Coin* pRet = new Coin(start, end, levelScene);
@@ -413,10 +413,6 @@ void EndPopup::restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
     auto delayed = CallFunc::create([=](){
         GameManager::getInstance()->restart();
     });
-    /*if (death and sdkbox::PluginAdMob::isAvailable("gameover")) {
-        sdkbox::PluginAdMob::show("gameover");
-        return;
-    }*/
     
     auto adscore = GameManager::getInstance()->adscore;
     if (adscore > 200) adscore = 200;
@@ -432,15 +428,16 @@ void EndPopup::restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (adscore >= 100) {
             adscore -= 100;
             sdkbox::PluginAdMob::show("gameover");
+        } else {
+            runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
         }
         GameManager::getInstance()->adscore = adscore;
         return;
     } else {
         sdkbox::PluginAdMob::cache("gameover");
+        runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
     }
     GameManager::getInstance()->adscore = adscore;
-    
-    runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
 }
 
 void EndPopup::next(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
@@ -451,15 +448,17 @@ void EndPopup::next(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
     auto adscore = GameManager::getInstance()->adscore;
     if (adscore > 200) adscore = 200;
     if (sdkbox::PluginAdMob::isAvailable("next")) {
-        adscore -= 100;
-        sdkbox::PluginAdMob::show("next");
-        GameManager::getInstance()->adscore = adscore;
-        return;
+        if (adscore > 100) {
+            adscore -= 100;
+            sdkbox::PluginAdMob::show("next");
+            GameManager::getInstance()->adscore = adscore;
+            return;
+        }
     } else {
         sdkbox::PluginAdMob::cache("next");
     }
-    GameManager::getInstance()->adscore = adscore;
     
+    GameManager::getInstance()->adscore = adscore;
     runAction(Sequence::create(DelayTime::create(0.1), delayed, NULL));
 }
                                     
@@ -949,7 +948,8 @@ bool LevelScene::init()
         } else if (linenum == 4) {
             //OPTIONS HERE
         } else if (linenum == 5) {
-            currentDepth = stoi(line);
+            startlevel = stoi(line);
+            currentDepth = startlevel;
         } else if (linenum == 6) {
             
             auto callback = CallFunc::create([=](){
@@ -1043,7 +1043,7 @@ bool LevelScene::init()
         
         linenum++;
     }
-    maxDepth = linenum - 7;
+    maxDepth = linenum - 8;
     
     for (auto depth = 0; depth < currentDepth; depth++) {
         for (auto lane = 0; lane < data[depth].size(); lane++) {
@@ -1266,6 +1266,9 @@ void LevelScene::dropDepth() {
     }
     auto popped = maxBubbles - currBubbles;
     auto poppedLetters = maxLetters - currLetters;
+    if (currBubbles == 0) {
+        depthRetainCount = startlevel - 1;
+    }
     
     //score += (5 * popped + poppedLetters) * boundToRange(10, 100 * int(pow(float(popped)/float(maxBubbles), 2)), INT32_MAX);
     score += 20 * (poppedLetters * poppedLetters);
@@ -1304,10 +1307,15 @@ void LevelScene::dropDepth() {
     for (auto lane = 0; lane < data[currentDepth-1].size(); lane++) {
         auto datum = data[currentDepth-1][lane];
         if (datum.second.size() > 0) {
-            auto bbl = Bubble::create(datum.second, lane, 0, this, datum.first, currentDepth);
+            auto bbl = Bubble::create(datum.second, lane, depthRetainCount, this, datum.first, currentDepth);
             nodeGrid->addChild(bbl);
             bubbles.push_back(bbl);
         }
+    }
+    
+    if (depthRetainCount > 0) {
+        depthRetainCount--;
+        dropDepth();
     }
 }
 
@@ -1362,7 +1370,7 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
         
         playSound("woosh5", false, 2.0f + float(strlen)/5.0f, 0.5f, 0.5f, 0.5f);
         addChild(card, 100);
-    } else {
+    } else if (cards.size() > 0) {
         auto callback = CallFunc::create([=](){
             cardsLen--;
             auto i = 0;
@@ -1441,13 +1449,21 @@ void LevelScene::getHint() {
     for (auto w : ws) {
         int score = 0;
         for (auto b : this->bubbles) {
+            if (b->ded) continue;
+            auto cwb = b->currentWord(w, true).size();
             if (b->bubbleType == BubbleType::BOMB) {
-                if (b->currentWord(w, true).size() > 0) {
+                if (cwb > 0) {
                     score = 0;
                     break;
                 }
             }
-            score += b->currentWord(w, true).size();
+            if (b->depth == 2) {
+                if (cwb != b->letters.size()) {
+                    score = 0;
+                    break;
+                }
+            }
+            score += cwb;
         }
         if (score > cscore) {
             cscore = score;

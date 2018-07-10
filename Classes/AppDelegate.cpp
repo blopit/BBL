@@ -46,7 +46,7 @@ static int register_all_packages()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
-    sdkbox::PluginSdkboxAds::init();
+    //sdkbox::PluginSdkboxAds::init();
     sdkbox::PluginAdMob::init();
     sdkbox::PluginSdkboxPlay::init();
     auto director = Director::getInstance();

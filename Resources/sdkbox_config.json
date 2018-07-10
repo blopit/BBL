@@ -105,7 +105,7 @@
             }
         }, 
         "AdColony": {
-            "debug": false,
+            "debug": true, 
             "id": "app185a7e71e1714831a49ec7", 
             "ads": {
                 "v4vc": {
@@ -215,7 +215,7 @@
             "clound_save": false, 
             "connect_on_start": false, 
             "show_achievement_notification": true, 
-            "debug": false
+            "debug": true
         }, 
         "Bee7": {
             "debug": true, 
@@ -292,7 +292,7 @@
             "app_key": "2cfc9cc638980eb7f5ff35d6eb63dbe404503151ccc451ed"
         }, 
         "SdkboxAds": {
-            "debug": false,
+            "debug": true, 
             "units": [
                 "AdColony", 
                 "Fyber", 
@@ -368,7 +368,7 @@
             ]
         }, 
         "AdColony": {
-            "debug": false,
+            "debug": true, 
             "id": "appbdee68ae27024084bb334a", 
             "ads": {
                 "v4vc": {
@@ -487,7 +487,7 @@
             ], 
             "connect_on_start": false, 
             "show_achievement_notification": true, 
-            "debug": false
+            "debug": true
         }, 
         "Bee7": {
             "debug": true, 
