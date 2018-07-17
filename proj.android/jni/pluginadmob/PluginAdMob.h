@@ -100,6 +100,11 @@ namespace sdkbox {
          * @return: -1 means current banner is not available
          */
         static int getCurrBannerHeightInPixel(const std::string &name = "");
+        
+        /**
+         * set GDPR
+         */
+        static void setGDPR(bool enabled);
     };
     
     class AdMobListener {

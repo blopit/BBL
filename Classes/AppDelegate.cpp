@@ -10,9 +10,9 @@ USING_NS_CC;
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(640, 1136);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(640, 1136);
-static cocos2d::Size mediumResolutionSize = cocos2d::Size(1125, 2436);
-static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 2732);
-static cocos2d::Size macResolutionSize = cocos2d::Size(432, 768);
+static cocos2d::Size mediumResolutionSize = cocos2d::Size(640, 1385);//cocos2d::Size(1125, 2436);
+static cocos2d::Size largeResolutionSize = cocos2d::Size(640, 1385);//cocos2d::Size(2048, 2732);
+static cocos2d::Size macResolutionSize = cocos2d::Size(640, 1136);//cocos2d::Size(432, 768);
 
 AppDelegate::AppDelegate()
 {
@@ -61,7 +61,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #endif
         director->setOpenGLView(glview);
     }
-
+    
     // turn on display FPS
     //director->setDisplayStats(true);
 
@@ -69,7 +69,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0f / 60);
 
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
     auto frameSize = glview->getFrameSize();
     // if the frame's height is larger than the height of medium size.
     if (frameSize.height > mediumResolutionSize.height)
@@ -94,11 +94,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-1.plist");
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-2.plist");
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-3.plist");
-    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-4.plist");
+    /*spriteFrameCache->addSpriteFramesWithFile("fonts/letters-4.plist");
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-5.plist");
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-6.plist");
     spriteFrameCache->addSpriteFramesWithFile("fonts/letters-7.plist");
-    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-8.plist");
+    spriteFrameCache->addSpriteFramesWithFile("fonts/letters-8.plist");*/
     
     auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
     audio->setEffectsVolume(1);

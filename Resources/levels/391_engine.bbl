@@ -1,12 +1,16 @@
 engine
-50
-piston, turbine, rotor, coolant, towing, eyelet
-3400
+30
+cylinder, rotor, reactor, motors, ignition
+3600
 1
+3
 
-t, pis, ,
-ubn- ti- -
-rtr- o- -
-n- col- a-
-g- tn- w-
-t- - eyl-
+nyc, a& ri,
+ms, o, r,
+d& tbu, nr,
+m& t5, r,
+mt, r, ,
+ti8, c& g,
+mc& p, ewr,
+ps& l, rv,
+er, n& to7,

@@ -27,13 +27,13 @@
             2, 
             4, 
             0, 
-            1
+            2
         ], 
         "result": "ok", 
         "message": "success", 
         "constants": {
             "ANDROID_STUDIO_JNI_DIR": "proj.android-studio/app/jni/", 
-            "COCOS_BACKUP_DIR": "backup-2018-06-20/", 
+            "COCOS_BACKUP_DIR": "backup-2018-07-13/", 
             "COCOS_PROJECT_DIR": "./", 
             "VS_PROJECT_DIR": "n/a", 
             "COCOS_2DX_INSTALLATION_VERSION": "unknown", 
@@ -107,13 +107,13 @@
             2, 
             4, 
             0, 
-            1
+            2
         ], 
         "result": "ok", 
         "message": "success", 
         "constants": {
             "ANDROID_STUDIO_JNI_DIR": "proj.android-studio/app/jni/", 
-            "COCOS_BACKUP_DIR": "backup-2018-06-20/", 
+            "COCOS_BACKUP_DIR": "backup-2018-07-16/", 
             "COCOS_PROJECT_DIR": "./", 
             "VS_PROJECT_DIR": "n/a", 
             "COCOS_2DX_INSTALLATION_VERSION": "unknown", 
@@ -171,12 +171,12 @@
             "runin": "gui", 
             "nohelp": 1, 
             "days": 10, 
-            "server": "download.sdkbox.com/installer/v1/", 
             "forcedownload": 0, 
             "command": "import", 
+            "manifest": "manifest.json", 
             "alwaysupdate": 1, 
             "installer": "/Users/shrenilpatel/.sdkbox/bin/sdkbox.pyc", 
-            "manifest": "manifest.json", 
+            "server": "download.sdkbox.com/installer/v1/", 
             "local": 0, 
             "nopatching": 1, 
             "jsonapi": 0
@@ -185,7 +185,7 @@
             2, 
             4, 
             0, 
-            1
+            2
         ], 
         "result": "ok", 
         "message": "success", 
@@ -223,7 +223,7 @@
             "XCODE_PROJECT_CXX_LIBRARY": "libc++", 
             "ANDROID_STUDIO_MK": "proj.android-studio/app/jni/Android.mk", 
             "XCODE_PROJECT_DIR": "proj.ios_mac/BBL.xcodeproj/", 
-            "COCOS_BACKUP_DIR": "backup-2018-06-20/", 
+            "COCOS_BACKUP_DIR": "backup-2018-07-13/", 
             "ANDROID_PROPERTIES": "proj.android/project.properties", 
             "ANDROID_ACTIVITY_PATH": "proj.android/src/org/cocos2dx/cpp/", 
             "SDKBOX_PACKAGE_NAME": "iap", 
@@ -263,13 +263,13 @@
             2, 
             4, 
             0, 
-            1
+            2
         ], 
         "result": "ok", 
         "message": "success", 
         "constants": {
             "ANDROID_STUDIO_JNI_DIR": "proj.android-studio/app/jni/", 
-            "COCOS_BACKUP_DIR": "backup-2018-06-20/", 
+            "COCOS_BACKUP_DIR": "backup-2018-07-13/", 
             "COCOS_PROJECT_DIR": "./", 
             "VS_PROJECT_DIR": "n/a", 
             "COCOS_2DX_INSTALLATION_VERSION": "unknown", 
@@ -323,16 +323,16 @@
             "patcherrors": 0, 
             "forcedownload": 0, 
             "noupdate": 0, 
-            "days": 10, 
             "remote": 1, 
             "verbose": 0, 
             "jsonapi": 0, 
             "forcecopy": 0, 
             "nohelp": 1, 
+            "days": 10, 
             "server": "download.sdkbox.com/installer/v1/", 
-            "manifest": "manifest.json", 
             "project": "./", 
             "command": "import", 
+            "manifest": "manifest.json", 
             "alwaysupdate": 1, 
             "installer": "/Users/shrenilpatel/.sdkbox/bin/sdkbox.pyc", 
             "nopatchingcpp": 0, 
@@ -344,13 +344,13 @@
             2, 
             4, 
             0, 
-            1
+            2
         ], 
         "result": "ok", 
         "message": "success", 
         "constants": {
             "ANDROID_STUDIO_JNI_DIR": "proj.android-studio/app/jni/", 
-            "COCOS_BACKUP_DIR": "backup-2018-06-20/", 
+            "COCOS_BACKUP_DIR": "backup-2018-07-13/", 
             "COCOS_PROJECT_DIR": "./", 
             "VS_PROJECT_DIR": "n/a", 
             "COCOS_2DX_INSTALLATION_VERSION": "unknown", 
@@ -424,7 +424,7 @@
             2, 
             4, 
             0, 
-            1
+            2
         ], 
         "result": "ok", 
         "message": "success", 
@@ -465,7 +465,7 @@
             "XCODE_PROJECT_CXX_LIBRARY": "libc++", 
             "ANDROID_STUDIO_MK": "proj.android-studio/app/jni/Android.mk", 
             "XCODE_PROJECT_DIR": "proj.ios_mac/BBL.xcodeproj/", 
-            "COCOS_BACKUP_DIR": "backup-2018-06-20/", 
+            "COCOS_BACKUP_DIR": "backup-2018-07-13/", 
             "ANDROID_PROPERTIES": "proj.android/project.properties", 
             "ANDROID_ACTIVITY_PATH": "proj.android/src/org/cocos2dx/cpp/", 
             "SDKBOX_PACKAGE_NAME": "adcolony", 

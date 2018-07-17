@@ -28,6 +28,7 @@ class EndPopup : public cocos2d::Layer {
     int stars;
     bool gold;
     bool death;
+    bool pressed = false;
     std::vector<std::string> secretWords;
     EndPopup(int score, int stars, bool gold, std::vector<std::string> secretWords, bool death, LevelScene *owner): score(score), stars(stars), gold(gold), secretWords(secretWords), death(death), owner(owner) {}
 public:
@@ -149,15 +150,15 @@ public:
     bool end = false;
     bool ending = false;
     static cocos2d::Scene* createScene(std::string fname);
-    virtual bool init();
+    virtual bool init() override;
     virtual void update(float dt) override;
     static LevelScene* create(std::string fname);
     std::string lastText = "";
     
-    virtual void editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox);
-    virtual void editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox);
-    virtual void editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string& text);
-    virtual void editBoxReturn(cocos2d::ui::EditBox* editBox);
+    virtual void editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox) override;
+    virtual void editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox) override;
+    virtual void editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string& text) override;
+    virtual void editBoxReturn(cocos2d::ui::EditBox* editBox) override;
     
     void dropDepth();
     void addLightRetain();

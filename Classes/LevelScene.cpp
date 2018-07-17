@@ -40,7 +40,7 @@ else\
 CC_SAFE_DELETE(pSprite);\
 return NULL;\
 
-#define HINT_COST 0
+#define HINT_COST 40
 
 Coin* Coin::create(cocos2d::Vec2 start, cocos2d::Vec2 end, LevelScene * levelScene) {
     Coin* pRet = new Coin(start, end, levelScene);
@@ -315,7 +315,7 @@ bool EndPopup::init() {
     panel->addChild(uMenu);*/
     
     if (!death) {
-        GameManager::getInstance()->adscore += 40;
+        GameManager::getInstance()->adscore += 45;
         auto uNext = cocos2d::ui::Button::create();
         uNext->setTouchEnabled(true);
         uNext->loadTextures("next-button.png", "next-pressed.png", "");
@@ -335,6 +335,12 @@ bool EndPopup::init() {
     std::vector<Sprite *> foundwords;
     auto i = 0;
     for (auto scr : GameManager::getInstance()->hiddenWords) {
+        
+        auto coinc = CallFunc::create([=]() mutable {
+            auto c = Coin::create(panel->convertToWorldSpace(Vec2(288, 272 - i * 42)), corner, owner);
+            addChild(c, 200);
+        });
+        
         auto secret = strip(scr);
         std::stringstream ss;
         auto len = secret.length();
@@ -349,6 +355,8 @@ bool EndPopup::init() {
             if (x == secret) {
                 done = true;
                 s->setColor(Color3B::MAGENTA);
+                auto waitt = 0.3 * i + 1 + 0.5 * (stars - 1);
+                runAction(Sequence::createWithTwoActions(DelayTime::create(waitt), coinc));
                 break;
             }
         }
@@ -409,6 +417,10 @@ bool EndPopup::init() {
 }
 
 void EndPopup::restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    if (pressed) {
+        return;
+    }
+    pressed = true;
     if (type != cocos2d::ui::Widget::TouchEventType::BEGAN) return;
     auto delayed = CallFunc::create([=](){
         GameManager::getInstance()->restart();
@@ -441,6 +453,10 @@ void EndPopup::restart(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
 }
 
 void EndPopup::next(Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    if (pressed) {
+        return;
+    }
+    pressed = true;
     auto delayed = CallFunc::create([=](){
         GameManager::getInstance()->next();
     });
@@ -630,6 +646,9 @@ void LevelScene::combo() {
     cmbo++;
     if (cmbo < 2) {
         return;
+    }
+    if (cmbo > 9) {
+        cmbo = 9;
     }
     
     auto sound = CallFunc::create([=](){
@@ -861,24 +880,26 @@ bool LevelScene::init()
     layer = LayerColor::create(Color4B(0, 0, 0, 0));
     addChild(layer, 8);
     
+    auto add = (director->getOpenGLView()->getFrameSize().height == 2436) ? -40 : 0;
+    
     scoreLabel =  Label::createWithTTF("0", "fonts/Marker Felt.ttf", 24);
     scoreLabel->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - scoreLabel ->getContentSize().height));
+                            add + origin.y + visibleSize.height - scoreLabel ->getContentSize().height));
     scoreLabel->setColor(Color3B::WHITE);
     scoreLabel->enableOutline(Color4B::BLACK, 3);
     addChild(scoreLabel,1);
-    
+
     scoreEmit = ParticleSystemQuad::create("res/Score.plist");
     scoreEmit->setSpeed(0);
     scoreEmit->setPosition(Vec2(origin.x + visibleSize.width/2, // - scorewid/2,
-                       origin.y + visibleSize.height - scoreLabel ->getContentSize().height + 8));
+                       add + origin.y + visibleSize.height - scoreLabel ->getContentSize().height + 8));
     addChild(scoreEmit);
     
     scoreEmit2 = ParticleSystemQuad::create("res/Score.plist");
     scoreEmit2->setSpeed(0);
     scoreEmit2->setAngle(180);
     scoreEmit2->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - scoreLabel ->getContentSize().height + 8));
+                                add + origin.y + visibleSize.height - scoreLabel ->getContentSize().height + 8));
     addChild(scoreEmit2);
     
     
@@ -915,7 +936,7 @@ bool LevelScene::init()
     
     textBox = cocos2d::ui::EditBox::create(Size(640, 60), cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("nothing.png"));
     textBox->setPosition(Vec2(320, EDIT_DEPTH));
-    textBox->setFont("arial", 0);
+    textBox->setFont("arial", 20);
     textBox->setMaxLength(9);
     textBox->setReturnType(cocos2d::ui::EditBox::KeyboardReturnType::DONE);
     textBox->setDelegate(this);
@@ -923,7 +944,7 @@ bool LevelScene::init()
     textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::INITIAL_CAPS_ALL_CHARACTERS);
     textBox->setInputMode(cocos2d::ui::EditBox::InputMode::SINGLE_LINE);
     textBox->setInputFlag(cocos2d::ui::EditBox::InputFlag::SENSITIVE);
-    textBox->setFontSize(20);
+    textBox->setFontSize(0);
     addChild(textBox, 0);
     
     auto lines = split_string(content, "\n");
@@ -1278,7 +1299,7 @@ void LevelScene::dropDepth() {
     if (currentDepth > maxDepth) {
         auto next = true;
         for (auto b : bubbles) {
-            if (!b->ded) {
+            if (!b->ded and b->bubbleType != BubbleType::BOMB) {
                 next = false;
                 break;
             }
@@ -1287,7 +1308,7 @@ void LevelScene::dropDepth() {
             auto stars = 1;
             if (score >= targetScore) {
                 stars = 3;
-            } else if (score >= targetScore/2) {
+            } else if (score >= targetScore * 0.65) {
                 stars = 2;
             }
             
@@ -1402,11 +1423,20 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
         i++;
     }
     
+    std::string tst = "";
+    for (auto c : cards) {
+        tst += c->letter;
+    }
+    
+    if (tst != d) {
+        
+    }
+    
     for (auto b : bubbles) {
         b->currentWord(d, false);
     }
     
-    lastLen = strlen;
+    lastLen = int(text.length());
     lastText = txt;
 }
 
@@ -1435,6 +1465,11 @@ void LevelScene::getHint() {
     
     //std::vector<std::pair<Letter *, int>>
     auto ws = GameManager::getInstance()->smwords;
+    
+    /*for (auto w: hiddenWords) {
+        ws.insert(ws.begin(), w);
+    }*/
+    
     //std::random_shuffle(ws.begin(), ws.end());
     auto mxscore = 0;
     for (auto b : this->bubbles) {
@@ -1442,38 +1477,45 @@ void LevelScene::getHint() {
             mxscore += b->letters.size();
         }
     }
+    auto truemxscore = mxscore;
     
     auto cscore = 0;
     std::string cword = "";
     auto ite = 0;
-    for (auto w : ws) {
-        int score = 0;
-        for (auto b : this->bubbles) {
-            if (b->ded) continue;
-            auto cwb = b->currentWord(w, true).size();
-            if (b->bubbleType == BubbleType::BOMB) {
-                if (cwb > 0) {
-                    score = 0;
+    for (auto j = 0; j < truemxscore; j++) {
+        for (auto w : ws) {
+            int score = 0;
+            for (auto b : this->bubbles) {
+                if (b->ded) continue;
+                auto cwb = b->currentWord(w, true).size();
+                if (b->bubbleType == BubbleType::BOMB) {
+                    if (cwb > 0) {
+                        score = 0;
+                        break;
+                    }
+                } else if (b->depth == 2) {
+                    if (cwb != b->letters.size()) {
+                        score = 0;
+                        break;
+                    }
+                }
+                score += cwb;
+            }
+            if (score > cscore) {
+                cscore = score;
+                cword = w;
+                if (score >= mxscore) {
                     break;
                 }
             }
-            if (b->depth == 2) {
-                if (cwb != b->letters.size()) {
-                    score = 0;
-                    break;
-                }
-            }
-            score += cwb;
-        }
-        if (score > cscore) {
-            cscore = score;
-            cword = w;
-            if (score >= mxscore) {
-                break;
+            ite++;
+            if (ite % 10000 == 0) {
+                //mxscore--;
             }
         }
-        ite++;
-        if (ite % 10000 == 0) {
+        if (cword != "") {
+            break;
+        } else {
             mxscore--;
         }
     }
@@ -1487,6 +1529,14 @@ void LevelScene::getHint() {
     for (int i = 0; i < replace; i++) {
         cword[v[i]] = '_';
     }
+    
+    if (cword == "") {
+        playSound("wrong", false, randFloat(0.75, 1.5));
+        coins += HINT_COST;
+        GameManager::getInstance()->coins = coins;
+        return;
+    }
+    
     hintLabel->setString(cword);
     sz = hintLabel->getBoundingBox().size;
     psemitter3->setPosVar(Vec2(sz.width/2 + 20, sz.height/2));
@@ -1497,6 +1547,8 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
     auto director = Director::getInstance();
     auto visibleSize = director->getVisibleSize();
     
+    textBox->setFontColor(Color3B::RED);
+    textBox->setVisible(false);
     auto dict = gm->words;
     auto text = std::string(editBox->getText());
     text.erase( std::remove_if( text.begin(), text.end(), []( char c ) { return !std::isalpha(c) ; } ), text.end() ) ;
@@ -1509,6 +1561,7 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
     if (text != "" and std::find(dict.begin(), dict.end(), d) == dict.end()) {
         auto callback = CallFunc::create([=](){
             textBox->touchDownAction(NULL, cocos2d::ui::Widget::TouchEventType::ENDED);
+            textBox->setVisible(true);
         });
         runAction(Sequence::create(DelayTime::create(cards.size()*0.1+1), callback, NULL));
         
@@ -1526,8 +1579,8 @@ void LevelScene::editBoxReturn(cocos2d::ui::EditBox* editBox) {
                 c->dest = dst;
             });
             
-            c->runAction(Sequence::create(TintTo::create(0.1, 255, 128, 128), NULL));
-            c->runAction(Sequence::create(DelayTime::create(0.2+i*0.1f), cb1, DelayTime::create(0.3), cb2, TintTo::create(0.1, 255, 255, 255), callback,  NULL));
+            //c->runAction(Sequence::create(, NULL));//
+            c->runAction(Sequence::create(TintTo::create(0.1, 255, 128, 128), DelayTime::create(0.2+i*0.1f), cb1, DelayTime::create(0.3), cb2, TintTo::create(0.1, 255, 255, 255),  NULL));
             
             i++;
         }

@@ -13,14 +13,14 @@
 #include "PluginSdkboxPlay/PluginSdkboxPlay.h"
 #include "LevelScene.hpp"
 
-class AdListener : public sdkbox::AdMobListener
+class AdListener : public sdkbox::AdMobListener, public cocos2d::Node
 {
 private:
     void adViewDidReceiveAd(const std::string &name) {
         
     }
     void adViewDidFailToReceiveAdWithError(const std::string &name, const std::string &msg) {
-        
+        //sdkbox::PluginAdMob::cache(name);
     }
     void adViewWillPresentScreen(const std::string &name) {
         
@@ -73,7 +73,10 @@ public:
     int level();
     
     virtual void onConnectionStatusChanged(int connection_status) {
-        if (sdkbox::GPS_CONNECTED) {
+
+        if (sdkbox::GPS_CONNECTED and !loaded) {
+            
+            loaded = true;
             /*std::string sData("1bC\0u\4;Y\5L", 10);
             const void* data = (const void*)sData.c_str();*/
             
@@ -88,6 +91,7 @@ public:
             auto ud = cocos2d::UserDefault::getInstance();
             levelIndex = ud->getIntegerForKey("level");
             coins = ud->getIntegerForKey("coins");
+            adscore = ud->getIntegerForKey("adscore");
             currentLevel = files[levelIndex];
             auto scene = LevelScene::createScene(currentLevel);
             cocos2d::Director::getInstance()->replaceScene(scene);

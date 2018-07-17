@@ -37,6 +37,12 @@
 		397EF01420C7801200129F2B /* ColorConv.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 397EF01120C7801200129F2B /* ColorConv.cpp */; };
 		397EF01720C78FA600129F2B /* grad_diamond.png in Resources */ = {isa = PBXBuildFile; fileRef = 397EF01620C78FA500129F2B /* grad_diamond.png */; };
 		397EF01820C78FA600129F2B /* grad_diamond.png in Resources */ = {isa = PBXBuildFile; fileRef = 397EF01620C78FA500129F2B /* grad_diamond.png */; };
+		39961DC920F7AF8E00380E2D /* PluginSdkboxAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61EF43B5B53F433321F53B48 /* PluginSdkboxAds.framework */; };
+		39961DE120FE9CD200380E2D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE020FE9CD200380E2D /* CoreTelephony.framework */; };
+		39961DE320FE9CDA00380E2D /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE220FE9CDA00380E2D /* JavaScriptCore.framework */; };
+		39961DE520FE9CE200380E2D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE420FE9CE200380E2D /* MessageUI.framework */; };
+		39961DE720FE9CEA00380E2D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE620FE9CEA00380E2D /* MobileCoreServices.framework */; };
+		39961DE920FE9CF500380E2D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE820FE9CF500380E2D /* SystemConfiguration.framework */; };
 		39DECD5C1FEB7ACC00A8080A /* retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DECD5A1FEB7ACC00A8080A /* retry-button.png */; };
 		39DECD5D1FEB7ACC00A8080A /* retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DECD5A1FEB7ACC00A8080A /* retry-button.png */; };
 		39DECD5E1FEB7ACC00A8080A /* retry-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DECD5B1FEB7ACC00A8080A /* retry-pressed.png */; };
@@ -186,7 +192,7 @@
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* BBL-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BBL-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Word Bubbles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Word Bubbles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
@@ -208,6 +214,11 @@
 		397EF01120C7801200129F2B /* ColorConv.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ColorConv.cpp; sourceTree = "<group>"; };
 		397EF01220C7801200129F2B /* ColorConv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ColorConv.hpp; sourceTree = "<group>"; };
 		397EF01620C78FA500129F2B /* grad_diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grad_diamond.png; sourceTree = "<group>"; };
+		39961DE020FE9CD200380E2D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		39961DE220FE9CDA00380E2D /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		39961DE420FE9CE200380E2D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		39961DE620FE9CEA00380E2D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		39961DE820FE9CF500380E2D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		39DECD5A1FEB7ACC00A8080A /* retry-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retry-button.png"; sourceTree = "<group>"; };
 		39DECD5B1FEB7ACC00A8080A /* retry-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retry-pressed.png"; sourceTree = "<group>"; };
 		39DECD601FEB7C0500A8080A /* next-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-button.png"; sourceTree = "<group>"; };
@@ -302,6 +313,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39961DE920FE9CF500380E2D /* SystemConfiguration.framework in Frameworks */,
+				39961DE720FE9CEA00380E2D /* MobileCoreServices.framework in Frameworks */,
+				39961DE520FE9CE200380E2D /* MessageUI.framework in Frameworks */,
+				39961DE320FE9CDA00380E2D /* JavaScriptCore.framework in Frameworks */,
+				39961DE120FE9CD200380E2D /* CoreTelephony.framework in Frameworks */,
 				39DECD711FEE1A8600A8080A /* MessageUI.framework in Frameworks */,
 				39DECD6F1FEE1A5000A8080A /* libz.1.2.5.tbd in Frameworks */,
 				294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */,
@@ -362,6 +378,7 @@
 				8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */,
 				503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */,
 				5087E78B17EB975400C73F5D /* OpenGL.framework in Frameworks */,
+				39961DC920F7AF8E00380E2D /* PluginSdkboxAds.framework in Frameworks */,
 				5087E78917EB974C00C73F5D /* AppKit.framework in Frameworks */,
 				5087E76317EB910900C73F5D /* Foundation.framework in Frameworks */,
 				5087E76817EB910900C73F5D /* QuartzCore.framework in Frameworks */,
@@ -392,7 +409,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* BBL-mobile.app */,
+				1D6058910D05DD3D006BFB54 /* Word Bubbles.app */,
 				5087E76F17EB910900C73F5D /* BBL-desktop.app */,
 			);
 			name = Products;
@@ -426,6 +443,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39961DE820FE9CF500380E2D /* SystemConfiguration.framework */,
+				39961DE620FE9CEA00380E2D /* MobileCoreServices.framework */,
+				39961DE420FE9CE200380E2D /* MessageUI.framework */,
+				39961DE220FE9CDA00380E2D /* JavaScriptCore.framework */,
+				39961DE020FE9CD200380E2D /* CoreTelephony.framework */,
 				3908890C20D8896100681B92 /* GameKit.framework */,
 				39DECD701FEE1A8600A8080A /* MessageUI.framework */,
 				39DECD6D1FEE1A5000A8080A /* libz.1.2.5.tbd */,
@@ -596,7 +618,7 @@
 			);
 			name = "BBL-mobile";
 			productName = iphone;
-			productReference = 1D6058910D05DD3D006BFB54 /* BBL-mobile.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Word Bubbles.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5087E73D17EB910900C73F5D /* BBL-desktop */ = {
@@ -851,7 +873,8 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TBH.BBL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blopit.BBL;
+				PRODUCT_NAME = "Word Bubbles";
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -901,7 +924,8 @@
 					"-ObjC",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.TBH.BBL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blopit.BBL;
+				PRODUCT_NAME = "Word Bubbles";
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -917,6 +941,10 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -948,6 +976,10 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = mac/Prefix.pch;

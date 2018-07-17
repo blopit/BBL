@@ -1,12 +1,13 @@
 reading
 1
-version, books, reader, book, text
-1200
+text, books, fuzzy, book, scan
+1000
 1
-1
+2
 
-eio, v, ,
-o, , bo,
-re, , a,
-o, , b,
-et, , t,
+sb, o, ,
+b, , o,
+t, , e,
+na, , s,
+et, , i,
+uy, f, ,

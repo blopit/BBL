@@ -1,11 +1,13 @@
 grain
 31
-texture, shipping, shipment, elevator, railway
-3700
+dispatch, texture, railway, elevators, shipment
+2700
 1
+2
 
-txe, et, ,
-ig, n, shp,
-ipm, sh, ,
-evr, , lt,
-y, rla, w,
+o& tex- re-
+ors- c& elt-
+shp- tk& pin-
+pt- s- hm-
+fc& lwy- ra-
+isp- m& dtc-

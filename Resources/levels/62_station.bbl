@@ -1,12 +1,15 @@
 station
-16
-depot, radio, train, police, plant, studio
-2500
+19
+channel, outpost, police, railway, plant
+3600
 1
+2
 
-et5, , do,
-o- i- r-
-ti5- - a-
-oe- pi- -
-at- p- -
-to- u- s-
+ep, td, ,
+ra, i, ,
+u, to, ,
+a, tr, ,
+ec, ip, ,
+a7, ec, l,
+irl, w, ,
+nl5, pa, ,

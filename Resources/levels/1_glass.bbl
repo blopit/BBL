@@ -1,12 +1,13 @@
 glass
 1
-vase, wall, wine, beer, drink
-800
+wine, wall, window, vase, goblet
+1100
 1
-2
+1
 
-e, , va,
+ob, , e,
+tg, o, e,
+v, , e,
+w, i, o,
 a, , w,
-ie, , w,
-ee, , b,
-i, r, d,
+ie, w, ,

@@ -1,11 +1,14 @@
 machine
-11
-auto, robot, system, engine, device
-1700
+18
+dryer, milling, gear, auto, robot
+1300
 1
+2
 
-t- a- -
-t- ro- o-
-e- ss- t-
-6- ne- en-
-dce- i- s&
+a, tu, ,
+r, to, ,
+ey, d, ,
+g, e, r,
+a, b, e,
+ml, n, ,
+a, me, ,

@@ -1,11 +1,13 @@
 bridge
-50
-causeway, trestle, walkway, gangway, conduit
-3700
+30
+levee, gangway, conduit, trestle, ponds
+2200
 1
+2
 
-wy, cas, a,
-ttl- - rs-
-wy- - lkw-
-wy- - gng-
-cnt- i- d-
+e, , lt,
+a, ywk, ,
+l, v, ,
+g, w, n,
+toc, i, d,
+dp, , n,

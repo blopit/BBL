@@ -33,12 +33,14 @@ libjsso \
 libadcolonyso \
 libjsso \
 libadcolonyso \
+libjsso \
+libadcolonyso \
 libjsso
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END
 
-LOCAL_WHOLE_STATIC_LIBRARIES += PluginSdkboxAds PluginSdkboxPlay PluginSdkboxPlay PluginSdkboxAds PluginSdkboxAds PluginSdkboxAds PluginSdkboxAds PluginSdkboxPlay
+LOCAL_WHOLE_STATIC_LIBRARIES += PluginSdkboxAds PluginSdkboxPlay PluginSdkboxPlay PluginSdkboxAds PluginSdkboxAds PluginSdkboxAds PluginSdkboxAds PluginSdkboxPlay PluginSdkboxAds PluginSdkboxAds PluginSdkboxPlay
 LOCAL_WHOLE_STATIC_LIBRARIES += sdkbox
 LOCAL_WHOLE_STATIC_LIBRARIES += PluginIAP
 LOCAL_WHOLE_STATIC_LIBRARIES += PluginAdColony

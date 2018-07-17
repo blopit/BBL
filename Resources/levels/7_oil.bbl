@@ -1,12 +1,13 @@
 oil
 4
-crude, barrel, fuel, petrol, energy
-1600
+petrol, energy, fuel, diesel, barrel
+2000
 1
-1
+2
 
 e, u, c,
-e, bar, ,
-e, , fu,
-r, , pet,
-ry, ge, ,
+ae, , b,
+e, f, u,
+e, opt, ,
+erg, , n,
+d, l, i,

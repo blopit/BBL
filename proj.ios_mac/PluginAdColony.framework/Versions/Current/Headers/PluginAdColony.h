@@ -63,6 +63,13 @@ namespace sdkbox
     public:
 
         /**
+         * Set GDPR
+         *
+         * **NOTE**: please call before 'init' function
+         */
+        static void setGDPR(bool enabled);
+        
+        /**
          * initialize the plugin instance.
          */
         static void init();

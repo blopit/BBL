@@ -1,12 +1,14 @@
 camp
 13
-pack, lodge, faction, field, base
-1600
+base, pack, area, site, colony
+1700
 1
-2
+3
 
-pk, a, ,
-e, lo, ,
-fn, ti, a,
-l, , fe,
-s, ba, ,
+pa, k, ,
+g, , el,
+d, l, fi,
+eb, s, ,
+a, , e,
+on, , c,
+es, i, ,
