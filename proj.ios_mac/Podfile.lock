@@ -1,0 +1,24 @@
+PODS:
+  - AdColony (3.3.5)
+  - Google-Mobile-Ads-SDK (7.31.0)
+  - GoogleMobileAdsMediationAdColony (3.3.5.0):
+    - AdColony (= 3.3.5)
+    - Google-Mobile-Ads-SDK (>= 7.10.1)
+
+DEPENDENCIES:
+  - GoogleMobileAdsMediationAdColony
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AdColony
+    - Google-Mobile-Ads-SDK
+    - GoogleMobileAdsMediationAdColony
+
+SPEC CHECKSUMS:
+  AdColony: 1d2c622054de217e5af2699abe7da6aa60a3533f
+  Google-Mobile-Ads-SDK: 6e529e748b45507a2ca904e0b5a52669ba3920c4
+  GoogleMobileAdsMediationAdColony: 61b0a45a59097dc610cb1dea00a72e710cbbd94e
+
+PODFILE CHECKSUM: b19b926f71557a1fdf20b31bce75791c94bf71d3
+
+COCOAPODS: 1.5.3

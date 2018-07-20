@@ -1,0 +1,1 @@
+../../../../GoogleMobileAdsMediationAdColony/AdColonyAdapter-3.3.5.0/AdColonyAdapter.framework/Versions/A/Headers/AdColonyAdapter.h

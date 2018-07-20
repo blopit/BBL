@@ -43,6 +43,7 @@
 		39961DE520FE9CE200380E2D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE420FE9CE200380E2D /* MessageUI.framework */; };
 		39961DE720FE9CEA00380E2D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE620FE9CEA00380E2D /* MobileCoreServices.framework */; };
 		39961DE920FE9CF500380E2D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961DE820FE9CF500380E2D /* SystemConfiguration.framework */; };
+		39961E01210005D400380E2D /* libPods-BBL-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39961E00210005D400380E2D /* libPods-BBL-mobile.a */; };
 		39DECD5C1FEB7ACC00A8080A /* retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DECD5A1FEB7ACC00A8080A /* retry-button.png */; };
 		39DECD5D1FEB7ACC00A8080A /* retry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DECD5A1FEB7ACC00A8080A /* retry-button.png */; };
 		39DECD5E1FEB7ACC00A8080A /* retry-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DECD5B1FEB7ACC00A8080A /* retry-pressed.png */; };
@@ -118,6 +119,7 @@
 		721B479A87A53E595A20B57C /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8FB4DB9AAC67F061C711FBE /* EventKit.framework */; };
 		7BBB422E9FED2C82023EB74A /* sdkbox_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 10CB494AB9E10668D22023AF /* sdkbox_config.json */; };
 		7D134103894CB0AA04BB1682 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC64635AA9C88E83A5948EA /* AdSupport.framework */; };
+		7D885EA2B277F55596348F77 /* libPods-BBL-desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34E9095DFBF27202FC1B0DBE /* libPods-BBL-desktop.a */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		8465407C86278DA21A641F1F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE147CBB55AF75E198B558E /* SafariServices.framework */; };
 		895B4721804C0C131FE3BAA1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54984E58A3DB5A595B0E9F0F /* CoreMedia.framework */; };
@@ -130,6 +132,7 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		C14854E98F8A220CB6B002E6 /* libPods-BBL-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 202B553B88D6E458F54AC53D /* libPods-BBL-mobile.a */; };
 		C53A44A880A706804630C372 /* sdkbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D7476EB1AB47C9269BBED4 /* sdkbox.framework */; };
 		CA5A48E7AFEA3FF3F86A89E0 /* PluginAdMob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD03402BB50D7D0EC3A513DC /* PluginAdMob.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
@@ -194,8 +197,11 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Word Bubbles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Word Bubbles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		202B553B88D6E458F54AC53D /* libPods-BBL-mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BBL-mobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2178EE2B3E38F3E39862AF1E /* Pods-BBL-mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BBL-mobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-BBL-mobile/Pods-BBL-mobile.release.xcconfig"; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		34E9095DFBF27202FC1B0DBE /* libPods-BBL-desktop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BBL-desktop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3533448CBB234757B99C1653 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/EventKitUI.framework; sourceTree = DEVELOPER_DIR; };
 		3908890B20D8894700681B92 /* BBL-mobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "BBL-mobile.entitlements"; path = "BBL-mobile/BBL-mobile.entitlements"; sourceTree = "<group>"; };
 		3908890C20D8896100681B92 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -219,6 +225,7 @@
 		39961DE420FE9CE200380E2D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		39961DE620FE9CEA00380E2D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		39961DE820FE9CF500380E2D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.4.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		39961E00210005D400380E2D /* libPods-BBL-mobile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-BBL-mobile.a"; path = "build/Debug-iphoneos/libPods-BBL-mobile.a"; sourceTree = "<group>"; };
 		39DECD5A1FEB7ACC00A8080A /* retry-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retry-button.png"; sourceTree = "<group>"; };
 		39DECD5B1FEB7ACC00A8080A /* retry-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retry-pressed.png"; sourceTree = "<group>"; };
 		39DECD601FEB7C0500A8080A /* next-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-button.png"; sourceTree = "<group>"; };
@@ -279,6 +286,7 @@
 		5371444095F435894A7675DE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		54984E58A3DB5A595B0E9F0F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		5BE147CBB55AF75E198B558E /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/SafariServices.framework; sourceTree = DEVELOPER_DIR; };
+		6160199FFBB56BFA55F41ECF /* Pods-BBL-desktop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BBL-desktop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BBL-desktop/Pods-BBL-desktop.debug.xcconfig"; sourceTree = "<group>"; };
 		61EF43B5B53F433321F53B48 /* PluginSdkboxAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PluginSdkboxAds.framework; sourceTree = SOURCE_ROOT; };
 		65C6416EBF48532A7F0A3DBC /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = SOURCE_ROOT; };
 		77284C5DB3CA1B5BEC0C1478 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
@@ -288,6 +296,7 @@
 		A56A42EF9898C74D6AA3D01F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		AA7640DDB19CE8DDC7D4C77A /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
 		AD03402BB50D7D0EC3A513DC /* PluginAdMob.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PluginAdMob.framework; sourceTree = SOURCE_ROOT; };
+		B20C5352CDB7C427A67DFD9C /* Pods-BBL-mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BBL-mobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BBL-mobile/Pods-BBL-mobile.debug.xcconfig"; sourceTree = "<group>"; };
 		B5A541DDA1E0AC617E456348 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		B9694EABB06C2146BECCD300 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
 		BBF243C3917B6004BFEEEC5C /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
@@ -295,6 +304,7 @@
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C986459F9CA01AFD485254F0 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		CB319A322A58CA7A5ACBEE1A /* Pods-BBL-desktop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BBL-desktop.release.xcconfig"; path = "Pods/Target Support Files/Pods-BBL-desktop/Pods-BBL-desktop.release.xcconfig"; sourceTree = "<group>"; };
 		CC0E4DB0960C416D09D85396 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		D0654717A0F3446E0AE6637F /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = SOURCE_ROOT; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -343,6 +353,7 @@
 				9B2F471DA72C392C8AB523C0 /* libsqlite3.dylib in Frameworks */,
 				6FE645E9B8DE3E2538D9FC9C /* MediaPlayer.framework in Frameworks */,
 				703D4C1BB50B873A363763C8 /* StoreKit.framework in Frameworks */,
+				39961E01210005D400380E2D /* libPods-BBL-mobile.a in Frameworks */,
 				534846F6A9D98B6B3A3236C5 /* SystemConfiguration.framework in Frameworks */,
 				45C04909BB69A621E73A7ADB /* WebKit.framework in Frameworks */,
 				4F08423DB97F53484E1AB357 /* GameController.framework in Frameworks */,
@@ -365,6 +376,7 @@
 				464B46568F23BD03615772B3 /* CoreVideo.framework in Frameworks */,
 				8465407C86278DA21A641F1F /* SafariServices.framework in Frameworks */,
 				90794920BE730F5404D61404 /* PluginSdkboxPlay.framework in Frameworks */,
+				C14854E98F8A220CB6B002E6 /* libPods-BBL-mobile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +397,7 @@
 				5087E76917EB910900C73F5D /* OpenAL.framework in Frameworks */,
 				5087E76A17EB910900C73F5D /* AVFoundation.framework in Frameworks */,
 				5087E76B17EB910900C73F5D /* AudioToolbox.framework in Frameworks */,
+				7D885EA2B277F55596348F77 /* libPods-BBL-desktop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +428,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		19EB14BA9DD0BC2DD683438E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6160199FFBB56BFA55F41ECF /* Pods-BBL-desktop.debug.xcconfig */,
+				CB319A322A58CA7A5ACBEE1A /* Pods-BBL-desktop.release.xcconfig */,
+				B20C5352CDB7C427A67DFD9C /* Pods-BBL-mobile.debug.xcconfig */,
+				2178EE2B3E38F3E39862AF1E /* Pods-BBL-mobile.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		1AC6FAE6180E9839004C840B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +460,7 @@
 				080E96DDFE201D6D7F000001 /* ios */,
 				503AE10617EB990700D1A890 /* mac */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				19EB14BA9DD0BC2DD683438E /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -443,6 +468,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39961E00210005D400380E2D /* libPods-BBL-mobile.a */,
 				39961DE820FE9CF500380E2D /* SystemConfiguration.framework */,
 				39961DE620FE9CEA00380E2D /* MobileCoreServices.framework */,
 				39961DE420FE9CE200380E2D /* MessageUI.framework */,
@@ -501,6 +527,8 @@
 				CC0E4DB0960C416D09D85396 /* CoreVideo.framework */,
 				5BE147CBB55AF75E198B558E /* SafariServices.framework */,
 				41EC4B3AB63D8369F065B795 /* PluginSdkboxPlay.framework */,
+				34E9095DFBF27202FC1B0DBE /* libPods-BBL-desktop.a */,
+				202B553B88D6E458F54AC53D /* libPods-BBL-mobile.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -607,6 +635,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "BBL-mobile" */;
 			buildPhases = (
+				E53DE5C9141D50CEDB0F2523 /* [CP] Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -625,6 +654,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5087E76C17EB910900C73F5D /* Build configuration list for PBXNativeTarget "BBL-desktop" */;
 			buildPhases = (
+				6DF48A896F0A9875CE3326F5 /* [CP] Check Pods Manifest.lock */,
 				5087E74817EB910900C73F5D /* Resources */,
 				5087E75617EB910900C73F5D /* Sources */,
 				5087E75C17EB910900C73F5D /* Frameworks */,
@@ -653,6 +683,9 @@
 							com.apple.GameCenter.iOS = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};
@@ -674,6 +707,7 @@
 				German,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
@@ -782,6 +816,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6DF48A896F0A9875CE3326F5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BBL-desktop-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E53DE5C9141D50CEDB0F2523 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BBL-mobile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -833,7 +906,9 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B20C5352CDB7C427A67DFD9C /* Pods-BBL-mobile.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -842,7 +917,10 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = E2FPXMPTD9;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"$(inherited)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -851,27 +929,33 @@
 					USE_FILE32API,
 					"COCOS2D_DEBUG=1",
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"sdkbox.framework\"",
-					"\"PluginSdkboxAds.framework\"",
-					"\"PluginIAP.framework\"",
-					"\"PluginAdColony.framework\"",
-					"\"AdColony.framework\"",
-					"\"PluginAdMob.framework\"",
-					"\"GoogleMobileAds.framework\"",
-					"\"PluginSdkboxPlay.framework\"",
+					sdkbox.framework,
+					PluginSdkboxAds.framework,
+					PluginIAP.framework,
+					PluginAdColony.framework,
+					AdColony.framework,
+					PluginAdMob.framework,
+					GoogleMobileAds.framework,
+					PluginSdkboxPlay.framework,
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				OTHER_CFLAGS = "-DSDKBOX_ENABLED";
+				OTHER_CFLAGS = (
+					"-DSDKBOX_ENABLED",
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
 					"-ObjC",
 					"-fobjc-arc",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.blopit.BBL;
 				PRODUCT_NAME = "Word Bubbles";
@@ -885,7 +969,9 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2178EE2B3E38F3E39862AF1E /* Pods-BBL-mobile.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -894,7 +980,10 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = E2FPXMPTD9;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)\"",
+					"$(inherited)",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -902,27 +991,33 @@
 					USE_FILE32API,
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
 					NDEBUG,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = (
-					"\"sdkbox.framework\"",
-					"\"PluginSdkboxAds.framework\"",
-					"\"PluginIAP.framework\"",
-					"\"PluginAdColony.framework\"",
-					"\"AdColony.framework\"",
-					"\"PluginAdMob.framework\"",
-					"\"GoogleMobileAds.framework\"",
-					"\"PluginSdkboxPlay.framework\"",
+					sdkbox.framework,
+					PluginSdkboxAds.framework,
+					PluginIAP.framework,
+					PluginAdColony.framework,
+					AdColony.framework,
+					PluginAdMob.framework,
+					GoogleMobileAds.framework,
+					PluginSdkboxPlay.framework,
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				OTHER_CFLAGS = "-DSDKBOX_ENABLED";
+				OTHER_CFLAGS = (
+					"-DSDKBOX_ENABLED",
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
 					"-ObjC",
 					"-fobjc-arc",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.blopit.BBL;
 				PRODUCT_NAME = "Word Bubbles";
@@ -936,6 +1031,7 @@
 		};
 		5087E76D17EB910900C73F5D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6160199FFBB56BFA55F41ECF /* Pods-BBL-desktop.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -953,6 +1049,7 @@
 					USE_FILE32API,
 					"COCOS2D_DEBUG=1",
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
@@ -964,6 +1061,7 @@
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_MAC_BEGIN)",
 					"$(_COCOS_LIB_MAC_END)",
+					"$(inherited)",
 				);
 				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_MAC_BEGIN) $(_COCOS_HEADER_MAC_END)";
 			};
@@ -971,6 +1069,7 @@
 		};
 		5087E76E17EB910900C73F5D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB319A322A58CA7A5ACBEE1A /* Pods-BBL-desktop.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -987,6 +1086,7 @@
 					USE_FILE32API,
 					"CC_ENABLE_CHIPMUNK_INTEGRATION=1",
 					NDEBUG,
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
@@ -998,6 +1098,7 @@
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_MAC_BEGIN)",
 					"$(_COCOS_LIB_MAC_END)",
+					"$(inherited)",
 				);
 				USER_HEADER_SEARCH_PATHS = "$(_COCOS_HEADER_MAC_BEGIN) $(_COCOS_HEADER_MAC_END)";
 			};

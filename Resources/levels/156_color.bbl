@@ -1,17 +1,17 @@
 color
 39
-gloss, tint, tones, stain, flavor
-4500
+shade, distort, tones, flavor, stripe
+3500
 1
 2
 
-ss- l- g-
-t6- srp- -
-e5- g- tn-
-tt4- i- -
-a5- pin- -
-sh5- d- a-
-os- - tn-
-v6- - flo-
-d4- - yd-
-a5- stn- -
+std, r, ,
+tsp, , e,
+ch, it, a,
+l, s, g,
+b, lm, ns,
+np, at, ,
+ase, , h,
+tse, n, ,
+v, or, f,
+cl, , fr,

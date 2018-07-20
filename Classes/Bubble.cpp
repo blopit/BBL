@@ -443,7 +443,8 @@ void Bubble::recalculate() {
             pop(null);
             Vector<cocos2d::FiniteTimeAction *> actions;
             
-            for (auto l : letters) {
+            vector<Letter *> newl(letters);
+            for (auto l : newl) {
                 popLetter(l);
             }
         }
@@ -519,6 +520,13 @@ void Bubble::recalculate() {
 }
 
 void Bubble::pop(cocos2d::CallFunc* cf) {
+    
+    /*if (bubbleType == BubbleType::BOMB) {
+        for (auto i : letters) {
+            i->pop();
+        }
+    }*/
+    
     psemitter->stop();
     auto callback = CallFunc::create([=](){
         ded = true;

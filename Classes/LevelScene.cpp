@@ -1372,6 +1372,7 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
     auto d = txt;
     d.erase( std::remove_if( d.begin(), d.end(), []( char c ) { return !std::isalpha(c) ; } ), d.end() ) ;
     editBox->setText(d.c_str());
+    cardsLen = cards.size();
     
     if (lastLen < strlen) {
         if (!isalpha(d.back())) return;
@@ -1415,21 +1416,31 @@ void LevelScene::editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::st
         playSound("vanish", false, 2.0f + float(strlen)/5.0f, 0.2f, 0.5f, 0.2f);
     }
     
-    auto i = 0;
-    for (auto c : cards) {
-        auto x = getX(cardsLen, i, spc);
-        c->idx = i;
-        c->dest = Vec2(320 + x, EDIT_DEPTH);
-        i++;
-    }
-    
     std::string tst = "";
     for (auto c : cards) {
         tst += c->letter;
     }
     
     if (tst != d) {
-        
+        for (auto x: cards) {
+            cards.pop_back();
+            x->runAction(RemoveSelf::create());
+        }
+        cardsLen = d.length();
+        for (auto x: d) {
+            auto card = Card::create(x);
+            card->setPosition(Vec2(320 + getX(cardsLen+1, cardsLen, spc), EDIT_DEPTH));
+            cards.push_back(card);
+            addChild(card, 100);
+        }
+    }
+    
+    auto i = 0;
+    for (auto c : cards) {
+        auto x = getX(cardsLen, i, spc);
+        c->idx = i;
+        c->dest = Vec2(320 + x, EDIT_DEPTH);
+        i++;
     }
     
     for (auto b : bubbles) {
@@ -1530,12 +1541,15 @@ void LevelScene::getHint() {
         cword[v[i]] = '_';
     }
     
+    auto ud = UserDefault::getInstance();
     if (cword == "") {
         playSound("wrong", false, randFloat(0.75, 1.5));
         coins += HINT_COST;
         GameManager::getInstance()->coins = coins;
+        ud->setIntegerForKey("coins", coins);
         return;
     }
+    ud->setIntegerForKey("coins", coins);
     
     hintLabel->setString(cword);
     sz = hintLabel->getBoundingBox().size;

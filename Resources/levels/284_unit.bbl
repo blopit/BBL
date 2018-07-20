@@ -1,16 +1,16 @@
 unit
 30
-brigade, modules, entity, platoon, ward
-3000
+battalion, brigade, squadron, machine, division
+3900
 1
-3
+2
 
-mu, d, lo,
-eba, r, d,
-tp, , lo,
-te, n, y,
-da, w, ,
-qs, d, ,
-or, c, ,
-lcs, r, t,
-ors, , c,
+i8- v- dsi-
+bd- ri- g-
+n9, oi, lb,
+y, a, flc,
+lon- pa- -
+r8- su- qad-
+n- cn- mpo-
+qm, tp, e,
+h7, i, ncm,

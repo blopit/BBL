@@ -1,13 +1,16 @@
 hospital
 27
-acquired, patient, facility, medical, clinical
-1900
+medical, facility, physician, doctor, treatment
+3800
 3
-2
+3
 
-pt- ie- t-
-l- ma- ec-
-lc, , fyi,
-an, , c,
-de- aca- -
-rd- acq- -
+n, l, c,
+t7, , aip,
+lm, a, di,
+r6, d, o,
+p, h, cni,
+9, m, tra,
+6, a, eth,
+t8, c, fla,
+r6, , cn,
